@@ -1,0 +1,13 @@
+.root {
+  height: 50px;
+  background-color: gray;
+}
+
+.routesList {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+}
