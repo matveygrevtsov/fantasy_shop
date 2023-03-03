@@ -1,5 +1,4 @@
 import { constants } from "../../../../constants";
-import { firebaseApi } from "../../../../firebaseApi";
 
 interface Props {
   root: HTMLDivElement;
@@ -26,7 +25,7 @@ type SignUpFormState =
       password: string;
     };
 
-export class SignUpFormController {
+export class SignUpFormValidator {
   // Переменные, которые приходят из пропсов:
   private readonly root: HTMLDivElement;
   private readonly onSubmit: (email: string, password: string) => void;
@@ -75,17 +74,27 @@ export class SignUpFormController {
     };
   }
 
+  /**
+   * Выполняет unmount.
+   */
   public unmount() {
     window.clearInterval(this.timer);
     this.submitButton.removeEventListener("click", () => this.submit());
   }
 
+  /**
+   * Обрабатывает событие, когда юзер ввёл валидные данные в форму и нажал кнопку "submit".
+   */
   private submit() {
     if (this.state.status !== SignUpFormStatus.Success) return;
     const { email, password } = this.state;
     this.onSubmit(email, password);
   }
 
+  /**
+   * Возвращает HTML-элемент внутри формы по айдишнику.
+   * @param id Айдишник искомого элемента.
+   */
   private getHTMLElementById(id: string): HTMLElement {
     const result: HTMLElement | null = this.root.querySelector(`#${id}`);
     if (result === null) {
@@ -94,6 +103,10 @@ export class SignUpFormController {
     return result;
   }
 
+  /**
+   * Обновляет стейт.
+   * @param state Новое значение стейта.
+   */
   private setState(state: SignUpFormState) {
     this.state = state;
     switch (this.state.status) {
@@ -112,6 +125,12 @@ export class SignUpFormController {
     }
   }
 
+  /**
+   * Обновляет стейт в зависимости от введённых в форму значений.
+   * @param email Электронная почта.
+   * @param password Пароль.
+   * @param passwordRepeat Пароль, введённый повторно.
+   */
   private mapFormValuesToState(
     email: string,
     password: string,
@@ -151,6 +170,9 @@ export class SignUpFormController {
     });
   }
 
+  /**
+   * Обрабатывает событие, когда юзер печатает свои данные в форму.
+   */
   private handleTyping(): void {
     const email = this.inputEmail.value;
     const password = this.inputPassword.value;
@@ -158,10 +180,18 @@ export class SignUpFormController {
     this.mapFormValuesToState(email, password, passwordRepeat);
   }
 
+  /**
+   * Возвращает true, если пароль удовлетворяет требованиям, и false - в противном случае.
+   * @param password Пароль.
+   */
   private isPasswordValid(password: string): boolean {
     return password.length >= 5;
   }
 
+  /**
+   * Возвращает true, если электронная почта удовлетворяет требованиям, и false - в противном случае.
+   * @param email электронная почта.
+   */
   private isEmailValid(email: string): boolean {
     if (
       email

@@ -29,10 +29,17 @@ class Store {
     );
   }
 
+  /**
+   * Возвращает текущее состояние юзера.
+   */
   public getUserState(): UserState {
     return this.userState;
   }
 
+  /**
+   * Обрабатывает событие изменения юзерского стейта.
+   * @param user Стейт юзера.
+   */
   private handleUserAuthStatusChange(user: User | null): void {
     this.userState = user
       ? {
