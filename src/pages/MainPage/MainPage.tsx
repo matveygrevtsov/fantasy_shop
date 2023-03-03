@@ -1,7 +1,7 @@
 import { Header } from "../../components/Header/Header";
 
 export const MainPage = () => {
-      return (
+  return (
     <div>
       <Header />
       <h2>MainPage</h2>
