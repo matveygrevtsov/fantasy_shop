@@ -3,6 +3,7 @@ import { firebaseApi } from "../../../../firebaseApi";
 
 interface Props {
   root: HTMLDivElement;
+  onSubmit: (email: string, password: string) => void;
 }
 
 export enum SignUpFormStatus {
@@ -28,6 +29,7 @@ type SignUpFormState =
 export class SignUpFormController {
   // Переменные, которые приходят из пропсов:
   private readonly root: HTMLDivElement;
+  private readonly onSubmit: (email: string, password: string) => void;
   // Переменные, которые инициализируются в конструкторе:
   private state: SignUpFormState;
   private readonly inputEmail: HTMLInputElement;
@@ -37,8 +39,9 @@ export class SignUpFormController {
   private readonly submitButton: HTMLButtonElement;
   private readonly timer: number;
 
-  constructor({ root }: Props) {
+  constructor({ root, onSubmit }: Props) {
     this.root = root;
+    this.onSubmit = onSubmit;
     const {
       emailInput,
       passwordInput,
@@ -80,7 +83,7 @@ export class SignUpFormController {
   private submit() {
     if (this.state.status !== SignUpFormStatus.Success) return;
     const { email, password } = this.state;
-    firebaseApi.signUp(email, password);
+    this.onSubmit(email, password);
   }
 
   private getHTMLElementById(id: string): HTMLElement {

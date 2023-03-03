@@ -4,21 +4,15 @@ import { firebaseApi } from "./firebaseApi";
 
 export enum UserStatus {
   Guest = "Guest",
-  Loading = "Loading",
-  Error = "Error",
-  Client = "Client",
+  LoggedIn = "LoggedIn",
 }
 
 export type UserState =
   | {
-      userStatus: UserStatus.Guest | UserStatus.Loading;
+      userStatus: UserStatus.Guest;
     }
   | {
-      userStatus: UserStatus.Error;
-      error: string;
-    }
-  | {
-      userStatus: UserStatus.Client;
+      userStatus: UserStatus.LoggedIn;
       userData: User;
     };
 
@@ -39,14 +33,10 @@ class Store {
     return this.userState;
   }
 
-  public isClient(): boolean {
-    return this.userState.userStatus === UserStatus.Client;
-  }
-
   private handleUserAuthStatusChange(user: User | null): void {
     this.userState = user
       ? {
-          userStatus: UserStatus.Client,
+          userStatus: UserStatus.LoggedIn,
           userData: user,
         }
       : {

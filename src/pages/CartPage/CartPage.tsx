@@ -7,7 +7,7 @@ import { store, UserStatus } from "../../store";
 export const CartPage = observer(() => {
   const userState = store.getUserState();
 
-  if (userState.userStatus !== UserStatus.Client) {
+  if (userState.userStatus !== UserStatus.LoggedIn) {
     return <Navigate to={constants.routes.MainPage.path} />;
   }
 
