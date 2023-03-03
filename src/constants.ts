@@ -4,19 +4,19 @@ export const constants = {
       path: `${process.env.PUBLIC_URL}/`,
       title: "Главная",
       enableForGuest: true,
-      enableForClient: true
+      enableForClient: true,
     },
     CartPage: {
       path: `${process.env.PUBLIC_URL}/cart`,
       title: "Корзина",
       enableForGuest: false,
-      enableForClient: true
+      enableForClient: true,
     },
     SignUpPage: {
       path: `${process.env.PUBLIC_URL}/signup`,
       title: "Зарегистрироваться",
       enableForGuest: true,
-      enableForClient: false
+      enableForClient: false,
     },
   },
   signUpForm: {
