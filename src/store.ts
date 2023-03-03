@@ -39,20 +39,18 @@ class Store {
     return this.userState;
   }
 
-  public iscClient(): boolean {
+  public isClient(): boolean {
     return this.userState.userStatus === UserStatus.Client;
   }
 
   private handleUserAuthStatusChange(user: User | null): void {
-    console.log('handleUserAuthStatusChange')
     this.userState = user
       ? {
           userStatus: UserStatus.Client,
           userData: user,
         }
       : {
-          userStatus: UserStatus.Error,
-          error: "TODO: текст ошибки",
+          userStatus: UserStatus.Guest,
         };
   }
 }

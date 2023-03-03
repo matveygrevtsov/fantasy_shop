@@ -7,7 +7,7 @@ import { store } from "../../store";
 import s from "./Header.module.css";
 
 export const Header = observer(() => {
-  const isClient = store.iscClient();
+  const isClient = store.isClient();
   const routes = Object.values(constants.routes).filter(
     ({ enableForGuest, enableForClient }) =>
       isClient ? enableForClient : enableForGuest

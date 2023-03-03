@@ -1,9 +1,9 @@
+import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
 import { constants } from "../../constants";
 import { store, UserStatus } from "../../store";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
-import { observer } from "mobx-react-lite";
 
 import s from "./SignUpPage.module.css";
 

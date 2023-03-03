@@ -42,8 +42,13 @@ class FirebaseApi {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
+  /**
+   * Разлогинивает юзера.
+   * @param email - Электронная почта.
+   * @param password - Пароль.
+   */
   public async signOut() {
-    this.auth.signOut();
+    await this.auth.signOut();
   }
 
   /**
