@@ -4,34 +4,48 @@ import { Header } from "../../components/Header/Header";
 import { constants } from "../../constants";
 import { store, UserStatus } from "../../store";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
+import { SignUpPageStatus, useSignUpPage } from "./useSignUpPage";
 
 import s from "./SignUpPage.module.css";
 
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();
   const { routes } = constants;
+  const { state, handleSubmit, handleStartRegistrationAgainClick } =
+    useSignUpPage();
 
   // Если юзер залогинен - редиректим его с этой страницы
-  if (userState.userStatus === UserStatus.Client) {
+  if (userState.userStatus === UserStatus.LoggedIn) {
     return <Navigate to={routes.CartPage.path} />;
   }
 
-  if (
-    userState.userStatus === UserStatus.Guest ||
-    userState.userStatus === UserStatus.Error
-  ) {
+  if (state.status === SignUpPageStatus.WaitingForUserInput) {
     return (
       <div>
         <Header />
         <h2 className={s.title}>Регистрация</h2>
-        <SignUpForm className={s.form} />
-        {userState.userStatus === UserStatus.Error && (
-          <span className={s.error}>{userState.error}</span>
-        )}
+        <SignUpForm onSubmit={handleSubmit} className={s.form} />
+      </div>
+    );
+  }
+
+  if (state.status === SignUpPageStatus.Error) {
+    return (
+      <div>
+        <Header />
+        <h2>Ошибка регистрации: {state.error}</h2>
+        <button onClick={handleStartRegistrationAgainClick}>
+          Попробовать ещё раз
+        </button>
       </div>
     );
   }
 
   // По умолчанию отображаем прелоадер
-  return <div>Загрузка...</div>;
+  return (
+    <div>
+      <Header />
+      <h2>Загрузка...</h2>
+    </div>
+  );
 });

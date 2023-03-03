@@ -2,15 +2,15 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { constants } from "../../constants";
 import { firebaseApi } from "../../firebaseApi";
-import { store } from "../../store";
+import { store, UserStatus } from "../../store";
 
 import s from "./Header.module.css";
 
 export const Header = observer(() => {
-  const isClient = store.isClient();
+  const isLoggedIn = store.getUserState().userStatus === UserStatus.LoggedIn;
   const routes = Object.values(constants.routes).filter(
-    ({ enableForGuest, enableForClient }) =>
-      isClient ? enableForClient : enableForGuest
+    ({ enableForGuest, enableForLoggedIn }) =>
+      isLoggedIn ? enableForLoggedIn : enableForGuest
   );
 
   return (
@@ -21,7 +21,7 @@ export const Header = observer(() => {
             <Link to={path}>{title}</Link>
           </li>
         ))}
-        {isClient && (
+        {isLoggedIn && (
           <button onClick={() => firebaseApi.signOut()}>Logout</button>
         )}
       </ul>

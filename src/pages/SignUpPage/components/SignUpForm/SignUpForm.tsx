@@ -6,9 +6,10 @@ import s from "./SignUpForm.module.css";
 
 interface Props {
   className?: string;
+  onSubmit: (email: string, password: string) => void;
 }
 
-export const SignUpForm: React.FC<Props> = ({ className }) => {
+export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
   const {
     emailInput,
     passwordInput,
@@ -16,7 +17,7 @@ export const SignUpForm: React.FC<Props> = ({ className }) => {
     elementForErrorText,
     submitButton,
   } = constants.signUpForm;
-  const { refRoot } = useSignUpForm();
+  const { refRoot } = useSignUpForm(onSubmit);
 
   return (
     <div ref={refRoot} className={cn(className, s.root)}>
