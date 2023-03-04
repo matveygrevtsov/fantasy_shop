@@ -72,6 +72,7 @@ export class SignUpFormValidator {
     this.state = {
       status: SignUpFormStatus.Init,
     };
+    this.handleTyping();
   }
 
   /**
