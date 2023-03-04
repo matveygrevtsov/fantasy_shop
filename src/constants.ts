@@ -32,14 +32,13 @@ export const constants = {
       id: "passwordRepeat",
       label: "Повторите пароль",
     },
-    elementForErrorText: {
-      id: "elementForErrorText",
-    },
-    submitButton: {
-      id: "submitButton",
-      text: "Зарегистрироваться",
-    },
+    submitText: "Зарегистрироваться",
     checkInputsValidationTimeInterval_ms: 1000,
+    errorText: {
+      invalidEmail: "Невалидный email.",
+      invalidPassword: "Невалидный пароль.",
+      passwordMismatch: "Пароли не совпадают.",
+    },
   },
   firebaseConfig: {
     apiKey: "AIzaSyAJxRpwaEfKfGYkXjyk6dPAy82noOBLKXg",

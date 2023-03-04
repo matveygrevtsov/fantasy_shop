@@ -10,14 +10,9 @@ interface Props {
 }
 
 export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
-  const {
-    emailInput,
-    passwordInput,
-    passwordRepeatInput,
-    elementForErrorText,
-    submitButton,
-  } = constants.signUpForm;
-  const { refRoot } = useSignUpForm(onSubmit);
+  const { emailInput, passwordInput, passwordRepeatInput, submitText } =
+    constants.signUpForm;
+  const { refRoot, state, handleSubmit } = useSignUpForm(onSubmit);
 
   return (
     <div ref={refRoot} className={cn(className, s.root)}>
@@ -27,9 +22,15 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
       <input type="password" id={passwordInput.id} />
       <label className={s.label}>{passwordRepeatInput.label}</label>
       <input type="password" id={passwordRepeatInput.id} />
-      <div className={s.elementForErrorText} id={elementForErrorText.id} />
-      <button className={s.submitButton} id={submitButton.id}>
-        {submitButton.text}
+      {state.errorText && (
+        <div className={s.elementForErrorText}>{state.errorText}</div>
+      )}
+      <button
+        onClick={handleSubmit}
+        disabled={state.isSubmitButtonDisabled}
+        className={s.submitButton}
+      >
+        {submitText}
       </button>
     </div>
   );
