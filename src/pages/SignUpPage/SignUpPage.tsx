@@ -11,6 +11,7 @@ import s from "./SignUpPage.module.css";
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();
   const { routes } = constants;
+  const { title } = constants.SignUpPage;
   const { state, handleSubmit, handleStartRegistrationAgainClick } =
     useSignUpPage();
 
@@ -23,7 +24,7 @@ export const SignUpPage = observer(() => {
     return (
       <div>
         <Header />
-        <h2 className={s.title}>Регистрация</h2>
+        <h2 className={s.title}>{title}</h2>
         <SignUpForm onSubmit={handleSubmit} className={s.form} />
       </div>
     );
