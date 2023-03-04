@@ -34,6 +34,11 @@ export const constants = {
     },
     submitText: "Зарегистрироваться",
     checkInputsValidationTimeInterval_ms: 1000,
+    errorText: {
+      invalidEmail: "Невалидный email.",
+      invalidPassword: "Невалидный пароль.",
+      passwordMismatch: "Пароли не совпадают.",
+    },
   },
   firebaseConfig: {
     apiKey: "AIzaSyAJxRpwaEfKfGYkXjyk6dPAy82noOBLKXg",

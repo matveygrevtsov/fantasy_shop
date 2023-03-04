@@ -109,21 +109,21 @@ export class SignUpFormValidator {
       this.state = {
         status: SignUpFormStatus.Invalid,
       };
-      this.onUserTyping(true, "Невалидный email.");
+      this.onUserTyping(true, constants.signUpForm.errorText.invalidEmail);
       return;
     }
     if (!this.isPasswordValid(password)) {
       this.state = {
         status: SignUpFormStatus.Invalid,
       };
-      this.onUserTyping(true, "Невалидный пароль.");
+      this.onUserTyping(true, constants.signUpForm.errorText.invalidPassword);
       return;
     }
     if (password !== passwordRepeat) {
       this.state = {
         status: SignUpFormStatus.Invalid,
       };
-      this.onUserTyping(true, "Пароли не совпадают.");
+      this.onUserTyping(true, constants.signUpForm.errorText.passwordMismatch);
       return;
     }
     this.state = {
