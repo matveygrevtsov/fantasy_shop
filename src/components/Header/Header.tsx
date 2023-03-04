@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { constants } from "../../constants";
 import { firebaseApi } from "../../firebaseApi";
 import { store, UserStatus } from "../../store";
@@ -18,7 +18,12 @@ export const Header = observer(() => {
       <ul className={s.list}>
         {routes.map(({ path, title }) => (
           <li key={path}>
-            <Link to={path}>{title}</Link>
+            <NavLink
+              className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+              to={path}
+            >
+              {title}
+            </NavLink>
           </li>
         ))}
         {isLoggedIn && (
