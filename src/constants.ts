@@ -32,13 +32,7 @@ export const constants = {
       id: "passwordRepeat",
       label: "Повторите пароль",
     },
-    elementForErrorText: {
-      id: "elementForErrorText",
-    },
-    submitButton: {
-      id: "submitButton",
-      text: "Зарегистрироваться",
-    },
+    submitText: "Зарегистрироваться",
     checkInputsValidationTimeInterval_ms: 1000,
   },
   firebaseConfig: {

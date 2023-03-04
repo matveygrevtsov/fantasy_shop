@@ -3,24 +3,20 @@ import { constants } from "../../../../constants";
 interface Props {
   root: HTMLDivElement;
   onSubmit: (email: string, password: string) => void;
+  onUserTyping: (isSubmitButtonDisabled: boolean, errorText: string) => void;
 }
 
 export enum SignUpFormStatus {
-  Init = "Init",
-  Error = "Error",
-  Success = "Success",
+  Invalid = "Invalid",
+  Valid = "Valid",
 }
 
 type SignUpFormState =
   | {
-      status: SignUpFormStatus.Init;
+      status: SignUpFormStatus.Invalid;
     }
   | {
-      status: SignUpFormStatus.Error;
-      error: string;
-    }
-  | {
-      status: SignUpFormStatus.Success;
+      status: SignUpFormStatus.Valid;
       email: string;
       password: string;
     };
@@ -29,50 +25,47 @@ export class SignUpFormValidator {
   // Переменные, которые приходят из пропсов:
   private readonly root: HTMLDivElement;
   private readonly onSubmit: (email: string, password: string) => void;
+  private readonly onUserTyping: (
+    isSubmitButtonDisabled: boolean,
+    errorText: string
+  ) => void;
   // Переменные, которые инициализируются в конструкторе:
   private state: SignUpFormState;
   private readonly inputEmail: HTMLInputElement;
   private readonly inputPassword: HTMLInputElement;
   private readonly inputPasswordRepeat: HTMLInputElement;
-  private readonly elementForErrorText: HTMLDivElement;
-  private readonly submitButton: HTMLButtonElement;
   private readonly timer: number;
 
-  constructor({ root, onSubmit }: Props) {
+  constructor({ root, onSubmit, onUserTyping }: Props) {
     this.root = root;
     this.onSubmit = onSubmit;
+    this.onUserTyping = onUserTyping;
     const {
       emailInput,
       passwordInput,
       passwordRepeatInput,
-      elementForErrorText,
-      submitButton,
       checkInputsValidationTimeInterval_ms,
     } = constants.signUpForm;
-    this.inputEmail = this.getHTMLElementById(
-      emailInput.id
-    ) as HTMLInputElement;
-    this.inputPassword = this.getHTMLElementById(
-      passwordInput.id
-    ) as HTMLInputElement;
-    this.inputPasswordRepeat = this.getHTMLElementById(
-      passwordRepeatInput.id
-    ) as HTMLInputElement;
-    this.elementForErrorText = this.getHTMLElementById(
-      elementForErrorText.id
-    ) as HTMLDivElement;
-    this.submitButton = this.getHTMLElementById(
-      submitButton.id
-    ) as HTMLButtonElement;
-    this.submitButton.addEventListener("click", () => this.submit());
+    this.inputEmail = this.getInputById(emailInput.id);
+    this.inputPassword = this.getInputById(passwordInput.id);
+    this.inputPasswordRepeat = this.getInputById(passwordRepeatInput.id);
     this.timer = window.setInterval(
       () => this.handleTyping(),
       checkInputsValidationTimeInterval_ms
     );
     this.state = {
-      status: SignUpFormStatus.Init,
+      status: SignUpFormStatus.Invalid,
     };
     this.handleTyping();
+  }
+
+  /**
+   * Обрабатывает событие, когда юзер ввёл валидные данные в форму и нажал кнопку "submit".
+   */
+  public submit() {
+    if (this.state.status !== SignUpFormStatus.Valid) return;
+    const { email, password } = this.state;
+    this.onSubmit(email, password);
   }
 
   /**
@@ -80,50 +73,18 @@ export class SignUpFormValidator {
    */
   public unmount() {
     window.clearInterval(this.timer);
-    this.submitButton.removeEventListener("click", () => this.submit());
   }
 
   /**
-   * Обрабатывает событие, когда юзер ввёл валидные данные в форму и нажал кнопку "submit".
-   */
-  private submit() {
-    if (this.state.status !== SignUpFormStatus.Success) return;
-    const { email, password } = this.state;
-    this.onSubmit(email, password);
-  }
-
-  /**
-   * Возвращает HTML-элемент внутри формы по айдишнику.
+   * Возвращает HTMLInputElement внутри формы по айдишнику.
    * @param id Айдишник искомого элемента.
    */
-  private getHTMLElementById(id: string): HTMLElement {
-    const result: HTMLElement | null = this.root.querySelector(`#${id}`);
+  private getInputById(id: string): HTMLInputElement {
+    const result: HTMLInputElement | null = this.root.querySelector(`#${id}`);
     if (result === null) {
-      throw new Error(`HTML-элемент с id=${id} не был найден.`);
+      throw new Error(`HTMLInputElement с id=${id} не был найден.`);
     }
     return result;
-  }
-
-  /**
-   * Обновляет стейт.
-   * @param state Новое значение стейта.
-   */
-  private setState(state: SignUpFormState) {
-    this.state = state;
-    switch (this.state.status) {
-      case SignUpFormStatus.Success:
-        this.elementForErrorText.style.display = "none";
-        this.submitButton.disabled = false;
-        break;
-      case SignUpFormStatus.Error:
-        this.elementForErrorText.innerHTML = this.state.error;
-        this.elementForErrorText.style.display = "block";
-        this.submitButton.disabled = true;
-        break;
-      default:
-        this.elementForErrorText.style.display = "none";
-        this.submitButton.disabled = true;
-    }
   }
 
   /**
@@ -138,37 +99,39 @@ export class SignUpFormValidator {
     passwordRepeat: string
   ) {
     if (email === "" && password === "" && passwordRepeat === "") {
-      this.setState({
-        status: SignUpFormStatus.Init,
-      });
+      this.state = {
+        status: SignUpFormStatus.Invalid,
+      };
+      this.onUserTyping(true, "");
       return;
     }
     if (!this.isEmailValid(email)) {
-      this.setState({
-        status: SignUpFormStatus.Error,
-        error: "Невалидный email",
-      });
+      this.state = {
+        status: SignUpFormStatus.Invalid,
+      };
+      this.onUserTyping(true, "Невалидный email.");
       return;
     }
     if (!this.isPasswordValid(password)) {
-      this.setState({
-        status: SignUpFormStatus.Error,
-        error: "Невалидный пароль",
-      });
+      this.state = {
+        status: SignUpFormStatus.Invalid,
+      };
+      this.onUserTyping(true, "Невалидный пароль.");
       return;
     }
     if (password !== passwordRepeat) {
-      this.setState({
-        status: SignUpFormStatus.Error,
-        error: "Пароли не совпадают",
-      });
+      this.state = {
+        status: SignUpFormStatus.Invalid,
+      };
+      this.onUserTyping(true, "Пароли не совпадают.");
       return;
     }
-    this.setState({
-      status: SignUpFormStatus.Success,
+    this.state = {
+      status: SignUpFormStatus.Valid,
       email,
       password,
-    });
+    };
+    this.onUserTyping(false, "");
   }
 
   /**
