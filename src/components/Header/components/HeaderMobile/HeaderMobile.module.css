@@ -33,16 +33,19 @@
   background-color: #301934;
 }
 
-.link {
-  text-decoration: none;
+.li {
   color: #cbbde2;
+  height: 3rem;
+}
+
+.link {
+  height: 100%;
+  text-decoration: none;
   font-size: 1rem;
   font-weight: 400;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 1rem;
 }
 
 .linkActive {
@@ -53,5 +56,5 @@
 }
 
 .logout {
-  padding: 1rem 4rem 0 0;
+  height: 100%;
 }

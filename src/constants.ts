@@ -1,28 +1,28 @@
 export const constants = {
   routes: {
     MainPage: {
-      path: `${process.env.PUBLIC_URL}/`,
+      path: `/`,
       title: "Главная",
-      enableForGuest: true,
-      enableForLoggedIn: true,
+      showInNavBarForGuest: true,
+      showInNavBarForLoggedIn: true,
     },
     CartPage: {
-      path: `${process.env.PUBLIC_URL}/cart`,
+      path: `/cart`,
       title: "Корзина",
-      enableForGuest: false,
-      enableForLoggedIn: true,
+      showInNavBarForGuest: false,
+      showInNavBarForLoggedIn: true,
     },
     SignUpPage: {
-      path: `${process.env.PUBLIC_URL}/signup`,
+      path: `/signup`,
       title: "Зарегистрироваться",
-      enableForGuest: true,
-      enableForLoggedIn: false,
+      showInNavBarForGuest: true,
+      showInNavBarForLoggedIn: false,
     },
     SignInPage: {
-      path: `${process.env.PUBLIC_URL}/signin`,
+      path: `/signin`,
       title: "Авторизоваться",
-      enableForGuest: true,
-      enableForLoggedIn: false,
+      showInNavBarForGuest: true,
+      showInNavBarForLoggedIn: false,
     },
   },
   SignUpPage: {
@@ -64,6 +64,9 @@ export const constants = {
       invalidEmailErrorText: "Невалидный email.",
       invalidPasswordErrorText: "Невалидный пароль.",
     },
+  },
+  Header: {
+    logoutText: "Выйти",
   },
   firebaseConfig: {
     apiKey: "AIzaSyAJxRpwaEfKfGYkXjyk6dPAy82noOBLKXg",

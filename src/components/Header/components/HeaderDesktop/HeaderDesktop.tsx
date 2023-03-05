@@ -1,24 +1,28 @@
-import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
-import { constants } from "../../../../constants";
 import { LogOut } from "../../../LogOut/LogOut";
-import { store, UserStatus } from "../../../../store";
 import { Logo } from "../../../Logo/Logo";
 import cn from "classnames";
 
 import s from "./HeaderDesktop.module.css";
 
-interface Props {
-  className?: string;
+interface RouteInfo {
+  path: string;
+  title: string;
+  showInNavBarForGuest: boolean;
+  showInNavBarForLoggedIn: boolean;
 }
 
-export const HeaderDesktop: React.FC<Props> = observer(({ className }) => {
-  const isLoggedIn = store.getUserState().userStatus === UserStatus.LoggedIn;
-  const routes = Object.values(constants.routes).filter(
-    ({ enableForGuest, enableForLoggedIn }) =>
-      isLoggedIn ? enableForLoggedIn : enableForGuest
-  );
+interface Props {
+  className?: string;
+  isUserLoggedIn: boolean;
+  routes: RouteInfo[];
+}
 
+export const HeaderDesktop: React.FC<Props> = ({
+  className,
+  isUserLoggedIn,
+  routes,
+}) => {
   return (
     <header className={cn(s.root, className)}>
       <ul className={s.list}>
@@ -35,8 +39,8 @@ export const HeaderDesktop: React.FC<Props> = observer(({ className }) => {
             </NavLink>
           </li>
         ))}
-        {isLoggedIn && <LogOut className={s.logout} />}
+        {isUserLoggedIn && <LogOut className={s.logout} />}
       </ul>
     </header>
   );
-});
+};
