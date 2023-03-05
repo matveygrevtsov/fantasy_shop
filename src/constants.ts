@@ -27,6 +27,7 @@ export const constants = {
   },
   SignUpPage: {
     title: "Зарегистрироваться",
+    alreadyHasAccountText: "Уже есть аккаунт ? Авторизуйтесь.",
     SignUpForm: {
       emailInput: {
         id: "email",

@@ -22,9 +22,7 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
       <input type="password" id={passwordInput.id} />
       <label className={s.label}>{passwordRepeatInput.label}</label>
       <input type="password" id={passwordRepeatInput.id} />
-      {state.errorText && (
-        <div className={s.elementForErrorText}>{state.errorText}</div>
-      )}
+      {state.errorText && <div className={s.error}>{state.errorText}</div>}
       <button
         onClick={handleSubmit}
         disabled={state.isSubmitButtonDisabled}

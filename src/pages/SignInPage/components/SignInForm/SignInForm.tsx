@@ -20,9 +20,7 @@ export const SignInForm: React.FC<Props> = ({ className, onSubmit }) => {
       <input type="email" id={emailInput.id} />
       <label className={s.label}>{passwordInput.label}</label>
       <input type="password" id={passwordInput.id} />
-      {state.errorText && (
-        <div className={s.elementForErrorText}>{state.errorText}</div>
-      )}
+      {state.errorText && <div className={s.error}>{state.errorText}</div>}
       <button
         onClick={handleSubmit}
         disabled={state.isSubmitButtonDisabled}

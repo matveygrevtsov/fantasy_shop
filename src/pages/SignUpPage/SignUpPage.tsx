@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
 import { constants } from "../../constants";
 import { store, UserStatus } from "../../store";
@@ -11,7 +11,7 @@ import s from "./SignUpPage.module.css";
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();
   const { routes } = constants;
-  const { title } = constants.SignUpPage;
+  const { title, alreadyHasAccountText } = constants.SignUpPage;
   const { state, handleSubmit, handleStartRegistrationAgainClick } =
     useSignUpPage();
 
@@ -26,6 +26,9 @@ export const SignUpPage = observer(() => {
         <Header />
         <h2 className={s.title}>{title}</h2>
         <SignUpForm onSubmit={handleSubmit} className={s.form} />
+        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
+          {alreadyHasAccountText}
+        </Link>
       </div>
     );
   }
@@ -38,6 +41,9 @@ export const SignUpPage = observer(() => {
         <button onClick={handleStartRegistrationAgainClick}>
           Попробовать ещё раз
         </button>
+        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
+          {alreadyHasAccountText}
+        </Link>
       </div>
     );
   }
