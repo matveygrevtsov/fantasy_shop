@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { SignUpFormValidator } from "./SignUpFormValidator";
+import { SignInFormValidator } from "./SignInFormValidator";
 
 interface State {
   isSubmitButtonDisabled: boolean;
   errorText: string;
 }
 
-export const useSignUpForm = (
+export const useSignInForm = (
   onSubmit: (email: string, password: string) => void
 ) => {
   const [state, setState] = useState<State>({
@@ -14,7 +14,7 @@ export const useSignUpForm = (
     errorText: "",
   });
   const refRoot = useRef<HTMLDivElement>(null);
-  const refFormValidator = useRef<SignUpFormValidator | null>(null);
+  const refFormValidator = useRef<SignInFormValidator | null>(null);
 
   function handleUserTyping(
     isSubmitButtonDisabled: boolean,
@@ -30,7 +30,7 @@ export const useSignUpForm = (
   useEffect(() => {
     const root = refRoot.current;
     if (root !== null && refFormValidator.current === null) {
-      refFormValidator.current = new SignUpFormValidator({
+      refFormValidator.current = new SignInFormValidator({
         root,
         onSubmit,
         onUserTyping: handleUserTyping,

@@ -18,26 +18,51 @@ export const constants = {
       enableForGuest: true,
       enableForLoggedIn: false,
     },
+    SignInPage: {
+      path: `${process.env.PUBLIC_URL}/signin`,
+      title: "Авторизоваться",
+      enableForGuest: true,
+      enableForLoggedIn: false,
+    },
   },
-  signUpForm: {
-    emailInput: {
-      id: "email",
-      label: "Введите email",
+  SignUpPage: {
+    title: "Зарегистрироваться",
+    alreadyHasAccountText: "Уже есть аккаунт ? Авторизуйтесь.",
+    SignUpForm: {
+      emailInput: {
+        id: "email",
+        label: "Введите email",
+      },
+      passwordInput: {
+        id: "password",
+        label: "Введите пароль",
+      },
+      passwordRepeatInput: {
+        id: "passwordRepeat",
+        label: "Повторите пароль",
+      },
+      submitText: "Зарегистрироваться",
+      checkInputsValidationTimeInterval_ms: 1000,
+      invalidEmailErrorText: "Невалидный email.",
+      invalidPasswordErrorText: "Невалидный пароль.",
+      passwordMismatchErrorText: "Пароли не совпадают.",
     },
-    passwordInput: {
-      id: "password",
-      label: "Введите пароль",
-    },
-    passwordRepeatInput: {
-      id: "passwordRepeat",
-      label: "Повторите пароль",
-    },
-    submitText: "Зарегистрироваться",
-    checkInputsValidationTimeInterval_ms: 1000,
-    errorText: {
-      invalidEmail: "Невалидный email.",
-      invalidPassword: "Невалидный пароль.",
-      passwordMismatch: "Пароли не совпадают.",
+  },
+  SignInPage: {
+    title: "Авторизоваться",
+    SignInForm: {
+      emailInput: {
+        id: "email",
+        label: "Введите email",
+      },
+      passwordInput: {
+        id: "password",
+        label: "Введите пароль",
+      },
+      submitText: "Авторизоваться",
+      checkInputsValidationTimeInterval_ms: 1000,
+      invalidEmailErrorText: "Невалидный email.",
+      invalidPasswordErrorText: "Невалидный пароль.",
     },
   },
   firebaseConfig: {

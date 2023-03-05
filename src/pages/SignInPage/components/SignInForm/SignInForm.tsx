@@ -1,18 +1,18 @@
-import { useSignUpForm } from "./useSignUpForm";
+import { useSignInForm } from "./useSignInForm";
 import { constants } from "../../../../constants";
 import cn from "classnames";
 
-import s from "./SignUpForm.module.css";
+import s from "./SignInForm.module.css";
 
 interface Props {
   className?: string;
   onSubmit: (email: string, password: string) => void;
 }
 
-export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
-  const { emailInput, passwordInput, passwordRepeatInput, submitText } =
-    constants.SignUpPage.SignUpForm;
-  const { refRoot, state, handleSubmit } = useSignUpForm(onSubmit);
+export const SignInForm: React.FC<Props> = ({ className, onSubmit }) => {
+  const { emailInput, passwordInput, submitText } =
+    constants.SignInPage.SignInForm;
+  const { refRoot, state, handleSubmit } = useSignInForm(onSubmit);
 
   return (
     <div ref={refRoot} className={cn(className, s.root)}>
@@ -20,8 +20,6 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
       <input type="email" id={emailInput.id} />
       <label className={s.label}>{passwordInput.label}</label>
       <input type="password" id={passwordInput.id} />
-      <label className={s.label}>{passwordRepeatInput.label}</label>
-      <input type="password" id={passwordRepeatInput.id} />
       {state.errorText && <div className={s.error}>{state.errorText}</div>}
       <button
         onClick={handleSubmit}
