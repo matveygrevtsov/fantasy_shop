@@ -1,5 +1,6 @@
 import { useSignUpForm } from "./useSignUpForm";
 import { constants } from "../../../../constants";
+import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
 import cn from "classnames";
 
 import s from "./SignUpForm.module.css";
@@ -23,14 +24,13 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
       <label className={s.label}>{passwordRepeatInput.label}</label>
       <input className={s.input} type="password" id={passwordRepeatInput.id} />
       {state.errorText && <div className={s.error}>{state.errorText}</div>}
-      <button
-        type="submit"
+      <SubmitButton
         onClick={handleSubmit}
         disabled={state.isSubmitButtonDisabled}
         className={s.submitButton}
       >
         {submitText}
-      </button>
+      </SubmitButton>
     </form>
   );
 };
