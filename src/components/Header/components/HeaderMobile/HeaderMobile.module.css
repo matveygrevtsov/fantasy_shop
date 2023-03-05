@@ -1,7 +1,7 @@
 .root {
   height: 56px;
   position: relative;
-  background-color: #563d7c;
+  background-color: var(--color-primary);
 }
 
 .container {
@@ -30,7 +30,7 @@
   flex-direction: column;
   padding: 1rem;
   list-style: none;
-  background-color: #301934;
+  background-color: var(--color-secondary);
 }
 
 .li {

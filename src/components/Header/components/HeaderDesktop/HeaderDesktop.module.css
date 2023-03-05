@@ -1,6 +1,6 @@
 .root {
   height: 56px;
-  background-color: #563d7c;
+  background-color: var(--color-primary);
   position: relative;
 }
 

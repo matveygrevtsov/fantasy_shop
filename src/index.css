@@ -11,3 +11,8 @@ a {
   color: inherit;
   text-decoration: inherit;
 }
+
+:root {
+  --color-primary: #563d7c;
+  --color-secondary: #301934;
+}

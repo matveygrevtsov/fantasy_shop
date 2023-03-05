@@ -26,17 +26,7 @@
 }
 
 .signInAgainButton {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  border-radius: 0.3rem;
-  display: block;
-  cursor: pointer;
   margin-top: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
 }
 
 .error {

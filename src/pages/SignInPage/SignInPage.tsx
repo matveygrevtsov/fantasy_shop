@@ -6,6 +6,7 @@ import { constants } from "../../constants";
 import { Header } from "../../components/Header/Header";
 import { SignInForm } from "./components/SignInForm/SignInForm";
 import { Preloader } from "../../components/Preloader/Preloader";
+import { SubmitButton } from "../../components/Header/components/SubmitButton/SubmitButton";
 
 import s from "./SignInPage.module.css";
 
@@ -39,12 +40,12 @@ export const SignInPage = observer(() => {
         <div className={s.container}>
           <h2>Ошибка авторизации</h2>
           <div className={s.error}>{state.error}</div>
-          <button
+          <SubmitButton
             className={s.signInAgainButton}
             onClick={handleSignInAgainClick}
           >
             Попробовать ещё раз
-          </button>
+          </SubmitButton>
         </div>
       </div>
     );

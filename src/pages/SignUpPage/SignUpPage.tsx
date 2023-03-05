@@ -6,6 +6,7 @@ import { store, UserStatus } from "../../store";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
 import { SignUpPageStatus, useSignUpPage } from "./useSignUpPage";
 import { Preloader } from "../../components/Preloader/Preloader";
+import { SubmitButton } from "../../components/Header/components/SubmitButton/SubmitButton";
 
 import s from "./SignUpPage.module.css";
 
@@ -43,12 +44,12 @@ export const SignUpPage = observer(() => {
         <div className={s.container}>
           <h2 className={s.title}>Ошибка регистрации</h2>
           <div className={s.error}>{state.error}</div>
-          <button
-            className={s.signUpAgainButton}
+          <SubmitButton
             onClick={handleStartRegistrationAgainClick}
+            className={s.signUpAgainButton}
           >
             Попробовать ещё раз
-          </button>
+          </SubmitButton>
           <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
             {alreadyHasAccountText}
           </Link>
