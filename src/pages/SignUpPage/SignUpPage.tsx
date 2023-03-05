@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 import { Link, Navigate } from "react-router-dom";
-import { Header } from "../../components/Header/Header";
 import { constants } from "../../constants";
 import { store, UserStatus } from "../../store";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
@@ -24,48 +23,39 @@ export const SignUpPage = observer(() => {
 
   if (state.status === SignUpPageStatus.WaitingForUserInput) {
     return (
-      <div>
-        <Header />
-        <div className={s.container}>
-          <h2 className={s.title}>{title}</h2>
-          <SignUpForm onSubmit={handleSubmit} className={s.form} />
-          <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
-            {alreadyHasAccountText}
-          </Link>
-        </div>
+      <div className={s.container}>
+        <h2 className={s.title}>{title}</h2>
+        <SignUpForm onSubmit={handleSubmit} className={s.form} />
+        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
+          {alreadyHasAccountText}
+        </Link>
       </div>
     );
   }
 
   if (state.status === SignUpPageStatus.Error) {
     return (
-      <div>
-        <Header />
-        <div className={s.container}>
-          <h2 className={s.title}>Ошибка регистрации</h2>
-          <div className={s.error}>{state.error}</div>
-          <SubmitButton
-            onClick={handleStartRegistrationAgainClick}
-            className={s.signUpAgainButton}
-          >
-            Попробовать ещё раз
-          </SubmitButton>
-          <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
-            {alreadyHasAccountText}
-          </Link>
-        </div>
+      <div className={s.container}>
+        <h2 className={s.title}>Ошибка регистрации</h2>
+        <div className={s.error}>{state.error}</div>
+        <SubmitButton
+          onClick={handleStartRegistrationAgainClick}
+          className={s.signUpAgainButton}
+        >
+          Попробовать ещё раз
+        </SubmitButton>
+        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
+          {alreadyHasAccountText}
+        </Link>
       </div>
     );
   }
 
   // По умолчанию отображаем прелоадер
   return (
-    <div>
-      <Header />
-      <div className={s.container}>
-        <h2 className={s.title}>{title}</h2>
-        <Preloader className={s.preloader} />
-      </div>
+    <div className={s.container}>
+      <h2 className={s.title}>{title}</h2>
+      <Preloader className={s.preloader} />
     </div>
   );
 });
