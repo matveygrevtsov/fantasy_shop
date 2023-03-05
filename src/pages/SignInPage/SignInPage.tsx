@@ -39,7 +39,12 @@ export const SignInPage = observer(() => {
         <div className={s.container}>
           <h2>Ошибка авторизации</h2>
           <div className={s.error}>{state.error}</div>
-          <button onClick={handleSignInAgainClick}>Попробовать ещё раз</button>
+          <button
+            className={s.signInAgainButton}
+            onClick={handleSignInAgainClick}
+          >
+            Попробовать ещё раз
+          </button>
         </div>
       </div>
     );
