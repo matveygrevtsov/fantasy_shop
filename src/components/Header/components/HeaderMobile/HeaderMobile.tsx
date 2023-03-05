@@ -5,9 +5,9 @@ import { useHeaderMobile } from "./useHeaderMobile";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
+import { constants } from "../../../../constants";
 
 import s from "./HeaderMobile.module.css";
-import { constants } from "../../../../constants";
 
 interface RouteInfo {
   path: string;
