@@ -5,9 +5,9 @@ import { useHeaderMobile } from "./useHeaderMobile";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
+import { constants } from "../../../../constants";
 
 import s from "./HeaderMobile.module.css";
-import { constants } from "../../../../constants";
 
 interface RouteInfo {
   path: string;
@@ -51,11 +51,11 @@ export const HeaderMobile: React.FC<Props> = observer(
                 </NavLink>
               </li>
             ))}
-            <li className={s.li}>
-              {isUserLoggedIn && (
+            {isUserLoggedIn && (
+              <li className={s.li}>
                 <LogOut className={s.logout} text={logoutText} />
-              )}
-            </li>
+              </li>
+            )}
           </ul>
         )}
       </div>
