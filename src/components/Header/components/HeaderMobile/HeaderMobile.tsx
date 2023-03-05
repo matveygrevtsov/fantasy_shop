@@ -51,11 +51,11 @@ export const HeaderMobile: React.FC<Props> = observer(
                 </NavLink>
               </li>
             ))}
-            <li className={s.li}>
-              {isUserLoggedIn && (
+            {isUserLoggedIn && (
+              <li className={s.li}>
                 <LogOut className={s.logout} text={logoutText} />
-              )}
-            </li>
+              </li>
+            )}
           </ul>
         )}
       </div>
