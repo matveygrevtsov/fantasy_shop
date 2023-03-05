@@ -68,6 +68,9 @@ export const constants = {
   Header: {
     logoutText: "Выйти",
   },
+  Footer: {
+    copyright: "© 2023 Copyright: Fantasy Shop",
+  },
   firebaseConfig: {
     apiKey: "AIzaSyAJxRpwaEfKfGYkXjyk6dPAy82noOBLKXg",
     authDomain: "fantasyshop-a4a0b.firebaseapp.com",
