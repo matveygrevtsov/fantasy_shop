@@ -13,7 +13,7 @@ export const useSignUpForm = (
     isSubmitButtonDisabled: true,
     errorText: "",
   });
-  const refRoot = useRef<HTMLDivElement>(null);
+  const refRoot = useRef<HTMLFormElement>(null);
   const refFormValidator = useRef<SignUpFormValidator | null>(null);
 
   function handleUserTyping(
@@ -36,7 +36,7 @@ export const useSignUpForm = (
         onUserTyping: handleUserTyping,
       });
     }
-  }, []);
+  }, [onSubmit]);
 
   return { refRoot, state, handleSubmit };
 };
