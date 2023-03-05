@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  text-decoration: none;
+  color: white;
+  padding-left: 0.5rem;
+}

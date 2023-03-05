@@ -15,7 +15,7 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
   const { refRoot, state, handleSubmit } = useSignUpForm(onSubmit);
 
   return (
-    <div ref={refRoot} className={cn(className, s.root)}>
+    <form ref={refRoot} className={cn(className, s.root)}>
       <label className={s.label}>{emailInput.label}</label>
       <input className={s.input} type="email" id={emailInput.id} />
       <label className={s.label}>{passwordInput.label}</label>
@@ -24,12 +24,13 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
       <input className={s.input} type="password" id={passwordRepeatInput.id} />
       {state.errorText && <div className={s.error}>{state.errorText}</div>}
       <button
+        type="submit"
         onClick={handleSubmit}
         disabled={state.isSubmitButtonDisabled}
         className={s.submitButton}
       >
         {submitText}
       </button>
-    </div>
+    </form>
   );
 };

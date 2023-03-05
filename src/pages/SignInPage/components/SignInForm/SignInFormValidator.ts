@@ -1,7 +1,7 @@
 import { constants } from "../../../../constants";
 
 interface Props {
-  root: HTMLDivElement;
+  root: HTMLFormElement;
   onSubmit: (email: string, password: string) => void;
   onUserTyping: (isSubmitButtonDisabled: boolean, errorText: string) => void;
 }
@@ -23,7 +23,7 @@ type SignInFormState =
 
 export class SignInFormValidator {
   // Переменные, которые приходят из пропсов:
-  private readonly root: HTMLDivElement;
+  private readonly root: HTMLFormElement;
   private readonly onSubmit: (email: string, password: string) => void;
   private readonly onUserTyping: (
     isSubmitButtonDisabled: boolean,
