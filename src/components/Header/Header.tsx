@@ -16,8 +16,11 @@ export const Header = observer(() => {
   return (
     <header className={s.root}>
       <ul className={s.list}>
+        <li className={s.li}>
+          <img className={s.logo} alt="logo" src="./images/logo.png" />
+        </li>
         {routes.map(({ path, title }) => (
-          <li key={path}>
+          <li className={s.li} key={path}>
             <NavLink
               className={({ isActive }) => (isActive ? s.linkActive : s.link)}
               to={path}
@@ -27,7 +30,9 @@ export const Header = observer(() => {
           </li>
         ))}
         {isLoggedIn && (
-          <button onClick={() => firebaseApi.signOut()}>Logout</button>
+          <button className={s.logout} onClick={() => firebaseApi.signOut()}>
+            Выйти
+          </button>
         )}
       </ul>
     </header>

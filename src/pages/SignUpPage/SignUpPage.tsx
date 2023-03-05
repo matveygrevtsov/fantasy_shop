@@ -5,9 +5,9 @@ import { constants } from "../../constants";
 import { store, UserStatus } from "../../store";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
 import { SignUpPageStatus, useSignUpPage } from "./useSignUpPage";
+import { Preloader } from "../../components/Preloader/Preloader";
 
 import s from "./SignUpPage.module.css";
-import { Preloader } from "../../components/Preloader/Preloader";
 
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();
@@ -25,11 +25,13 @@ export const SignUpPage = observer(() => {
     return (
       <div>
         <Header />
-        <h2 className={s.title}>{title}</h2>
-        <SignUpForm onSubmit={handleSubmit} className={s.form} />
-        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
-          {alreadyHasAccountText}
-        </Link>
+        <div className={s.container}>
+          <h2 className={s.title}>{title}</h2>
+          <SignUpForm onSubmit={handleSubmit} className={s.form} />
+          <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
+            {alreadyHasAccountText}
+          </Link>
+        </div>
       </div>
     );
   }
@@ -38,13 +40,19 @@ export const SignUpPage = observer(() => {
     return (
       <div>
         <Header />
-        <h2>Ошибка регистрации: {state.error}</h2>
-        <button onClick={handleStartRegistrationAgainClick}>
-          Попробовать ещё раз
-        </button>
-        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
-          {alreadyHasAccountText}
-        </Link>
+        <div className={s.container}>
+          <h2 className={s.title}>Ошибка регистрации</h2>
+          <div className={s.error}>{state.error}</div>
+          <button
+            className={s.signUpAgainButton}
+            onClick={handleStartRegistrationAgainClick}
+          >
+            Попробовать ещё раз
+          </button>
+          <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
+            {alreadyHasAccountText}
+          </Link>
+        </div>
       </div>
     );
   }
@@ -53,7 +61,10 @@ export const SignUpPage = observer(() => {
   return (
     <div>
       <Header />
-      <Preloader className={s.preloader} />
+      <div className={s.container}>
+        <h2 className={s.title}>{title}</h2>
+        <Preloader className={s.preloader} />
+      </div>
     </div>
   );
 });

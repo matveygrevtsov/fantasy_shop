@@ -24,8 +24,10 @@ export const SignInPage = observer(() => {
     return (
       <div>
         <Header />
-        <h2 className={s.title}>{title}</h2>
-        <SignInForm onSubmit={handleSubmit} className={s.form} />
+        <div className={s.container}>
+          <h2 className={s.title}>{title}</h2>
+          <SignInForm onSubmit={handleSubmit} className={s.form} />
+        </div>
       </div>
     );
   }
@@ -34,8 +36,16 @@ export const SignInPage = observer(() => {
     return (
       <div>
         <Header />
-        <h2>Ошибка авторизации: {state.error}</h2>
-        <button onClick={handleSignInAgainClick}>Попробовать ещё раз</button>
+        <div className={s.container}>
+          <h2>Ошибка авторизации</h2>
+          <div className={s.error}>{state.error}</div>
+          <button
+            className={s.signInAgainButton}
+            onClick={handleSignInAgainClick}
+          >
+            Попробовать ещё раз
+          </button>
+        </div>
       </div>
     );
   }
@@ -44,7 +54,10 @@ export const SignInPage = observer(() => {
   return (
     <div>
       <Header />
-      <Preloader className={s.preloader} />
+      <div className={s.container}>
+        <h2 className={s.title}>{title}</h2>
+        <Preloader className={s.preloader} />
+      </div>
     </div>
   );
 });
