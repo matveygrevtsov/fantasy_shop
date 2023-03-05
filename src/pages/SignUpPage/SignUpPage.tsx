@@ -7,6 +7,7 @@ import { SignUpForm } from "./components/SignUpForm/SignUpForm";
 import { SignUpPageStatus, useSignUpPage } from "./useSignUpPage";
 
 import s from "./SignUpPage.module.css";
+import { Preloader } from "../../components/Preloader/Preloader";
 
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();
@@ -52,7 +53,7 @@ export const SignUpPage = observer(() => {
   return (
     <div>
       <Header />
-      <h2>Загрузка...</h2>
+      <Preloader className={s.preloader} />
     </div>
   );
 });

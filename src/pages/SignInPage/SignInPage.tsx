@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import { constants } from "../../constants";
 import { Header } from "../../components/Header/Header";
 import { SignInForm } from "./components/SignInForm/SignInForm";
+import { Preloader } from "../../components/Preloader/Preloader";
 
 import s from "./SignInPage.module.css";
 
@@ -43,7 +44,7 @@ export const SignInPage = observer(() => {
   return (
     <div>
       <Header />
-      <h2>Загрузка...</h2>
+      <Preloader className={s.preloader} />
     </div>
   );
 });
