@@ -1,23 +1,57 @@
 .root {
-  height: 50px;
-  background-color: #f8f9fa;
+  height: 56px;
+  background-color: #563d7c;
+  position: relative;
 }
 
 .list {
   width: 100%;
   height: 100%;
+  padding: 0 1rem;
+  max-width: 1000px;
+  margin: auto;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
   list-style: none;
+  align-items: center;
+}
+
+.li {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  height: 40px;
 }
 
 .link {
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.9);
+  color: #cbbde2;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1rem;
 }
 
 .linkActive {
   composes: link;
   font-weight: 800;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.logout {
+  margin-left: auto;
+  cursor: pointer;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  color: #cbbde2;
+  font-size: 1rem;
+  font-weight: 400;
 }
