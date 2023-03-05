@@ -1,0 +1,10 @@
+.root {
+  height: 50px;
+  background-color: var(--color-primary);
+  padding: 1rem;
+}
+
+.container {
+  margin: auto;
+  max-width: 1000px;
+}

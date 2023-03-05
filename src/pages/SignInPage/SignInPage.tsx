@@ -3,7 +3,6 @@ import { SignInPageStatus, useSignInPage } from "./useSignInPage";
 import { store, UserStatus } from "../../store";
 import { Navigate } from "react-router-dom";
 import { constants } from "../../constants";
-import { Header } from "../../components/Header/Header";
 import { SignInForm } from "./components/SignInForm/SignInForm";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { SubmitButton } from "../../components/Header/components/SubmitButton/SubmitButton";
@@ -23,42 +22,33 @@ export const SignInPage = observer(() => {
 
   if (state.status === SignInPageStatus.WaitingForUserInput) {
     return (
-      <div>
-        <Header />
-        <div className={s.container}>
-          <h2 className={s.title}>{title}</h2>
-          <SignInForm onSubmit={handleSubmit} className={s.form} />
-        </div>
+      <div className={s.container}>
+        <h2 className={s.title}>{title}</h2>
+        <SignInForm onSubmit={handleSubmit} className={s.form} />
       </div>
     );
   }
 
   if (state.status === SignInPageStatus.Error) {
     return (
-      <div>
-        <Header />
-        <div className={s.container}>
-          <h2>Ошибка авторизации</h2>
-          <div className={s.error}>{state.error}</div>
-          <SubmitButton
-            className={s.signInAgainButton}
-            onClick={handleSignInAgainClick}
-          >
-            Попробовать ещё раз
-          </SubmitButton>
-        </div>
+      <div className={s.container}>
+        <h2>Ошибка авторизации</h2>
+        <div className={s.error}>{state.error}</div>
+        <SubmitButton
+          className={s.signInAgainButton}
+          onClick={handleSignInAgainClick}
+        >
+          Попробовать ещё раз
+        </SubmitButton>
       </div>
     );
   }
 
   // По умолчанию отображаем прелоадер
   return (
-    <div>
-      <Header />
-      <div className={s.container}>
-        <h2 className={s.title}>{title}</h2>
-        <Preloader className={s.preloader} />
-      </div>
+    <div className={s.container}>
+      <h2 className={s.title}>{title}</h2>
+      <Preloader className={s.preloader} />
     </div>
   );
 });
