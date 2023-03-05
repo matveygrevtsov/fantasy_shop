@@ -9,3 +9,7 @@
 .error {
   color: red;
 }
+
+.preloader {
+  margin: 15px auto 0;
+}
