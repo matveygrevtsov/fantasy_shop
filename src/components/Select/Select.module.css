@@ -1,0 +1,42 @@
+.root {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid grey;
+  padding: 0.5rem;
+  background-color: white;
+}
+
+.openOptionsListIcon {
+  margin-left: 0.5rem;
+}
+
+.optionsList {
+  background-color: white;
+  list-style: none;
+  padding: 0.5rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid grey;
+}
+
+.optionsListClosed {
+  composes: optionsList;
+  display: none;
+}
+
+.optionsListOpened {
+  composes: optionsList;
+}
+
+.checkbox {
+  margin-right: 0.5rem;
+}
