@@ -32,7 +32,7 @@ export const SignInPage = observer(() => {
   if (state.status === SignInPageStatus.Error) {
     return (
       <div className={s.container}>
-        <h2>Ошибка авторизации</h2>
+        <h2 className={s.title}>Ошибка авторизации</h2>
         <div className={s.error}>{state.error}</div>
         <SubmitButton
           className={s.signInAgainButton}
