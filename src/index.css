@@ -25,4 +25,6 @@ a {
 
   --color-primary: #563d7c;
   --color-secondary: #301934;
+
+  --tablet-screen-width: 600px;
 }
