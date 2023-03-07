@@ -8,7 +8,7 @@
   width: 100%;
   height: 100%;
   padding: 0 1rem;
-  max-width: 1000px;
+  max-width: var(--container-m-max-width);
   margin: auto;
   display: flex;
   list-style: none;

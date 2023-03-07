@@ -1,4 +1,4 @@
-import { constants } from "../../../../constants";
+import { texts } from "../../../../constants/texts";
 
 interface Props {
   root: HTMLFormElement;
@@ -45,7 +45,7 @@ export class SignUpFormValidator {
       passwordInput,
       passwordRepeatInput,
       checkInputsValidationTimeInterval_ms,
-    } = constants.SignUpPage.SignUpForm;
+    } = texts.SignUpPage.SignUpForm;
     this.inputEmail = this.getInputById(emailInput.id);
     this.inputPassword = this.getInputById(passwordInput.id);
     this.inputPasswordRepeat = this.getInputById(passwordRepeatInput.id);
@@ -109,7 +109,7 @@ export class SignUpFormValidator {
       invalidEmailErrorText,
       invalidPasswordErrorText,
       passwordMismatchErrorText,
-    } = constants.SignUpPage.SignUpForm;
+    } = texts.SignUpPage.SignUpForm;
     if (!this.isEmailValid(email)) {
       this.state = {
         status: SignUpFormStatus.Invalid,

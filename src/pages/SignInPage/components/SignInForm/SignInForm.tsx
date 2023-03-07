@@ -1,7 +1,7 @@
 import { useSignInForm } from "./useSignInForm";
-import { constants } from "../../../../constants";
 import cn from "classnames";
 import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
+import { texts } from "../../../../constants/texts";
 
 import s from "./SignInForm.module.css";
 
@@ -11,8 +11,7 @@ interface Props {
 }
 
 export const SignInForm: React.FC<Props> = ({ className, onSubmit }) => {
-  const { emailInput, passwordInput, submitText } =
-    constants.SignInPage.SignInForm;
+  const { emailInput, passwordInput, submitText } = texts.SignInPage.SignInForm;
   const { refRoot, state, handleSubmit } = useSignInForm(onSubmit);
 
   return (

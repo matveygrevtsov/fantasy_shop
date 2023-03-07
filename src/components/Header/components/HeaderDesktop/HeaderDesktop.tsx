@@ -1,21 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
 import { Logo } from "../../../Logo/Logo";
+import { RouteConfig } from "../../Header";
 import cn from "classnames";
 
 import s from "./HeaderDesktop.module.css";
 
-interface RouteInfo {
-  path: string;
-  title: string;
-  showInNavBarForGuest: boolean;
-  showInNavBarForLoggedIn: boolean;
-}
-
 interface Props {
   className?: string;
   isUserLoggedIn: boolean;
-  routes: RouteInfo[];
+  routes: RouteConfig[];
 }
 
 export const HeaderDesktop: React.FC<Props> = ({

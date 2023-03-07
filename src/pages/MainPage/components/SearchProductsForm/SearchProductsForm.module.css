@@ -1,0 +1,26 @@
+.root {
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.searchParams {
+  display: flex;
+  list-style: none;
+}
+
+.searchInput {
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  height: 2rem;
+  transition: border ease-in-out 0.2s;
+  padding: 0.5rem;
+}
+
+.searchInput:focus {
+  border: 1px solid var(--color-primary);
+  outline: none;
+}

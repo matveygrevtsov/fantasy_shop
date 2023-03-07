@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { constants } from "../../../../constants";
+import { texts } from "../../../../constants/texts";
 
 import s from "./Footer.module.css";
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const Footer: React.FC<Props> = ({ className }) => {
-  const { copyright } = constants.Footer;
+  const { copyright } = texts.Footer;
 
   return <footer className={cn(s.root, className)}>{copyright}</footer>;
 };
