@@ -1,18 +1,18 @@
 import { observer } from "mobx-react-lite";
 import { Link, Navigate } from "react-router-dom";
-import { constants } from "../../constants";
 import { store, UserStatus } from "../../store";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
 import { SignUpPageStatus, useSignUpPage } from "./useSignUpPage";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { SubmitButton } from "../../components/Header/components/SubmitButton/SubmitButton";
+import { texts } from "../../constants/texts";
+import { routes } from "../../constants/routes";
 
 import s from "./SignUpPage.module.css";
 
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();
-  const { routes } = constants;
-  const { title, alreadyHasAccountText } = constants.SignUpPage;
+  const { title, alreadyHasAccountText } = texts.SignUpPage;
   const { state, handleSubmit, handleStartRegistrationAgainClick } =
     useSignUpPage();
 

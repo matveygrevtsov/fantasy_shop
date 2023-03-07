@@ -1,0 +1,5 @@
+.root {
+  max-width: var(--container-m-max-width);
+  padding: var(--container-padding);
+  margin: 0 auto;
+}

@@ -5,19 +5,13 @@ import { useHeaderMobile } from "./useHeaderMobile";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
-import { constants } from "../../../../constants";
+import { RouteConfig } from "../../Header";
+import { texts } from "../../../../constants/texts";
 
 import s from "./HeaderMobile.module.css";
 
-interface RouteInfo {
-  path: string;
-  title: string;
-  showInNavBarForGuest: boolean;
-  showInNavBarForLoggedIn: boolean;
-}
-
 interface Props {
-  routes: RouteInfo[];
+  routes: RouteConfig[];
   isUserLoggedIn: boolean;
   className?: string;
 }
@@ -25,7 +19,7 @@ interface Props {
 export const HeaderMobile: React.FC<Props> = observer(
   ({ className, routes, isUserLoggedIn }) => {
     const { isOpened, handleClick } = useHeaderMobile();
-    const { logoutText } = constants.Header;
+    const { logoutText } = texts.Header;
 
     return (
       <div className={className}>

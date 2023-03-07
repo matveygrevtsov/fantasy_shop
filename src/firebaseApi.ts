@@ -11,7 +11,7 @@ import {
   onAuthStateChanged,
   User,
 } from "firebase/auth";
-import { constants } from "./constants";
+import { firebaseConfig } from "./constants/firebase";
 
 class FirebaseApi {
   private readonly firebaseApp: FirebaseApp;
@@ -19,7 +19,7 @@ class FirebaseApi {
   private readonly auth: Auth;
 
   constructor() {
-    this.firebaseApp = initializeApp(constants.firebaseConfig) as FirebaseApp;
+    this.firebaseApp = initializeApp(firebaseConfig) as FirebaseApp;
     this.firestore = getFirestore(this.firebaseApp);
     this.auth = getAuth(this.firebaseApp);
   }

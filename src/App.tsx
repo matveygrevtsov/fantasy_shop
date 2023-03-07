@@ -1,6 +1,6 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Header/components/Layout/Layout";
-import { constants } from "./constants";
+import { routes } from "./constants/routes";
 import { CartPage } from "./pages/CartPage/CartPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { SignInPage } from "./pages/SignInPage/SignInPage";
@@ -11,15 +11,9 @@ function App() {
     <HashRouter>
       <Layout>
         <Routes>
-          <Route path={constants.routes.CartPage.path} element={<CartPage />} />
-          <Route
-            path={constants.routes.SignUpPage.path}
-            element={<SignUpPage />}
-          />
-          <Route
-            path={constants.routes.SignInPage.path}
-            element={<SignInPage />}
-          />
+          <Route path={routes.CartPage.path} element={<CartPage />} />
+          <Route path={routes.SignUpPage.path} element={<SignUpPage />} />
+          <Route path={routes.SignInPage.path} element={<SignInPage />} />
           <Route path="*" element={<MainPage />} />
         </Routes>
       </Layout>

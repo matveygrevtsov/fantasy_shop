@@ -1,30 +1,6 @@
-export const constants = {
-  routes: {
-    MainPage: {
-      path: `/`,
-      title: "Главная",
-      showInNavBarForGuest: true,
-      showInNavBarForLoggedIn: true,
-    },
-    CartPage: {
-      path: `/cart`,
-      title: "Корзина",
-      showInNavBarForGuest: false,
-      showInNavBarForLoggedIn: true,
-    },
-    SignUpPage: {
-      path: `/signup`,
-      title: "Зарегистрироваться",
-      showInNavBarForGuest: true,
-      showInNavBarForLoggedIn: false,
-    },
-    SignInPage: {
-      path: `/signin`,
-      title: "Авторизоваться",
-      showInNavBarForGuest: true,
-      showInNavBarForLoggedIn: false,
-    },
-  },
+import { ProductCategory, ProductsSortType, RouteName } from "./enums";
+
+export const texts = {
   SignUpPage: {
     title: "Зарегистрироваться",
     alreadyHasAccountText: "Уже есть аккаунт ? Авторизуйтесь.",
@@ -67,17 +43,29 @@ export const constants = {
   },
   Header: {
     logoutText: "Выйти",
+    routesTitles: {
+      [RouteName.MainPage]: "Главная",
+      [RouteName.SignUpPage]: "Регистрация",
+      [RouteName.SignInPage]: "Вход",
+      [RouteName.CartPage]: "Корзина",
+    },
   },
   Footer: {
     copyright: "© 2023 Copyright: Fantasy Shop",
   },
-  firebaseConfig: {
-    apiKey: "AIzaSyAJxRpwaEfKfGYkXjyk6dPAy82noOBLKXg",
-    authDomain: "fantasyshop-a4a0b.firebaseapp.com",
-    projectId: "fantasyshop-a4a0b",
-    storageBucket: "fantasyshop-a4a0b.appspot.com",
-    messagingSenderId: "891225945011",
-    appId: "1:891225945011:web:041f3f08fef9cc63c011c6",
-    measurementId: "G-3Q8P19HFC6",
+  ProductCategorySelect: {
+    title: "Категория",
+    variants: {
+      [ProductCategory.Goblins]: "Гоблины",
+      [ProductCategory.Orks]: "Орки",
+      [ProductCategory.Dwarfs]: "Гномы",
+    },
+  },
+  ProductSortTypeSelect: {
+    title: "Сортировка",
+    variants: {
+      [ProductsSortType.AscendingOrder]: "По возрастанию",
+      [ProductsSortType.DescendingOrder]: "По убыванию",
+    },
   },
 };

@@ -2,17 +2,17 @@ import { observer } from "mobx-react-lite";
 import { SignInPageStatus, useSignInPage } from "./useSignInPage";
 import { store, UserStatus } from "../../store";
 import { Navigate } from "react-router-dom";
-import { constants } from "../../constants";
 import { SignInForm } from "./components/SignInForm/SignInForm";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { SubmitButton } from "../../components/Header/components/SubmitButton/SubmitButton";
+import { texts } from "../../constants/texts";
+import { routes } from "../../constants/routes";
 
 import s from "./SignInPage.module.css";
 
 export const SignInPage = observer(() => {
   const userState = store.getUserState();
-  const { title } = constants.SignInPage;
-  const { routes } = constants;
+  const { title } = texts.SignInPage;
   const { state, handleSubmit, handleSignInAgainClick } = useSignInPage();
 
   // Если юзер залогинен - редиректим его с этой страницы

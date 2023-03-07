@@ -1,4 +1,4 @@
-import { constants } from "../../../../constants";
+import { texts } from "../../../../constants/texts";
 
 interface Props {
   root: HTMLFormElement;
@@ -40,7 +40,7 @@ export class SignInFormValidator {
     this.onSubmit = onSubmit;
     this.onUserTyping = onUserTyping;
     const { emailInput, passwordInput, checkInputsValidationTimeInterval_ms } =
-      constants.SignInPage.SignInForm;
+      texts.SignInPage.SignInForm;
     this.inputEmail = this.getInputById(emailInput.id);
     this.inputPassword = this.getInputById(passwordInput.id);
     this.timer = window.setInterval(
@@ -88,7 +88,7 @@ export class SignInFormValidator {
    */
   private mapFormValuesToState(email: string, password: string) {
     const { invalidEmailErrorText, invalidPasswordErrorText } =
-      constants.SignInPage.SignInForm;
+      texts.SignInPage.SignInForm;
 
     if (email === "" && password === "") {
       this.state = {

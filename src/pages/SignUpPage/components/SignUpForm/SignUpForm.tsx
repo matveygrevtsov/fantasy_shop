@@ -1,7 +1,7 @@
 import { useSignUpForm } from "./useSignUpForm";
-import { constants } from "../../../../constants";
 import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
 import cn from "classnames";
+import { texts } from "../../../../constants/texts";
 
 import s from "./SignUpForm.module.css";
 
@@ -12,7 +12,7 @@ interface Props {
 
 export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
   const { emailInput, passwordInput, passwordRepeatInput, submitText } =
-    constants.SignUpPage.SignUpForm;
+    texts.SignUpPage.SignUpForm;
   const { refRoot, state, handleSubmit } = useSignUpForm(onSubmit);
 
   return (
