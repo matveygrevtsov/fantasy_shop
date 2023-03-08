@@ -53,19 +53,39 @@ export const texts = {
   Footer: {
     copyright: "© 2023 Copyright: Fantasy Shop",
   },
-  ProductCategorySelect: {
-    title: "Категория",
-    options: {
-      [ProductCategory.Goblins]: "Гоблины",
-      [ProductCategory.Orks]: "Орки",
-      [ProductCategory.Dwarfs]: "Гномы",
+  ProductsSearchForm: {
+    searchProductPlaceholder: "Введите название продукта",
+    searchProductsParamsTitle: "Фильтры",
+    ProductCategorySelect: {
+      title: "Категория",
+      placeholder: "Выбрать категории",
+      options: [
+        {
+          value: ProductCategory.Goblins,
+          label: "Гоблины",
+        },
+        {
+          value: ProductCategory.Orks,
+          label: "Орки",
+        },
+        {
+          value: ProductCategory.Dwarfs,
+          label: "Гномы",
+        },
+      ],
     },
-  },
-  ProductSortTypeSelect: {
-    title: "Сортировка",
-    options: {
-      [ProductsSortType.AscendingOrder]: "По возрастанию",
-      [ProductsSortType.DescendingOrder]: "По убыванию",
+    ProductSortTypeSelect: {
+      title: "Сортировка",
+      options: [
+        {
+          value: ProductsSortType.AscendingOrderPrice,
+          label: "По возрастанию цены",
+        },
+        {
+          value: ProductsSortType.DescendingOrderPrice,
+          label: "По убыванию цены",
+        },
+      ],
     },
   },
 };
