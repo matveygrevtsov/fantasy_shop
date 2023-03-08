@@ -39,7 +39,7 @@ export function Select<T>(props: Props<T>) {
   return (
     <div className={cn(s.root, props.rootClassName)}>
       <div onClick={handleOpenClick} className={classNameHead}>
-        {props.title}
+        <span className={s.title}>{props.title}</span>
         <FontAwesomeIcon
           className={openOptionsListIconClassName}
           icon={faChevronDown}

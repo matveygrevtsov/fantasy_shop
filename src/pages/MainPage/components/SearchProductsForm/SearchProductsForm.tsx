@@ -9,11 +9,18 @@ export const SearchProductsForm = () => {
     <div className={s.root}>
       <SearchProductsInput className={s.searchInput} />
       <ul className={s.searchParams}>
-        <li>
+        <li className={s.searchParam}>
           <Select
             {...texts.ProductCategorySelect}
             onSelect={(options) => alert(options)}
             selectType={"MultipleChoice"}
+          />
+        </li>
+        <li className={s.searchParam}>
+          <Select
+            {...texts.ProductSortTypeSelect}
+            onSelect={(options) => alert(options)}
+            selectType={"OneChoice"}
           />
         </li>
       </ul>
