@@ -15,6 +15,7 @@ export function SearchProductsInput({ className }: Props) {
       <input
         placeholder={texts.ProductsSearchForm.searchProductPlaceholder}
         className={s.input}
+        type="search"
       />
       <button className={s.button}>
         <FontAwesomeIcon icon={faSearch} />

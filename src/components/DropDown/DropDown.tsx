@@ -16,18 +16,22 @@ export function DropDown({
   className,
   children,
 }: PropsWithChildren<Props>) {
-  const { opened, handleClick } = useDropDown();
+  const { opened, ref, handleOpen } = useDropDown();
 
   const iconClassName = opened ? s.iconOpened : s.iconClosed;
   const headClassName = opened ? s.headOpened : s.headClosed;
 
   return (
     <div className={cn(s.root, className)}>
-      <div onClick={handleClick} className={headClassName}>
+      <div onClick={handleOpen} className={headClassName}>
         <span className={s.title}>{title}</span>
         <FontAwesomeIcon className={iconClassName} icon={faAngleDown} />
       </div>
-      {opened && <div className={s.body}>{children}</div>}
+      {opened && (
+        <div ref={ref} className={s.body}>
+          {children}
+        </div>
+      )}
     </div>
   );
 }
