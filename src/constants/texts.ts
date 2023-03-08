@@ -55,7 +55,7 @@ export const texts = {
   },
   ProductCategorySelect: {
     title: "Категория",
-    variants: {
+    options: {
       [ProductCategory.Goblins]: "Гоблины",
       [ProductCategory.Orks]: "Орки",
       [ProductCategory.Dwarfs]: "Гномы",
@@ -63,7 +63,7 @@ export const texts = {
   },
   ProductSortTypeSelect: {
     title: "Сортировка",
-    variants: {
+    options: {
       [ProductsSortType.AscendingOrder]: "По возрастанию",
       [ProductsSortType.DescendingOrder]: "По убыванию",
     },
