@@ -39,7 +39,7 @@ export function useSelect<T>(props: Props<T>) {
         selectedOptions,
       }));
 
-      props.onSelect(selectedOptions);
+      props.onSelect(selectedOptions[0]);
     }
   }
 

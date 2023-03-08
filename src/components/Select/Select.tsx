@@ -16,7 +16,7 @@ export type Props<T> =
     }
   | {
       selectType: "OneChoice";
-      onSelect: (options: T[]) => void;
+      onSelect: (option: T | undefined) => void;
       title: string;
       options: Record<string, string>;
       rootClassName?: string;
