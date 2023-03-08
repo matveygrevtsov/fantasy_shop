@@ -1,11 +1,19 @@
 .root {
   cursor: pointer;
   user-select: none;
+  position: relative;
+}
+
+.title {
+  margin-right: 1rem;
 }
 
 .head {
   border: 1px solid gray;
   padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .headClosed {
@@ -21,6 +29,10 @@
   list-style: none;
   border: 1px solid gray;
   padding: 0.2rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
 }
 
 .optionsListClosed {
@@ -34,10 +46,10 @@
 
 .checkbox {
   margin-right: 0.5rem;
+  cursor: pointer;
 }
 
 .openOptionsListIcon {
-  margin-left: 0.5rem;
 }
 
 .openOptionsListIconClosed {
