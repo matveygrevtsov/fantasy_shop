@@ -1,0 +1,54 @@
+.root {
+  cursor: pointer;
+  user-select: none;
+}
+
+.head {
+  border: 1px solid gray;
+  padding: 0.2rem;
+}
+
+.headClosed {
+  composes: head;
+}
+
+.headOpened {
+  composes: head;
+  pointer-events: none;
+}
+
+.optionsList {
+  list-style: none;
+  border: 1px solid gray;
+  padding: 0.2rem;
+}
+
+.optionsListClosed {
+  composes: optionsList;
+  display: none;
+}
+
+.optionsListOpened {
+  composes: optionsList;
+}
+
+.checkbox {
+  margin-right: 0.5rem;
+}
+
+.openOptionsListIcon {
+  margin-left: 0.5rem;
+}
+
+.openOptionsListIconClosed {
+  composes: openOptionsListIcon;
+}
+
+.openOptionsListIconOpened {
+  composes: openOptionsListIcon;
+  transform: rotate(180deg);
+}
+
+.option {
+  padding: 0.2rem;
+}

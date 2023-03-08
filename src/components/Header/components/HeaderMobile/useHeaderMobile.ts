@@ -9,7 +9,7 @@ export const useHeaderMobile = () => {
     }
   };
 
-  const { ref } = useClickOutsideListener(handleClose);
+  const { ref } = useClickOutsideListener<HTMLDivElement>(handleClose);
 
   const handleClick = () => setIsOpened((prevValue) => !prevValue);
 

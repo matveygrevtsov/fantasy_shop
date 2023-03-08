@@ -4,4 +4,12 @@
 
 .searchInput {
   width: 100%;
+  margin-bottom: 1rem;
+}
+
+.searchParams {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  flex-wrap: wrap;
 }
