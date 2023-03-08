@@ -12,6 +12,6 @@ export enum ProductCategory {
 }
 
 export enum ProductsSortType {
-  AscendingOrder = "AscendingOrder", // По возрастанию
-  DescendingOrder = "DescendingOrder", // По убыванию
+  AscendingOrderPrice = "AscendingOrderPrice", // По возрастанию цены
+  DescendingOrderPrice = "DescendingOrderPrice", // По убыванию цены
 }
