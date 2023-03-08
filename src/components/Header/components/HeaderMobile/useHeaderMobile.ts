@@ -3,13 +3,15 @@ import { useClickOutsideListener } from "../../../../hooks/useClickOutsideListen
 
 export const useHeaderMobile = () => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const { ref } = useClickOutsideListener(() => {
+  const handleClose = () => {
     if (isOpened) {
       setIsOpened(false);
     }
-  });
+  };
+
+  const { ref } = useClickOutsideListener(handleClose);
 
   const handleClick = () => setIsOpened((prevValue) => !prevValue);
 
-  return { ref, isOpened, handleClick };
+  return { ref, isOpened, handleClick, handleClose };
 };
