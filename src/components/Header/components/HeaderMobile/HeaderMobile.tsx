@@ -18,11 +18,11 @@ interface Props {
 
 export const HeaderMobile: React.FC<Props> = observer(
   ({ className, routes, isUserLoggedIn }) => {
-    const { isOpened, handleClick } = useHeaderMobile();
+    const { ref, isOpened, handleClick } = useHeaderMobile();
     const { logoutText } = texts.Header;
 
     return (
-      <div className={className}>
+      <div ref={ref} className={className}>
         <header className={s.root}>
           <div className={s.container}>
             <Logo />
