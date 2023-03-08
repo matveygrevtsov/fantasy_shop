@@ -40,6 +40,15 @@
   margin-left: 0.5rem;
 }
 
+.openOptionsListIconClosed {
+  composes: openOptionsListIcon;
+}
+
+.openOptionsListIconOpened {
+  composes: openOptionsListIcon;
+  transform: rotate(180deg);
+}
+
 .option {
   padding: 0.2rem;
 }

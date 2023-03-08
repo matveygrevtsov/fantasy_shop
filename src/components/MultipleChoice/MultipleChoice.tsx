@@ -29,12 +29,16 @@ export function MultipleChoice<T>({
     ? cn(s.optionsListOpened, optionsListClassName)
     : cn(s.optionsListClosed, optionsListClassName);
 
+  const openOptionsListIconClassName = state.isOpened
+    ? s.openOptionsListIconOpened
+    : s.openOptionsListIconClosed;
+
   return (
     <div className={cn(s.root, rootClassName)}>
       <div onClick={handleOpenClick} className={classNameHead}>
         {title}
         <FontAwesomeIcon
-          className={s.openOptionsListIcon}
+          className={openOptionsListIconClassName}
           icon={faChevronDown}
         />
       </div>
