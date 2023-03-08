@@ -1,49 +1,52 @@
 import cn from "classnames";
-import { useMultipleChoice } from "./useMultipleChoice";
+import { useSelect } from "./useSelect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-import s from "./MultipleChoice.module.css";
+import s from "./Select.module.css";
 
-interface Props<T> {
-  title: string;
-  options: Record<string, string>;
-  onSelect: (options: T[]) => void;
-  rootClassName?: string;
-  optionsListClassName?: string;
-}
+export type Props<T> =
+  | {
+      selectType: "MultipleChoice";
+      onSelect: (options: T[]) => void;
+      title: string;
+      options: Record<string, string>;
+      rootClassName?: string;
+      optionsListClassName?: string;
+    }
+  | {
+      selectType: "OneChoice";
+      onSelect: (options: T[]) => void;
+      title: string;
+      options: Record<string, string>;
+      rootClassName?: string;
+      optionsListClassName?: string;
+    };
 
-export function MultipleChoice<T>({
-  title,
-  options,
-  onSelect,
-  rootClassName,
-  optionsListClassName,
-}: Props<T>) {
-  const { ref, state, handleSelect, handleOpenClick } =
-    useMultipleChoice<T>(onSelect);
+export function Select<T>(props: Props<T>) {
+  const { ref, state, handleSelect, handleOpenClick } = useSelect<T>(props);
 
   const classNameHead = state.isOpened ? s.headOpened : s.headClosed;
 
   const classNameOptionsList = state.isOpened
-    ? cn(s.optionsListOpened, optionsListClassName)
-    : cn(s.optionsListClosed, optionsListClassName);
+    ? cn(s.optionsListOpened, props.optionsListClassName)
+    : cn(s.optionsListClosed, props.optionsListClassName);
 
   const openOptionsListIconClassName = state.isOpened
     ? s.openOptionsListIconOpened
     : s.openOptionsListIconClosed;
 
   return (
-    <div className={cn(s.root, rootClassName)}>
+    <div className={cn(s.root, props.rootClassName)}>
       <div onClick={handleOpenClick} className={classNameHead}>
-        {title}
+        {props.title}
         <FontAwesomeIcon
           className={openOptionsListIconClassName}
           icon={faChevronDown}
         />
       </div>
       <ul ref={ref} className={classNameOptionsList}>
-        {Object.entries(options).map(([key, value]) => {
+        {Object.entries(props.options).map(([key, value]) => {
           const option = key as unknown as T;
 
           return (

@@ -1,4 +1,4 @@
-import { MultipleChoice } from "../../../../components/MultipleChoice/MultipleChoice";
+import { Select } from "../../../../components/Select/Select";
 import { texts } from "../../../../constants/texts";
 import { SearchProductsInput } from "../SearchProductsInput/SearchProductsInput";
 
@@ -10,9 +10,10 @@ export const SearchProductsForm = () => {
       <SearchProductsInput className={s.searchInput} />
       <ul className={s.searchParams}>
         <li>
-          <MultipleChoice
+          <Select
             {...texts.ProductCategorySelect}
             onSelect={(options) => alert(options)}
+            selectType={"MultipleChoice"}
           />
         </li>
       </ul>
