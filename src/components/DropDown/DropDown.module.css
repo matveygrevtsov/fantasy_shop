@@ -35,5 +35,5 @@
 
 .iconOpened {
   composes: icon;
-  transform: translate(180deg);
+  transform: rotate(180deg);
 }
