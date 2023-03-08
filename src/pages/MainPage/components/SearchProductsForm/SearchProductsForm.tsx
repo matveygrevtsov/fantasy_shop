@@ -3,11 +3,19 @@ import { SearchProductsParams } from "../SearchProductsParams/SearchProductsPara
 
 import s from "./SearchProductsForm.module.css";
 
-export const SearchProductsForm = () => {
+interface Props {
+  className?: string;
+}
+
+export function SearchProductsForm({ className }: Props) {
   return (
-    <div>
+    <div className={className}>
       <SearchProductsInput />
-      <SearchProductsParams className={s.searchProductsParams} />
+      <SearchProductsParams
+        onProductsSortTypeSelect={console.log}
+        onProductCategorySelect={console.log}
+        className={s.searchProductsParams}
+      />
     </div>
   );
-};
+}
