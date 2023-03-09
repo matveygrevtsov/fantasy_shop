@@ -3,7 +3,7 @@ import Select from "react-select";
 import { DropDown } from "../../../../components/DropDown/DropDown";
 import { texts } from "../../../../constants/texts";
 import { useSearchProductsParams } from "./useSearchProductsParams";
-import { SearchParams } from "../SearchProductsForm/useSearchProductsForm";
+import { SearchParams } from "../../types";
 
 import s from "./SearchProductsParams.module.css";
 

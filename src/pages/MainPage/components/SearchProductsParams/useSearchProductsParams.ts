@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { MultiValue } from "react-select";
 import { ProductCategory, ProductsSortType } from "../../../../constants/enums";
-import {
-  initSearchProductsFormState,
-  SearchParams,
-} from "../SearchProductsForm/useSearchProductsForm";
+import { SearchParams } from "../../types";
+import { initSearchProductsFormState } from "../SearchProductsForm/useSearchProductsForm";
 import { Props } from "./SearchProductsParams";
 
 export function useSearchProductsParams({ onChange }: Props) {
