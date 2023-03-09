@@ -1,19 +1,9 @@
 import { SearchProductsInput } from "../SearchProductsInput/SearchProductsInput";
 import { SearchProductsParams } from "../SearchProductsParams/SearchProductsParams";
 import { useSearchProductsForm } from "./useSearchProductsForm";
-import { ProductCategory, ProductsSortType } from "../../../../constants/enums";
+import { SearchProductsFormState } from "../../types";
 
 import s from "./SearchProductsForm.module.css";
-
-export interface SearchParams {
-  productCategories: ProductCategory[];
-  productsSortType: ProductsSortType;
-}
-
-export interface SearchProductsFormState {
-  searchString: string;
-  searchParams: SearchParams;
-}
 
 interface Props {
   onSubmit: (searchProductsFormState: SearchProductsFormState) => void;
@@ -25,7 +15,7 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
     useSearchProductsForm(onSubmit);
 
   return (
-    <form className={className}>
+    <div className={className}>
       <SearchProductsInput
         onSubmit={handleSubmit}
         onChange={handleSearchStringChange}
@@ -34,6 +24,6 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
         onChange={handleSearchParamsChange}
         className={s.searchProductsParams}
       />
-    </form>
+    </div>
   );
 }

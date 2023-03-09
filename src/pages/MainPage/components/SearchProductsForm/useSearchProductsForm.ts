@@ -1,12 +1,6 @@
 import { useState } from "react";
-import { ProductCategory, ProductsSortType } from "../../../../constants/enums";
 import { texts } from "../../../../constants/texts";
-import { SearchProductsFormState } from "./SearchProductsForm";
-
-export interface SearchParams {
-  productCategories: ProductCategory[];
-  productsSortType: ProductsSortType;
-}
+import { SearchParams, SearchProductsFormState } from "../../types";
 
 interface State {
   searchString: string;
