@@ -76,14 +76,14 @@ export const texts = {
     },
     ProductSortTypeSelect: {
       title: "Сортировка",
+      defaultOption: {
+        value: ProductsSortType.DescendingOrderPrice,
+        label: "По убыванию цены",
+      },
       options: [
         {
           value: ProductsSortType.AscendingOrderPrice,
           label: "По возрастанию цены",
-        },
-        {
-          value: ProductsSortType.DescendingOrderPrice,
-          label: "По убыванию цены",
         },
       ],
     },
