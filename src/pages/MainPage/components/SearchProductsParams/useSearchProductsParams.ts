@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { MultiValue } from "react-select";
 import { ProductCategory, ProductsSortType } from "../../../../constants/enums";
-import { texts } from "../../../../constants/texts";
-import { SearchParams } from "../SearchProductsForm/useSearchProductsForm";
+import {
+  initSearchProductsFormState,
+  SearchParams,
+} from "../SearchProductsForm/useSearchProductsForm";
 import { Props } from "./SearchProductsParams";
 
 export function useSearchProductsParams({ onChange }: Props) {
-  const [state, setState] = useState<SearchParams>({
-    productCategories: [],
-    productsSortType:
-      texts.ProductsSearchForm.ProductSortTypeSelect.defaultOption.value,
-  });
+  const [state, setState] = useState<SearchParams>(
+    initSearchProductsFormState.searchParams
+  );
 
   function handleProductCategorySelect(
     event: MultiValue<{ value: ProductCategory; label: string }>
