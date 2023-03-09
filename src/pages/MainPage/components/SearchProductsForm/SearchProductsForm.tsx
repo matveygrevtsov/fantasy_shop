@@ -25,7 +25,7 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
     useSearchProductsForm(onSubmit);
 
   return (
-    <div className={className}>
+    <form className={className}>
       <SearchProductsInput
         onSubmit={handleSubmit}
         onChange={handleSearchStringChange}
@@ -34,6 +34,6 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
         onChange={handleSearchParamsChange}
         className={s.searchProductsParams}
       />
-    </div>
+    </form>
   );
 }

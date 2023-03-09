@@ -20,7 +20,7 @@ export function SearchProductsInput({ onSubmit, onChange, className }: Props) {
         className={s.input}
         type="search"
       />
-      <button onClick={onSubmit} className={s.button}>
+      <button type="submit" onClick={onSubmit} className={s.button}>
         <FontAwesomeIcon icon={faSearch} />
       </button>
     </div>
