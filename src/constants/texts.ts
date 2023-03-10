@@ -10,8 +10,8 @@ import {
 export const texts = {
   FirebaseErrors: {
     [FirebaseErrors.AuthUserNotFound]: "Пользователь с таким email не найден.",
-    [FirebaseErrors.AuthInvalidPassword]: "Невалидный пароль.",
-    [FirebaseErrors.AuthEmailAlreadyExists]:
+    [FirebaseErrors.AuthWrongPassword]: "Невалидный пароль.",
+    [FirebaseErrors.AuthEmailAlreadyInUse]:
       "Предоставленный адрес электронной почты уже используется существующим пользователем.",
     defaultErrorText: "Произошла ошибка. Повторите попытку позже",
   },

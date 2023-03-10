@@ -14,7 +14,7 @@ export function FirebaseErrorText({ errorCode, className }: Props) {
   const { defaultErrorText } = FirebaseErrors;
   const errors = FirebaseErrors as Record<string, string>;
   if (errors[errorCode]) {
-    return <span className={rootClassName}>errors[errorCode]</span>;
+    return <span className={rootClassName}>{errors[errorCode]}</span>;
   }
   return (
     <span className={rootClassName}>

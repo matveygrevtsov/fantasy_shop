@@ -28,7 +28,7 @@ export enum SignInFormInput {
 }
 
 export enum FirebaseErrors {
-  AuthUserNotFound = "AuthUserNotFound", // Пользователь с таким email не найден.
-  AuthInvalidPassword = "AuthInvalidPassword", // Невалидный пароль
-  AuthEmailAlreadyExists = "AuthEmailAlreadyExists", // Предоставленный адрес электронной почты уже используется существующим пользователем.
+  AuthUserNotFound = "auth/user-not-found", // Пользователь с таким email не найден.
+  AuthWrongPassword = "auth/wrong-password", // Невалидный пароль
+  AuthEmailAlreadyInUse = "auth/email-already-in-use", // Предоставленный адрес электронной почты уже используется существующим пользователем.
 }
