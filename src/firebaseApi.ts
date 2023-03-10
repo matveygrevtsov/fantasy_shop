@@ -12,6 +12,7 @@ import {
   User,
 } from "firebase/auth";
 import { firebaseConfig } from "./constants/firebase";
+import { Product, SearchProductsParams } from "./types";
 
 class FirebaseApi {
   private readonly firebaseApp: FirebaseApp;
@@ -59,6 +60,17 @@ class FirebaseApi {
     onUserAuthStateChanged: (user: User | null) => void
   ): void {
     onAuthStateChanged(this.auth, onUserAuthStateChanged);
+  }
+
+  /**
+   * Возвращает массив продуктов, соответствующих параметрам поиска, либо undefined, если параметры поиска не заданы.
+   * @param searchProductsParams - параметры поиска продуктов.
+   */
+  public async getProductsBySearchParams(
+    searchProductsParams?: SearchProductsParams
+  ): Promise<Product[]> {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return [];
   }
 }
 
