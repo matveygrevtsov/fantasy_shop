@@ -21,3 +21,8 @@ export enum SignUpFormInput {
   Password = "Password",
   RepeatPassword = "RepeatPassword",
 }
+
+export enum SignInFormInput {
+  Email = "Email",
+  Password = "Password",
+}

@@ -1,7 +1,9 @@
 import { useSignInForm } from "./useSignInForm";
-import cn from "classnames";
 import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
 import { texts } from "../../../../constants/texts";
+import { SignInFormInput } from "../../../../constants/enums";
+import { AuthFormErrorLabel } from "../../../../components/AuthFormErrorLabel/AuthFormErrorLabel";
+import cn from "classnames";
 
 import s from "./SignInForm.module.css";
 
@@ -11,22 +13,25 @@ interface Props {
 }
 
 export const SignInForm: React.FC<Props> = ({ className, onSubmit }) => {
-  const { emailInput, passwordInput, submitText } = texts.SignInPage.SignInForm;
-  const { refRoot, state, handleSubmit } = useSignInForm(onSubmit);
+  const { submit, register, formState } = useSignInForm(onSubmit);
 
   return (
-    <form ref={refRoot} className={cn(className, s.root)}>
-      <label className={s.label}>{emailInput.label}</label>
-      <input className={s.input} type="email" id={emailInput.id} />
-      <label className={s.label}>{passwordInput.label}</label>
-      <input className={s.input} type="password" id={passwordInput.id} />
-      {state.errorText && <div className={s.error}>{state.errorText}</div>}
-      <SubmitButton
-        className={s.submitButton}
-        onClick={handleSubmit}
-        disabled={state.isSubmitButtonDisabled}
-      >
-        {submitText}
+    <form onSubmit={submit} className={cn(className, s.root)}>
+      <label className={s.label}>
+        {texts.SignInPage.SignInForm.labels.Email}
+      </label>
+      <input {...register(SignInFormInput.Email)} className={s.input} />
+      <label className={s.label}>
+        {texts.SignInPage.SignInForm.labels.Password}
+      </label>
+      <input
+        {...register(SignInFormInput.Password)}
+        className={s.input}
+        type="password"
+      />
+      {!formState.isValid && <AuthFormErrorLabel errors={formState.errors} />}
+      <SubmitButton className={s.submitButton} disabled={!formState.isValid}>
+        {texts.SignInPage.SignInForm.submitButtonText}
       </SubmitButton>
     </form>
   );
