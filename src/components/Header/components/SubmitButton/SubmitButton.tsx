@@ -6,7 +6,7 @@ interface Props {
   className?: string;
   children?: JSX.Element | string;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const SubmitButton: React.FC<Props> = ({

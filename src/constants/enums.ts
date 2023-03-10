@@ -15,3 +15,9 @@ export enum ProductsSortType {
   AscendingOrderPrice = "AscendingOrderPrice", // По возрастанию цены
   DescendingOrderPrice = "DescendingOrderPrice", // По убыванию цены
 }
+
+export enum SignUpFormInput {
+  Email = "Email",
+  Password = "Password",
+  RepeatPassword = "RepeatPassword",
+}

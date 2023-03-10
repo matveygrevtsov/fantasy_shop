@@ -1,7 +1,9 @@
 import { useSignUpForm } from "./useSignUpForm";
-import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
-import cn from "classnames";
 import { texts } from "../../../../constants/texts";
+import { SignUpFormInput } from "../../../../constants/enums";
+import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
+import { ErrorLabel } from "../components/ErrorLabel/ErrorLabel";
+import cn from "classnames";
 
 import s from "./SignUpForm.module.css";
 
@@ -11,25 +13,32 @@ interface Props {
 }
 
 export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
-  const { emailInput, passwordInput, passwordRepeatInput, submitText } =
-    texts.SignUpPage.SignUpForm;
-  const { refRoot, state, handleSubmit } = useSignUpForm(onSubmit);
+  const { submit, register, formState } = useSignUpForm(onSubmit);
+  const { SignUpForm } = texts.SignUpPage;
 
   return (
-    <form ref={refRoot} className={cn(className, s.root)}>
-      <label className={s.label}>{emailInput.label}</label>
-      <input className={s.input} type="email" id={emailInput.id} />
-      <label className={s.label}>{passwordInput.label}</label>
-      <input className={s.input} type="password" id={passwordInput.id} />
-      <label className={s.label}>{passwordRepeatInput.label}</label>
-      <input className={s.input} type="password" id={passwordRepeatInput.id} />
-      {state.errorText && <div className={s.error}>{state.errorText}</div>}
-      <SubmitButton
-        onClick={handleSubmit}
-        disabled={state.isSubmitButtonDisabled}
-        className={s.submitButton}
-      >
-        {submitText}
+    <form onSubmit={submit} className={cn(className, s.root)}>
+      <label className={s.label}>{SignUpForm.labels.Email}</label>
+      <input
+        {...register(SignUpFormInput.Email)}
+        type="email"
+        className={s.input}
+      />
+      <label className={s.label}>{SignUpForm.labels.Password}</label>
+      <input
+        {...register(SignUpFormInput.Password)}
+        type="password"
+        className={s.input}
+      />
+      <label className={s.label}>{SignUpForm.labels.RepeatPassword}</label>
+      <input
+        {...register(SignUpFormInput.RepeatPassword)}
+        className={s.input}
+        type="password"
+      />
+      {!formState.isValid && <ErrorLabel errors={formState.errors} />}
+      <SubmitButton disabled={!formState.isValid} className={s.submitButton}>
+        {SignUpForm.submitButtonText}
       </SubmitButton>
     </form>
   );
