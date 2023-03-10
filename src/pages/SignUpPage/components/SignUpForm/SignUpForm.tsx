@@ -2,7 +2,7 @@ import { useSignUpForm } from "./useSignUpForm";
 import { texts } from "../../../../constants/texts";
 import { SignUpFormInput } from "../../../../constants/enums";
 import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
-import { ErrorLabel } from "../components/ErrorLabel/ErrorLabel";
+import { AuthFormErrorLabel } from "../../../../components/AuthFormErrorLabel/AuthFormErrorLabel";
 import cn from "classnames";
 
 import s from "./SignUpForm.module.css";
@@ -36,7 +36,7 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
         className={s.input}
         type="password"
       />
-      {!formState.isValid && <ErrorLabel errors={formState.errors} />}
+      {!formState.isValid && <AuthFormErrorLabel errors={formState.errors} />}
       <SubmitButton disabled={!formState.isValid} className={s.submitButton}>
         {SignUpForm.submitButtonText}
       </SubmitButton>

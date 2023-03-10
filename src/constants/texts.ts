@@ -2,6 +2,7 @@ import {
   ProductCategory,
   ProductsSortType,
   RouteName,
+  SignInFormInput,
   SignUpFormInput,
 } from "./enums";
 
@@ -19,7 +20,7 @@ export const texts = {
         emptyEmail: "Email не указан",
         invalidEmail: "Невалидный email",
         emptyPassword: "Пароль не указан",
-        shortPassword: "Пароль слишком короткий",
+        shortPassword: "Длина пароля должна быть не менее 4 символа",
         passwordsMismatch: "Пароли не совпадают",
       },
       submitButtonText: "Зарегистрироваться",
@@ -28,18 +29,17 @@ export const texts = {
   SignInPage: {
     title: "Авторизоваться",
     SignInForm: {
-      emailInput: {
-        id: "email",
-        label: "Введите email",
+      labels: {
+        [SignInFormInput.Email]: "Почта",
+        [SignInFormInput.Password]: "Пароль",
       },
-      passwordInput: {
-        id: "password",
-        label: "Введите пароль",
+      errors: {
+        emptyEmail: "Email не указан",
+        invalidEmail: "Невалидный email",
+        emptyPassword: "Пароль не указан",
+        invalidPassword: "Длина пароля должна быть не менее 4 символа",
       },
-      submitText: "Авторизоваться",
-      checkInputsValidationTimeInterval_ms: 1000,
-      invalidEmailErrorText: "Невалидный email.",
-      invalidPasswordErrorText: "Невалидный пароль.",
+      submitButtonText: "Войти",
     },
   },
   Header: {
