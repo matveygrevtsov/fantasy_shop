@@ -4,58 +4,44 @@ import { store, UserStatus } from "../../store";
 import { SignUpForm } from "./components/SignUpForm/SignUpForm";
 import { SignUpPageStatus, useSignUpPage } from "./useSignUpPage";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { SubmitButton } from "../../components/Header/components/SubmitButton/SubmitButton";
 import { texts } from "../../constants/texts";
 import { routes } from "../../constants/routes";
+import { FirebaseErrorText } from "../../components/FirebaseErrorText/FirebaseErrorText";
 
 import s from "./SignUpPage.module.css";
 
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();
   const { title, alreadyHasAccountText } = texts.SignUpPage;
-  const { state, handleSubmit, handleStartRegistrationAgainClick } =
-    useSignUpPage();
+  const { state, handleSubmit, handleStartTyping } = useSignUpPage();
 
-  // Если юзер залогинен - редиректим его с этой страницы
   if (userState.userStatus === UserStatus.LoggedIn) {
     return <Navigate to={routes.CartPage.path} />;
   }
 
-  if (state.status === SignUpPageStatus.WaitingForUserInput) {
+  if (state.status === SignUpPageStatus.Loading) {
     return (
       <div className={s.container}>
         <h2 className={s.title}>{title}</h2>
-        <SignUpForm onSubmit={handleSubmit} className={s.form} />
-        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
-          {alreadyHasAccountText}
-        </Link>
+        <Preloader className={s.preloader} />
       </div>
     );
   }
 
-  if (state.status === SignUpPageStatus.Error) {
-    return (
-      <div className={s.container}>
-        <h2 className={s.title}>Ошибка регистрации</h2>
-        <div className={s.error}>{state.error}</div>
-        <SubmitButton
-          onClick={handleStartRegistrationAgainClick}
-          className={s.signUpAgainButton}
-        >
-          Попробовать ещё раз
-        </SubmitButton>
-        <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
-          {alreadyHasAccountText}
-        </Link>
-      </div>
-    );
-  }
-
-  // По умолчанию отображаем прелоадер
   return (
     <div className={s.container}>
       <h2 className={s.title}>{title}</h2>
-      <Preloader className={s.preloader} />
+      <SignUpForm
+        onSubmit={handleSubmit}
+        onStartTyping={handleStartTyping}
+        className={s.form}
+      />
+      <Link className={s.linkToSignInPage} to={routes.SignInPage.path}>
+        {alreadyHasAccountText}
+      </Link>
+      {state.status === SignUpPageStatus.Error && (
+        <FirebaseErrorText errorCode={state.errorCode} />
+      )}
     </div>
   );
 });

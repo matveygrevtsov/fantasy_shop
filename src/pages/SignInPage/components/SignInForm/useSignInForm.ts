@@ -3,6 +3,7 @@ import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignInFormInput } from "../../../../constants/enums";
 import { texts } from "../../../../constants/texts";
+import { PASSWORD_MIN_LENGTH } from "../../../../constants/authFormValidation";
 
 export interface FormValues {
   [SignInFormInput.Email]: string;
@@ -11,11 +12,14 @@ export interface FormValues {
 
 const formSchema = object().shape({
   [SignInFormInput.Email]: string()
-    .required(texts.SignInPage.SignInForm.errors.emptyEmail)
-    .email(texts.SignInPage.SignInForm.errors.invalidEmail),
+    .required(texts.SignInPage.SignInForm.validationErrors.emptyEmail)
+    .email(texts.SignInPage.SignInForm.validationErrors.invalidEmail),
   [SignInFormInput.Password]: string()
-    .required(texts.SignInPage.SignInForm.errors.emptyPassword)
-    .min(4, texts.SignInPage.SignInForm.errors.invalidPassword),
+    .required(texts.SignInPage.SignInForm.validationErrors.emptyPassword)
+    .min(
+      PASSWORD_MIN_LENGTH,
+      texts.SignInPage.SignInForm.validationErrors.invalidPassword
+    ),
 });
 
 export const useSignInForm = (

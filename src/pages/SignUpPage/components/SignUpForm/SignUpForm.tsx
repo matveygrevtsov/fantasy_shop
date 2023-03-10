@@ -8,15 +8,24 @@ import s from "./SignUpForm.module.css";
 
 interface Props {
   className?: string;
+  onStartTyping: () => void;
   onSubmit: (email: string, password: string) => void;
 }
 
-export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
+export const SignUpForm: React.FC<Props> = ({
+  className,
+  onStartTyping,
+  onSubmit,
+}) => {
   const { submit, register, formState } = useSignUpForm(onSubmit);
   const { SignUpForm } = texts.SignUpPage;
 
   return (
-    <form onSubmit={submit} className={cn(className, s.root)}>
+    <form
+      onSubmit={submit}
+      onClick={onStartTyping}
+      className={cn(className, s.root)}
+    >
       <label className={s.label}>{SignUpForm.labels.Email}</label>
       <input
         {...register(SignUpFormInput.Email)}

@@ -33,7 +33,7 @@
 
 .error {
   margin-top: 1rem;
-  color: #dc3545;
+  color: var(--color-red);
 }
 
 .submitButton {

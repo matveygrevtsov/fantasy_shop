@@ -18,20 +18,16 @@
   max-width: 300px;
   margin: 15px auto 0;
   text-align: center;
-  color: #0d6efd;
+  color: var(--color-blue);
 }
 
 .preloader {
   margin: 2rem auto 0;
 }
 
-.signInAgainButton {
-  margin-top: 2rem;
-  width: 100%;
-}
-
 .error {
-  margin-top: 2rem;
+  display: block;
+  margin-top: 1rem;
   text-align: center;
-  color: #dc3545;
+  color: var(--color-red);
 }

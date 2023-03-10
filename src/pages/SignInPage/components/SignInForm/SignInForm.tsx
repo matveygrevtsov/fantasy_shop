@@ -7,15 +7,24 @@ import cn from "classnames";
 import s from "./SignInForm.module.css";
 
 interface Props {
-  className?: string;
   onSubmit: (email: string, password: string) => void;
+  onStartTyping?: () => void;
+  className?: string;
 }
 
-export const SignInForm: React.FC<Props> = ({ className, onSubmit }) => {
+export const SignInForm: React.FC<Props> = ({
+  onSubmit,
+  onStartTyping,
+  className,
+}) => {
   const { submit, register, formState } = useSignInForm(onSubmit);
 
   return (
-    <form onSubmit={submit} className={cn(className, s.root)}>
+    <form
+      onClick={onStartTyping}
+      onSubmit={submit}
+      className={cn(className, s.root)}
+    >
       <label className={s.label}>
         {texts.SignInPage.SignInForm.labels.Email}
       </label>

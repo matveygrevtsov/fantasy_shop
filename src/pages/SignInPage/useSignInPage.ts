@@ -13,7 +13,7 @@ type SignInPageState =
     }
   | {
       status: SignInPageStatus.Error;
-      error: string;
+      errorCode: string;
     };
 
 export function useSignInPage() {
@@ -28,16 +28,17 @@ export function useSignInPage() {
     firebaseApi.signIn(email, password).catch((error) =>
       setState({
         status: SignInPageStatus.Error,
-        error: error.message,
+        errorCode: error.code,
       })
     );
   };
 
-  const handleSignInAgainClick = () => {
+  const handleStartTyping = () => {
+    if (state.status !== SignInPageStatus.Error) return;
     setState({
       status: SignInPageStatus.WaitingForUserInput,
     });
   };
 
-  return { state, handleSubmit, handleSignInAgainClick };
+  return { state, handleSubmit, handleStartTyping };
 }
