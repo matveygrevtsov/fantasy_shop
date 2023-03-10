@@ -1,27 +1,28 @@
-import { ProductCategory, ProductsSortType, RouteName } from "./enums";
+import {
+  ProductCategory,
+  ProductsSortType,
+  RouteName,
+  SignUpFormInput,
+} from "./enums";
 
 export const texts = {
   SignUpPage: {
     title: "Зарегистрироваться",
     alreadyHasAccountText: "Уже есть аккаунт ? Авторизуйтесь.",
     SignUpForm: {
-      emailInput: {
-        id: "email",
-        label: "Введите email",
+      labels: {
+        [SignUpFormInput.Email]: "Почта",
+        [SignUpFormInput.Password]: "Пароль",
+        [SignUpFormInput.RepeatPassword]: "Повторите пароль",
       },
-      passwordInput: {
-        id: "password",
-        label: "Введите пароль",
+      errors: {
+        emptyEmail: "Email не указан",
+        invalidEmail: "Невалидный email",
+        emptyPassword: "Пароль не указан",
+        shortPassword: "Пароль слишком короткий",
+        passwordsMismatch: "Пароли не совпадают",
       },
-      passwordRepeatInput: {
-        id: "passwordRepeat",
-        label: "Повторите пароль",
-      },
-      submitText: "Зарегистрироваться",
-      checkInputsValidationTimeInterval_ms: 1000,
-      invalidEmailErrorText: "Невалидный email.",
-      invalidPasswordErrorText: "Невалидный пароль.",
-      passwordMismatchErrorText: "Пароли не совпадают.",
+      submitButtonText: "Зарегистрироваться",
     },
   },
   SignInPage: {

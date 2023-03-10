@@ -1,42 +1,40 @@
-import { useEffect, useRef, useState } from "react";
-import { SignUpFormValidator } from "./SignUpFormValidator";
+import { useForm } from "react-hook-form";
+import { object, string, ref } from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SignUpFormInput } from "../../../../constants/enums";
+import { texts } from "../../../../constants/texts";
 
-interface State {
-  isSubmitButtonDisabled: boolean;
-  errorText: string;
+export interface FormValues {
+  [SignUpFormInput.Email]: string;
+  [SignUpFormInput.Password]: string;
+  [SignUpFormInput.RepeatPassword]: string;
 }
+
+const formSchema = object().shape({
+  [SignUpFormInput.Email]: string()
+    .required(texts.SignUpPage.SignUpForm.errors.emptyEmail)
+    .email(texts.SignUpPage.SignUpForm.errors.invalidEmail),
+  [SignUpFormInput.Password]: string()
+    .required(texts.SignUpPage.SignUpForm.errors.emptyPassword)
+    .min(4, texts.SignUpPage.SignUpForm.errors.shortPassword),
+  [SignUpFormInput.RepeatPassword]: string().oneOf(
+    [ref(SignUpFormInput.Password)],
+    texts.SignUpPage.SignUpForm.errors.passwordsMismatch
+  ),
+});
 
 export const useSignUpForm = (
   onSubmit: (email: string, password: string) => void
 ) => {
-  const [state, setState] = useState<State>({
-    isSubmitButtonDisabled: true,
-    errorText: "",
+  const { register, handleSubmit, formState } = useForm<FormValues>({
+    mode: "onTouched",
+    // @ts-ignore
+    resolver: yupResolver(formSchema),
   });
-  const refRoot = useRef<HTMLFormElement>(null);
-  const refFormValidator = useRef<SignUpFormValidator | null>(null);
 
-  function handleUserTyping(
-    isSubmitButtonDisabled: boolean,
-    errorText: string
-  ) {
-    setState({ isSubmitButtonDisabled, errorText });
-  }
+  const submit = handleSubmit(({ Email, Password }: FormValues) =>
+    onSubmit(Email, Password)
+  );
 
-  function handleSubmit() {
-    refFormValidator.current?.submit();
-  }
-
-  useEffect(() => {
-    const root = refRoot.current;
-    if (root !== null && refFormValidator.current === null) {
-      refFormValidator.current = new SignUpFormValidator({
-        root,
-        onSubmit,
-        onUserTyping: handleUserTyping,
-      });
-    }
-  }, [onSubmit]);
-
-  return { refRoot, state, handleSubmit };
+  return { submit, register, formState };
 };
