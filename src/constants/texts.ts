@@ -63,7 +63,7 @@ export const texts = {
     copyright: "© 2023 Copyright: Fantasy Shop",
   },
   ProductsSearchForm: {
-    searchProductPlaceholder: "Введите название продукта",
+    searchInputPlaceholder: "Введите название продукта",
     searchProductsParamsTitle: "Фильтры",
     ProductCategorySelect: {
       title: "Категория",

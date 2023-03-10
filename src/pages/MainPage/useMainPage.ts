@@ -1,9 +1,9 @@
-import { SearchProductsFormState } from "./types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { decodeBase64, encodeBase64 } from "../../utils/base64";
 import { ProductCategory, ProductsSortType } from "../../constants/enums";
 import { useEffect, useState } from "react";
-import { Product } from "../../types";
+import { Product, SearchProductsParams } from "../../types";
+import { firebaseApi } from "../../firebaseApi";
 
 export enum StateStatus {
   Loading = "Loading",
@@ -25,19 +25,20 @@ export function useMainPage() {
     status: StateStatus.Loading,
   });
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParamsEncoded, setSearchParamsEncoded] = useSearchParams();
 
-  function handleSubmit(
-    searchProductsFormState: SearchProductsFormState
-  ): void {
-    navigate(`?searchParams=${encodeBase64(searchProductsFormState)}`);
+  function handleSubmit(searchProductsFormState: SearchProductsParams): void {
+    console.log(searchProductsFormState);
+    navigate(`?searchParamsEncoded=${encodeBase64(searchProductsFormState)}`);
   }
 
   useEffect(() => {
     setState({
       status: StateStatus.Loading,
     });
-    mapSearchParamsToProducts(searchParams.get("searchParams") || "").then(
+    mapSearchParamsEncodedToProducts(
+      searchParamsEncoded.get("searchParamsEncoded") || ""
+    ).then(
       (products) => {
         setState({
           status: StateStatus.Success,
@@ -46,37 +47,40 @@ export function useMainPage() {
       },
       () => setState({ status: StateStatus.Error })
     );
-  }, [searchParams, mapSearchParamsToProducts, setSearchParams]);
+  }, [
+    searchParamsEncoded,
+    mapSearchParamsEncodedToProducts,
+    setSearchParamsEncoded,
+  ]);
 
   return { state, handleSubmit };
 }
 
-async function mapSearchParamsToProducts(
-  searchParams: string
+async function mapSearchParamsEncodedToProducts(
+  searchParamsEncoded: string
 ): Promise<Product[]> {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return [];
+  const searchParams = decodeBase64(searchParamsEncoded);
+  return isSearchParams(searchParams)
+    ? firebaseApi.getProductsBySearchParams(searchParams)
+    : firebaseApi.getProductsBySearchParams();
 }
 
-function isSearchProductsFormState(obj: any): obj is SearchProductsFormState {
+function isSearchParams(obj: any): obj is SearchProductsParams {
   if (!obj || typeof obj !== "object") return false;
   if (typeof obj.searchString !== "string") return false;
-  if (!obj.searchParams || typeof obj.searchParams !== "object") return false;
   if (
-    typeof obj.searchParams.productCategories !== "object" ||
-    !Array.isArray(obj.searchParams.productCategories)
+    typeof obj.productCategories !== "object" ||
+    !Array.isArray(obj.productCategories)
   ) {
     return false;
   }
 
-  if (
-    !Object.values(ProductsSortType).includes(obj.searchParams.productsSortType)
-  ) {
+  if (!Object.values(ProductsSortType).includes(obj.productsSortType)) {
     return false;
   }
 
   if (
-    obj.searchParams.productCategories.some(
+    obj.productCategories.some(
       (category: any) => !Object.values(ProductCategory).includes(category)
     )
   ) {
