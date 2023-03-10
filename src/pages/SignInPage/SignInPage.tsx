@@ -4,51 +4,41 @@ import { store, UserStatus } from "../../store";
 import { Navigate } from "react-router-dom";
 import { SignInForm } from "./components/SignInForm/SignInForm";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { SubmitButton } from "../../components/Header/components/SubmitButton/SubmitButton";
 import { texts } from "../../constants/texts";
 import { routes } from "../../constants/routes";
+import { FirebaseErrorText } from "../../components/FirebaseErrorText/FirebaseErrorText";
 
 import s from "./SignInPage.module.css";
 
 export const SignInPage = observer(() => {
   const userState = store.getUserState();
   const { title } = texts.SignInPage;
-  const { state, handleSubmit, handleSignInAgainClick } = useSignInPage();
+  const { state, handleSubmit, handleStartTyping } = useSignInPage();
 
-  // Если юзер залогинен - редиректим его с этой страницы
   if (userState.userStatus === UserStatus.LoggedIn) {
     return <Navigate to={routes.CartPage.path} />;
   }
 
-  if (state.status === SignInPageStatus.WaitingForUserInput) {
+  if (state.status === SignInPageStatus.Loading) {
     return (
       <div className={s.container}>
         <h2 className={s.title}>{title}</h2>
-        <SignInForm onSubmit={handleSubmit} className={s.form} />
+        <Preloader className={s.preloader} />
       </div>
     );
   }
 
-  if (state.status === SignInPageStatus.Error) {
-    return (
-      <div className={s.container}>
-        <h2 className={s.title}>Ошибка авторизации</h2>
-        <div className={s.error}>{state.error}</div>
-        <SubmitButton
-          className={s.signInAgainButton}
-          onClick={handleSignInAgainClick}
-        >
-          Попробовать ещё раз
-        </SubmitButton>
-      </div>
-    );
-  }
-
-  // По умолчанию отображаем прелоадер
   return (
     <div className={s.container}>
       <h2 className={s.title}>{title}</h2>
-      <Preloader className={s.preloader} />
+      <SignInForm
+        onSubmit={handleSubmit}
+        onStartTyping={handleStartTyping}
+        className={s.form}
+      />
+      {state.status === SignInPageStatus.Error && (
+        <FirebaseErrorText errorCode={state.errorCode} />
+      )}
     </div>
   );
 });

@@ -3,6 +3,7 @@ import { object, string, ref } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignUpFormInput } from "../../../../constants/enums";
 import { texts } from "../../../../constants/texts";
+import { PASSWORD_MIN_LENGTH } from "../../../../constants/authFormValidation";
 
 export interface FormValues {
   [SignUpFormInput.Email]: string;
@@ -12,14 +13,17 @@ export interface FormValues {
 
 const formSchema = object().shape({
   [SignUpFormInput.Email]: string()
-    .required(texts.SignUpPage.SignUpForm.errors.emptyEmail)
-    .email(texts.SignUpPage.SignUpForm.errors.invalidEmail),
+    .required(texts.SignUpPage.SignUpForm.validationErrors.emptyEmail)
+    .email(texts.SignUpPage.SignUpForm.validationErrors.invalidEmail),
   [SignUpFormInput.Password]: string()
-    .required(texts.SignUpPage.SignUpForm.errors.emptyPassword)
-    .min(4, texts.SignUpPage.SignUpForm.errors.shortPassword),
+    .required(texts.SignUpPage.SignUpForm.validationErrors.emptyPassword)
+    .min(
+      PASSWORD_MIN_LENGTH,
+      texts.SignUpPage.SignUpForm.validationErrors.shortPassword
+    ),
   [SignUpFormInput.RepeatPassword]: string().oneOf(
     [ref(SignUpFormInput.Password)],
-    texts.SignUpPage.SignUpForm.errors.passwordsMismatch
+    texts.SignUpPage.SignUpForm.validationErrors.passwordsMismatch
   ),
 });
 

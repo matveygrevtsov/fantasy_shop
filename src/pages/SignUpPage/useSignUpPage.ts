@@ -13,7 +13,7 @@ type SignUpPageState =
     }
   | {
       status: SignUpPageStatus.Error;
-      error: string;
+      errorCode: string;
     };
 
 export const useSignUpPage = () => {
@@ -28,16 +28,17 @@ export const useSignUpPage = () => {
     firebaseApi.signUp(email, password).catch((error) =>
       setState({
         status: SignUpPageStatus.Error,
-        error: error.message,
+        errorCode: error.code,
       })
     );
   };
 
-  const handleStartRegistrationAgainClick = () => {
+  const handleStartTyping = () => {
+    if (state.status !== SignUpPageStatus.Error) return;
     setState({
       status: SignUpPageStatus.WaitingForUserInput,
     });
   };
 
-  return { state, handleSubmit, handleStartRegistrationAgainClick };
+  return { state, handleSubmit, handleStartTyping };
 };

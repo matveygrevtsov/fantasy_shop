@@ -1,4 +1,5 @@
 import {
+  FirebaseErrors,
   ProductCategory,
   ProductsSortType,
   RouteName,
@@ -7,6 +8,13 @@ import {
 } from "./enums";
 
 export const texts = {
+  FirebaseErrors: {
+    [FirebaseErrors.AuthUserNotFound]: "Пользователь с таким email не найден.",
+    [FirebaseErrors.AuthWrongPassword]: "Невалидный пароль.",
+    [FirebaseErrors.AuthEmailAlreadyInUse]:
+      "Предоставленный адрес электронной почты уже используется существующим пользователем.",
+    defaultErrorText: "Произошла ошибка. Повторите попытку позже",
+  },
   SignUpPage: {
     title: "Зарегистрироваться",
     alreadyHasAccountText: "Уже есть аккаунт ? Авторизуйтесь.",
@@ -16,7 +24,7 @@ export const texts = {
         [SignUpFormInput.Password]: "Пароль",
         [SignUpFormInput.RepeatPassword]: "Повторите пароль",
       },
-      errors: {
+      validationErrors: {
         emptyEmail: "Email не указан",
         invalidEmail: "Невалидный email",
         emptyPassword: "Пароль не указан",
@@ -33,11 +41,11 @@ export const texts = {
         [SignInFormInput.Email]: "Почта",
         [SignInFormInput.Password]: "Пароль",
       },
-      errors: {
+      validationErrors: {
         emptyEmail: "Email не указан",
         invalidEmail: "Невалидный email",
         emptyPassword: "Пароль не указан",
-        invalidPassword: "Длина пароля должна быть не менее 4 символа",
+        invalidPassword: "Невалидный пароль",
       },
       submitButtonText: "Войти",
     },
