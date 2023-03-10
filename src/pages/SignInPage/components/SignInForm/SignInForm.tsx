@@ -2,7 +2,6 @@ import { useSignInForm } from "./useSignInForm";
 import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
 import { texts } from "../../../../constants/texts";
 import { SignInFormInput } from "../../../../constants/enums";
-import { AuthFormErrorLabel } from "../../../../components/AuthFormErrorLabel/AuthFormErrorLabel";
 import cn from "classnames";
 
 import s from "./SignInForm.module.css";
@@ -21,6 +20,9 @@ export const SignInForm: React.FC<Props> = ({ className, onSubmit }) => {
         {texts.SignInPage.SignInForm.labels.Email}
       </label>
       <input {...register(SignInFormInput.Email)} className={s.input} />
+      {formState.errors.Email && (
+        <span className={s.error}>{formState.errors.Email.message}</span>
+      )}
       <label className={s.label}>
         {texts.SignInPage.SignInForm.labels.Password}
       </label>
@@ -29,7 +31,9 @@ export const SignInForm: React.FC<Props> = ({ className, onSubmit }) => {
         className={s.input}
         type="password"
       />
-      {!formState.isValid && <AuthFormErrorLabel errors={formState.errors} />}
+      {formState.errors.Password && (
+        <span className={s.error}>{formState.errors.Password.message}</span>
+      )}
       <SubmitButton className={s.submitButton} disabled={!formState.isValid}>
         {texts.SignInPage.SignInForm.submitButtonText}
       </SubmitButton>

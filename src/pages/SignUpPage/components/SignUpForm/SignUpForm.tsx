@@ -2,7 +2,6 @@ import { useSignUpForm } from "./useSignUpForm";
 import { texts } from "../../../../constants/texts";
 import { SignUpFormInput } from "../../../../constants/enums";
 import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
-import { AuthFormErrorLabel } from "../../../../components/AuthFormErrorLabel/AuthFormErrorLabel";
 import cn from "classnames";
 
 import s from "./SignUpForm.module.css";
@@ -24,19 +23,29 @@ export const SignUpForm: React.FC<Props> = ({ className, onSubmit }) => {
         type="email"
         className={s.input}
       />
+      {formState.errors.Email && (
+        <span className={s.error}>{formState.errors.Email.message}</span>
+      )}
       <label className={s.label}>{SignUpForm.labels.Password}</label>
       <input
         {...register(SignUpFormInput.Password)}
         type="password"
         className={s.input}
       />
+      {formState.errors.Password && (
+        <span className={s.error}>{formState.errors.Password.message}</span>
+      )}
       <label className={s.label}>{SignUpForm.labels.RepeatPassword}</label>
       <input
         {...register(SignUpFormInput.RepeatPassword)}
         className={s.input}
         type="password"
       />
-      {!formState.isValid && <AuthFormErrorLabel errors={formState.errors} />}
+      {formState.errors.RepeatPassword && (
+        <span className={s.error}>
+          {formState.errors.RepeatPassword.message}
+        </span>
+      )}
       <SubmitButton disabled={!formState.isValid} className={s.submitButton}>
         {SignUpForm.submitButtonText}
       </SubmitButton>
