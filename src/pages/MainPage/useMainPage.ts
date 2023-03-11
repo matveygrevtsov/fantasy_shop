@@ -47,11 +47,7 @@ export function useMainPage() {
       },
       () => setState({ status: StateStatus.Error })
     );
-  }, [
-    searchParamsEncoded,
-    mapSearchParamsEncodedToProducts,
-    setSearchParamsEncoded,
-  ]);
+  }, [searchParamsEncoded, setSearchParamsEncoded]);
 
   return { state, handleSubmit };
 }
