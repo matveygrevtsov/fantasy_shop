@@ -42,7 +42,6 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
             <Controller
               name="productsCategories"
               control={control}
-              defaultValue={[]}
               render={({ field: { onChange, value, ref } }) => (
                 <Select
                   ref={ref}
@@ -67,9 +66,6 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
             <Controller
               name="productsSortType"
               control={control}
-              defaultValue={
-                texts.ProductsSearchForm.ProductSortTypeSelect.options[0].value
-              }
               render={({ field: { onChange, value, ref } }) => (
                 <Select
                   options={
