@@ -50,6 +50,9 @@ export const texts = {
       submitButtonText: "Войти",
     },
   },
+  CreateProductPage: {
+    title: "Создать продукт",
+  },
   Header: {
     logoutText: "Выйти",
     routesTitles: {
@@ -57,6 +60,7 @@ export const texts = {
       [RouteName.SignUpPage]: "Регистрация",
       [RouteName.SignInPage]: "Вход",
       [RouteName.CartPage]: "Корзина",
+      [RouteName.CreateProductPage]: "Создание продукта",
     },
   },
   Footer: {
@@ -66,7 +70,7 @@ export const texts = {
     searchInputPlaceholder: "Введите название продукта",
     searchProductsParamsTitle: "Фильтры",
     ProductCategorySelect: {
-      title: "Категория",
+      title: "Категории",
       placeholder: "Выбрать категории",
       options: [
         {
