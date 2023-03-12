@@ -3,6 +3,7 @@ export enum RouteName {
   CartPage = "CartPage",
   SignUpPage = "SignUpPage",
   SignInPage = "SignInPage",
+  CreateProductPage = "CreateProductPage",
 }
 
 export enum ProductCategory {

@@ -27,4 +27,9 @@ export const routes: Record<RouteName, RouteConfig> = {
     showInNavBarForGuest: true,
     showInNavBarForLoggedIn: false,
   },
+  [RouteName.CreateProductPage]: {
+    path: `/create-product`,
+    showInNavBarForGuest: true,
+    showInNavBarForLoggedIn: false,
+  },
 };
