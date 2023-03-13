@@ -1,0 +1,25 @@
+.root {
+}
+
+.dropZone {
+  border: 2px dashed var(--color-primary);
+  height: 150px;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+  transition: border-color ease-in-out 0.2s;
+}
+
+.dropZone:hover {
+  border-color: var(--color-blue);
+}
+
+.uploadIcon {
+  color: var(--color-primary);
+  font-size: 3rem;
+}

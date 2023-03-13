@@ -1,9 +1,19 @@
 import { useCreateProductsForm } from "./useCreateProductsForm";
+import { ImagesUploader } from "../../../../components/ImagesUploader/ImagesUploader";
+import cn from "classnames";
 
 import s from "./CreateProductForm.module.css";
 
-export function CreateProductForm() {
+interface Props {
+  className?: string;
+}
+
+export function CreateProductForm({ className }: Props) {
   const {} = useCreateProductsForm();
 
-  return <form></form>;
+  return (
+    <form className={cn(s.root, className)}>
+      <ImagesUploader onSelect={console.log} className={s.imagesUploader} />
+    </form>
+  );
 }

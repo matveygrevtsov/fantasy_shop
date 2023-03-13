@@ -5,9 +5,9 @@ import s from "./CreateProductPage.module.css";
 
 export function CreateProductPage() {
   return (
-    <div>
-      <h1>{texts.CreateProductPage.title}</h1>
-      <CreateProductForm />
+    <div className={s.root}>
+      <h2 className={s.title}>{texts.CreateProductPage.title}</h2>
+      <CreateProductForm className={s.createProductForm} />
     </div>
   );
 }
