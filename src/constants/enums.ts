@@ -33,3 +33,11 @@ export enum FirebaseErrors {
   AuthWrongPassword = "auth/wrong-password", // Невалидный пароль
   AuthEmailAlreadyInUse = "auth/email-already-in-use", // Предоставленный адрес электронной почты уже используется существующим пользователем.
 }
+
+export enum UserStatus {
+  Loading = "Loading",
+  Error = "Error",
+  Guest = "Guest",
+  Client = "Client",
+  Admin = "Admin",
+}

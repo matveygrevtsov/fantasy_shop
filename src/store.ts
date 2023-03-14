@@ -1,20 +1,11 @@
 import { User } from "firebase/auth";
 import { makeAutoObservable } from "mobx";
+import { UserStatus } from "./constants/enums";
 import { firebaseApi } from "./firebaseApi";
 
-export enum UserStatus {
-  Guest = "Guest",
-  LoggedIn = "LoggedIn",
-}
-
-export type UserState =
-  | {
-      userStatus: UserStatus.Guest;
-    }
-  | {
-      userStatus: UserStatus.LoggedIn;
-      userData: User;
-    };
+type UserState = {
+  status: UserStatus;
+};
 
 class Store {
   private userState: UserState;
@@ -22,33 +13,44 @@ class Store {
   constructor() {
     makeAutoObservable(this);
     this.userState = {
-      userStatus: UserStatus.Guest,
+      status: UserStatus.Loading,
     };
     firebaseApi.observeUserAuthStatus((user) =>
       this.handleUserAuthStatusChange(user)
     );
   }
 
-  /**
-   * Возвращает текущее состояние юзера.
-   */
   public getUserState(): UserState {
     return this.userState;
   }
 
-  /**
-   * Обрабатывает событие изменения юзерского стейта.
-   * @param user Стейт юзера.
-   */
-  private handleUserAuthStatusChange(user: User | null): void {
-    this.userState = user
-      ? {
-          userStatus: UserStatus.LoggedIn,
-          userData: user,
-        }
-      : {
-          userStatus: UserStatus.Guest,
+  public isUserLoggedIn(): boolean {
+    const { status } = this.userState;
+    return status === UserStatus.Client || status === UserStatus.Admin;
+  }
+
+  private handleUserAuthStatusChange(user: User | null) {
+    if (!user) {
+      this.userState = {
+        status: UserStatus.Guest,
+      };
+      return;
+    }
+    this.userState = {
+      status: UserStatus.Loading,
+    };
+    firebaseApi.getUserStatus(user).then(
+      (status) => {
+        this.userState = {
+          status,
         };
+      },
+      (error) => {
+        this.userState = {
+          status: UserStatus.Error,
+        };
+      }
+    );
   }
 }
 

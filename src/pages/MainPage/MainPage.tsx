@@ -14,9 +14,7 @@ export const MainPage = () => {
         className={s.searchProductsForm}
         onSubmit={handleSubmit}
       />
-      {state.status === StateStatus.Loading && (
-        <Preloader className={s.preloader} />
-      )}
+      {state.status === StateStatus.Loading && <Preloader />}
       {state.status === StateStatus.Error && (
         <h2>
           При скачивании списка продуктов произошла ошибка. Пожалуйста,

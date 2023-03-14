@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import { firebaseConfig } from "./constants/firebase";
 import { Product, SearchProductsParams } from "./types";
+import { UserStatus } from "./constants/enums";
 
 class FirebaseApi {
   private readonly firebaseApp: FirebaseApp;
@@ -54,12 +55,22 @@ class FirebaseApi {
 
   /**
    * Отслеживает статус юзера.
-   * @param onUserAuthStateChanged - функция, которая срабатывает при изменении статуса авторизации юзера.
+   * @param onUserAuthStateChanged - функция, которая срабатывает при любом изменении статуса авторизации юзера.
    */
   public observeUserAuthStatus(
     onUserAuthStateChanged: (user: User | null) => void
   ): void {
     onAuthStateChanged(this.auth, onUserAuthStateChanged);
+  }
+
+  /**
+   * Возвращает статус юзера.
+   * @param user - данные пользователя.
+   */
+  public async getUserStatus(user: User | null): Promise<UserStatus> {
+    if (!user) return UserStatus.Guest;
+    const idTokenResult = await user.getIdTokenResult();
+    return !!idTokenResult.claims.admin ? UserStatus.Admin : UserStatus.Client;
   }
 
   /**
