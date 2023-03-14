@@ -21,10 +21,6 @@
   color: var(--color-blue);
 }
 
-.preloader {
-  margin: 2rem auto 0;
-}
-
 .error {
   display: block;
   margin-top: 1rem;

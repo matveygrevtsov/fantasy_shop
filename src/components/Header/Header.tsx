@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
-import { RouteName } from "../../constants/enums";
+import { RouteName, UserStatus } from "../../constants/enums";
 import { routes } from "../../constants/routes";
 import { texts } from "../../constants/texts";
-import { store, UserStatus } from "../../store";
+import { store } from "../../store";
 import { HeaderDesktop } from "./components/HeaderDesktop/HeaderDesktop";
 import { HeaderMobile } from "./components/HeaderMobile/HeaderMobile";
 
@@ -14,32 +14,30 @@ export interface RouteConfig {
 }
 
 export const Header = observer(() => {
-  const isUserLoggedIn =
-    store.getUserState().userStatus === UserStatus.LoggedIn;
-  const routes = getRoutes(isUserLoggedIn);
+  const userStatus = store.getUserState().status;
+  const routes = getRoutes(userStatus);
 
   return (
     <>
       <HeaderMobile
         routes={routes}
-        isUserLoggedIn={isUserLoggedIn}
+        isUserLoggedIn={store.isUserLoggedIn()}
         className={s.headerMobile}
       />
       <HeaderDesktop
         routes={routes}
-        isUserLoggedIn={isUserLoggedIn}
+        isUserLoggedIn={store.isUserLoggedIn()}
         className={s.headerDesktop}
       />
     </>
   );
 });
 
-function getRoutes(isUserLoggedIn: boolean): RouteConfig[] {
+function getRoutes(userStatus: UserStatus): RouteConfig[] {
   const routesNames = Object.keys(RouteName) as RouteName[];
-  const enabledRoutes = routesNames.filter((routeName) => {
-    const { showInNavBarForGuest, showInNavBarForLoggedIn } = routes[routeName];
-    return isUserLoggedIn ? showInNavBarForLoggedIn : showInNavBarForGuest;
-  });
+  const enabledRoutes = routesNames.filter(
+    (routeName) => routes[routeName].showInHeader[userStatus]
+  );
   return enabledRoutes.map((routeName) => ({
     title: texts.Header.routesTitles[routeName],
     path: routes[routeName].path,

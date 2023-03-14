@@ -1,35 +1,59 @@
-import { RouteName } from "./enums";
+import { RouteName, UserStatus } from "./enums";
 
 interface RouteConfig {
   path: string;
-  showInNavBarForGuest: boolean;
-  showInNavBarForLoggedIn: boolean;
+  showInHeader: Record<UserStatus, boolean>;
 }
 
 export const routes: Record<RouteName, RouteConfig> = {
   [RouteName.MainPage]: {
     path: `/`,
-    showInNavBarForGuest: true,
-    showInNavBarForLoggedIn: true,
+    showInHeader: {
+      [UserStatus.Loading]: true,
+      [UserStatus.Error]: true,
+      [UserStatus.Guest]: true,
+      [UserStatus.Client]: true,
+      [UserStatus.Admin]: true,
+    },
   },
   [RouteName.CartPage]: {
     path: `/cart`,
-    showInNavBarForGuest: false,
-    showInNavBarForLoggedIn: true,
+    showInHeader: {
+      [UserStatus.Loading]: false,
+      [UserStatus.Error]: false,
+      [UserStatus.Guest]: false,
+      [UserStatus.Client]: true,
+      [UserStatus.Admin]: false,
+    },
   },
   [RouteName.SignUpPage]: {
     path: `/signup`,
-    showInNavBarForGuest: true,
-    showInNavBarForLoggedIn: false,
+    showInHeader: {
+      [UserStatus.Loading]: true,
+      [UserStatus.Error]: true,
+      [UserStatus.Guest]: true,
+      [UserStatus.Client]: false,
+      [UserStatus.Admin]: false,
+    },
   },
   [RouteName.SignInPage]: {
     path: `/signin`,
-    showInNavBarForGuest: true,
-    showInNavBarForLoggedIn: false,
+    showInHeader: {
+      [UserStatus.Loading]: true,
+      [UserStatus.Error]: true,
+      [UserStatus.Guest]: true,
+      [UserStatus.Client]: false,
+      [UserStatus.Admin]: false,
+    },
   },
   [RouteName.CreateProductPage]: {
     path: `/create-product`,
-    showInNavBarForGuest: true,
-    showInNavBarForLoggedIn: false,
+    showInHeader: {
+      [UserStatus.Loading]: false,
+      [UserStatus.Error]: false,
+      [UserStatus.Guest]: false,
+      [UserStatus.Client]: false,
+      [UserStatus.Admin]: true,
+    },
   },
 };
