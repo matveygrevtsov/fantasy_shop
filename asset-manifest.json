@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/fantasy_shop/static/css/main.5ee969b8.css",
-    "main.js": "/fantasy_shop/static/js/main.d1fdc6ec.js",
+    "main.js": "/fantasy_shop/static/js/main.28995bca.js",
     "static/js/787.770bb586.chunk.js": "/fantasy_shop/static/js/787.770bb586.chunk.js",
     "index.html": "/fantasy_shop/index.html",
     "main.5ee969b8.css.map": "/fantasy_shop/static/css/main.5ee969b8.css.map",
-    "main.d1fdc6ec.js.map": "/fantasy_shop/static/js/main.d1fdc6ec.js.map",
+    "main.28995bca.js.map": "/fantasy_shop/static/js/main.28995bca.js.map",
     "787.770bb586.chunk.js.map": "/fantasy_shop/static/js/787.770bb586.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5ee969b8.css",
-    "static/js/main.d1fdc6ec.js"
+    "static/js/main.28995bca.js"
   ]
 }
