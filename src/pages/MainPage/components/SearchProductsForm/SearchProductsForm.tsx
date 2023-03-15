@@ -42,15 +42,9 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
             <Controller
               name="productsCategories"
               control={control}
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field: { onChange } }) => (
                 <Select
-                  ref={ref}
-                  value={texts.ProductsSearchForm.ProductCategorySelect.options.filter(
-                    (option) => value.includes(option.value)
-                  )}
-                  onChange={(options) =>
-                    onChange(options.map((option) => option.value))
-                  }
+                  onChange={onChange}
                   options={
                     texts.ProductsSearchForm.ProductCategorySelect.options
                   }
@@ -66,16 +60,12 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
             <Controller
               name="productsSortType"
               control={control}
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field: { onChange } }) => (
                 <Select
                   options={
                     texts.ProductsSearchForm.ProductSortTypeSelect.options
                   }
-                  value={texts.ProductsSearchForm.ProductSortTypeSelect.options.find(
-                    (option) => option.value === value
-                  )}
-                  onChange={(option) => onChange(option?.value)}
-                  ref={ref}
+                  onChange={onChange}
                 />
               )}
             />

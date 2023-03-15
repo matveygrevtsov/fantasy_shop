@@ -54,6 +54,7 @@ export function ImagesUploader({ onSelect, className }: Props) {
         {state.images.map(({ src }) => (
           <li key={src} className={s.imageContainer}>
             <img
+              alt=""
               src={src}
               onLoad={() => {
                 URL.revokeObjectURL(src);
