@@ -63,6 +63,9 @@ export const texts = {
       },
       submitButtonText: "Создать",
     },
+    createProductFailText:
+      "К сожалению, не удалось создать продукт. Попробуйте позже.",
+    createProductSuccessText: "Продукт успешно создан.",
   },
   Header: {
     logoutText: "Выйти",
