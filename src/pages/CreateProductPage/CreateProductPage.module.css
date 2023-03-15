@@ -13,3 +13,19 @@
   margin: 2rem auto 0;
   max-width: 500px;
 }
+
+.responseMessage {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.error {
+  composes: responseMessage;
+  color: var(--color-red);
+}
+
+.success {
+  composes: responseMessage;
+  color: var(--color-green);
+}

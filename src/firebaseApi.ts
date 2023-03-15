@@ -83,6 +83,12 @@ class FirebaseApi {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return [];
   }
+
+  /**
+   * Записывает данные о продукте в базу данных.
+   * @param product - информация о продукте.
+   */
+  public async createProduct(product: Product): Promise<void> {}
 }
 
 export const firebaseApi = new FirebaseApi();
