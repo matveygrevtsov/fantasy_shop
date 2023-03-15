@@ -116,7 +116,7 @@ class FirebaseApi {
     const productId = v4();
     const database = getDatabase();
     const images = await this.uploadImages(product.images);
-    set(databaseRef(database, `products/${productId}`), {
+    await set(databaseRef(database, `products/${productId}`), {
       ...product,
       images,
     });
