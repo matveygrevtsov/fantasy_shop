@@ -21,6 +21,7 @@
     "react-router-dom": "6.8.2",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.0",
+    "uuidv4": "^6.2.13",
     "web-vitals": "2.1.0",
     "yup": "^1.0.2"
   },
@@ -36,6 +37,7 @@
     "@types/react": "18.0.0",
     "@types/react-dom": "18.0.0",
     "@types/react-dropzone": "^5.1.0",
+    "@types/uuid": "^9.0.1",
     "@types/yup": "^0.32.0",
     "husky": "8.0.3",
     "prettier": "2.8.4",

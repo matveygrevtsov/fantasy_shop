@@ -1,9 +1,15 @@
 import { ProductCategory, ProductsSortType } from "./constants/enums";
 
-export interface Product {
+export interface CreateProductFormData {
   name: string;
   description: string;
   images: File[];
+}
+
+export interface Product {
+  name: string;
+  description: string;
+  images: string[];
 }
 
 export interface SearchProductsParams {
