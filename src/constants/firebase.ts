@@ -1,4 +1,6 @@
-export const firebaseConfig = {
+import { FirebaseOptions } from "@firebase/app-types";
+
+export const firebaseConfig: FirebaseOptions = {
   apiKey: "AIzaSyAJxRpwaEfKfGYkXjyk6dPAy82noOBLKXg",
   authDomain: "fantasyshop-a4a0b.firebaseapp.com",
   projectId: "fantasyshop-a4a0b",
@@ -6,4 +8,5 @@ export const firebaseConfig = {
   messagingSenderId: "891225945011",
   appId: "1:891225945011:web:041f3f08fef9cc63c011c6",
   measurementId: "G-3Q8P19HFC6",
+  databaseURL: "https://fantasyshop-a4a0b-default-rtdb.firebaseio.com/",
 };

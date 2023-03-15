@@ -14,7 +14,12 @@ import {
 import { firebaseConfig } from "./constants/firebase";
 import { CreateProductFormData, Product, SearchProductsParams } from "./types";
 import { UserStatus } from "./constants/enums";
-import { getStorage, ref as storeRef, uploadBytes } from "firebase/storage";
+import {
+  getStorage,
+  ref as storeRef,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
 import { getDatabase, ref as databaseRef, set } from "firebase/database";
 import { v4 } from "uuid";
 
@@ -95,8 +100,9 @@ class FirebaseApi {
     const imageId = v4();
     const storage = getStorage();
     const storageRef = storeRef(storage, `images/${imageId}`);
-    const snapshot = await uploadBytes(storageRef, image);
-    return snapshot.metadata.fullPath;
+    await uploadBytes(storageRef, image);
+    const src = await getDownloadURL(storageRef);
+    return src;
   }
 
   /**
