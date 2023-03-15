@@ -23,7 +23,10 @@ export const CreateProductPage = observer(() => {
   return (
     <div className={s.root}>
       <h2 className={s.title}>{texts.CreateProductPage.title}</h2>
-      <CreateProductForm className={s.createProductForm} />
+      <CreateProductForm
+        onSubmit={console.log}
+        className={s.createProductForm}
+      />
     </div>
   );
 });
