@@ -12,8 +12,11 @@ import {
   User,
 } from "firebase/auth";
 import { firebaseConfig } from "./constants/firebase";
-import { Product, SearchProductsParams } from "./types";
+import { CreateProductFormData, Product, SearchProductsParams } from "./types";
 import { UserStatus } from "./constants/enums";
+import { getStorage, ref as storeRef, uploadBytes } from "firebase/storage";
+import { getDatabase, ref as databaseRef, set } from "firebase/database";
+import { v4 } from "uuid";
 
 class FirebaseApi {
   private readonly firebaseApp: FirebaseApp;
@@ -85,10 +88,39 @@ class FirebaseApi {
   }
 
   /**
+   * Загружает картинку в хранилище firebase и возвращает соответствующий src.
+   * @param image - объект, описывающий картинку.
+   */
+  public async uploadImage(image: File): Promise<string> {
+    const imageId = v4();
+    const storage = getStorage();
+    const storageRef = storeRef(storage, `images/${imageId}`);
+    const snapshot = await uploadBytes(storageRef, image);
+    return snapshot.metadata.fullPath;
+  }
+
+  /**
+   * Загружает картинки в хранилище firebase и возвращает соответствующие src.
+   * @param images - объекты, описывающие картинки.
+   */
+  public async uploadImages(images: File[]): Promise<string[]> {
+    const promises = images.map((image) => this.uploadImage(image));
+    return Promise.all(promises);
+  }
+
+  /**
    * Записывает данные о продукте в базу данных.
    * @param product - информация о продукте.
    */
-  public async createProduct(product: Product): Promise<void> {}
+  public async createProduct(product: CreateProductFormData): Promise<void> {
+    const productId = v4();
+    const database = getDatabase();
+    const images = await this.uploadImages(product.images);
+    set(databaseRef(database, `products/${productId}`), {
+      ...product,
+      images,
+    });
+  }
 }
 
 export const firebaseApi = new FirebaseApi();

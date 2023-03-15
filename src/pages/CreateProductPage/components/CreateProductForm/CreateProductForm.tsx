@@ -1,15 +1,15 @@
 import { useCreateProductsForm } from "./useCreateProductsForm";
 import { ImagesUploader } from "../../../../components/ImagesUploader/ImagesUploader";
-import { Product } from "../../../../types";
 import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
 import { texts } from "../../../../constants/texts";
 import { Controller } from "react-hook-form";
+import { CreateProductFormData } from "../../../../types";
 import cn from "classnames";
 
 import s from "./CreateProductForm.module.css";
 
 interface Props {
-  onSubmit: (product: Product) => void;
+  onSubmit: (product: CreateProductFormData) => void;
   onStartTyping: () => void;
   className?: string;
 }
