@@ -52,6 +52,17 @@ export const texts = {
   },
   CreateProductPage: {
     title: "Создать продукт",
+    CreateProductForm: {
+      labels: {
+        name: "Наименование",
+        description: "Описание",
+      },
+      validationErrors: {
+        emptyName: "Наименование не должно быть пустым",
+        emptyDescription: "Описание не должно быть пустым",
+      },
+      submitButtonText: "Создать",
+    },
   },
   Header: {
     logoutText: "Выйти",

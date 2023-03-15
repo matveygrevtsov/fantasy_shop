@@ -3,7 +3,7 @@ import { ProductCategory, ProductsSortType } from "./constants/enums";
 export interface Product {
   name: string;
   description: string;
-  image: string;
+  images: File[];
 }
 
 export interface SearchProductsParams {
