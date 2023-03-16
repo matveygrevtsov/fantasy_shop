@@ -88,6 +88,20 @@ class FirebaseApi {
   }
 
   /**
+   * Возвращает данные продукта из базы данных.
+   * @param productId - айдишник продукта.
+   */
+  public async getProduct(productId: string) {
+    const dbRef = databaseRef(getDatabase());
+    const snapshot = await get(child(dbRef, `products/${productId}`));
+    if (!snapshot.exists()) {
+      return undefined;
+    }
+    const product = snapshot.val();
+    return product;
+  }
+
+  /**
    * Возвращает массив продуктов, соответствующих параметрам поиска, либо undefined, если параметры поиска не заданы.
    * @param searchProductsParams - параметры поиска продуктов.
    */

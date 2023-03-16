@@ -3,10 +3,14 @@
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.head {
+  height: 300px;
+}
+
 .image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .body {
