@@ -1,0 +1,16 @@
+.root {
+}
+
+@media (min-width: 600px) {
+  .root {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .root {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

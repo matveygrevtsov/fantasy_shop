@@ -1,4 +1,6 @@
 import { Product } from "../../types";
+import { ProductCard } from "../ProductCard/ProductCard";
+import cn from "classnames";
 
 import s from "./ProductsList.module.css";
 
@@ -8,5 +10,11 @@ interface Props {
 }
 
 export function ProductsList({ products, className }: Props) {
-  return <h2>Здесь должен отображаться список продуктов</h2>;
+  return (
+    <ul className={cn(s.root, className)}>
+      {products.map((productInfo) => (
+        <ProductCard key={productInfo.id} info={productInfo} />
+      ))}
+    </ul>
+  );
 }

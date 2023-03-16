@@ -29,6 +29,10 @@ class Store {
     return status === UserStatus.Client || status === UserStatus.Admin;
   }
 
+  public isUserAdmin(): boolean {
+    return this.userState.status === UserStatus.Admin;
+  }
+
   private handleUserAuthStatusChange(user: User | null) {
     if (!user) {
       this.userState = {

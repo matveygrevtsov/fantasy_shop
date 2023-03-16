@@ -1,5 +1,5 @@
 import { useSignInForm } from "./useSignInForm";
-import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
+import { Button } from "../../../../components/Button/Button";
 import { texts } from "../../../../constants/texts";
 import { SignInFormInput } from "../../../../constants/enums";
 import cn from "classnames";
@@ -43,9 +43,9 @@ export const SignInForm: React.FC<Props> = ({
       {formState.errors.Password && (
         <span className={s.error}>{formState.errors.Password.message}</span>
       )}
-      <SubmitButton className={s.submitButton} disabled={!formState.isValid}>
+      <Button className={s.submitButton} disabled={!formState.isValid}>
         {texts.SignInPage.SignInForm.submitButtonText}
-      </SubmitButton>
+      </Button>
     </form>
   );
 };

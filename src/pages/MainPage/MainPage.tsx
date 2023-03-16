@@ -10,10 +10,7 @@ export const MainPage = () => {
 
   return (
     <div className={s.root}>
-      <SearchProductsForm
-        className={s.searchProductsForm}
-        onSubmit={handleSubmit}
-      />
+      <SearchProductsForm onSubmit={handleSubmit} />
       {state.status === StateStatus.Loading && <Preloader />}
       {state.status === StateStatus.Error && (
         <h2>
@@ -22,7 +19,7 @@ export const MainPage = () => {
         </h2>
       )}
       {state.status === StateStatus.Success && (
-        <ProductsList products={state.products} />
+        <ProductsList products={state.products} className={s.productsList} />
       )}
     </div>
   );

@@ -1,25 +1,27 @@
 import cn from "classnames";
 
-import s from "./SubmitButton.module.css";
+import s from "./Button.module.css";
 
 interface Props {
   className?: string;
   children?: JSX.Element | string;
   disabled?: boolean;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
-export const SubmitButton: React.FC<Props> = ({
+export const Button: React.FC<Props> = ({
   className,
   children,
   disabled,
   onClick,
+  type,
 }) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      type="submit"
+      type={type}
       className={cn(s.root, className)}
     >
       {children}

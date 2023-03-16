@@ -1,5 +1,5 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
-import { Layout } from "./components/Header/components/Layout/Layout";
+import { Layout } from "./components/Layout/Layout";
 import { routes } from "./constants/routes";
 import { CartPage } from "./pages/CartPage/CartPage";
 import { CreateProductPage } from "./pages/CreateProductPage/CreateProductPage";
