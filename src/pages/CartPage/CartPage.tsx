@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { UserStatus } from "../../constants/enums";
-import { routes } from "../../constants/routes";
+import { RoutePath, UserStatus } from "../../constants/enums";
 import { store } from "../../store";
 
 export const CartPage = observer(() => {
@@ -13,7 +12,7 @@ export const CartPage = observer(() => {
   }
 
   if (userStatus !== UserStatus.Client) {
-    return <Navigate to={routes.MainPage.path} />;
+    return <Navigate to={RoutePath.MainPage} />;
   }
 
   return <h2>CartPage</h2>;

@@ -1,9 +1,10 @@
-export enum RouteName {
-  MainPage = "MainPage",
-  CartPage = "CartPage",
-  SignUpPage = "SignUpPage",
-  SignInPage = "SignInPage",
-  CreateProductPage = "CreateProductPage",
+export enum RoutePath {
+  MainPage = "/",
+  CartPage = "/cart",
+  SignUpPage = "/signup",
+  SignInPage = "/signin",
+  CreateProductPage = "/create-product",
+  ProductPage = "/product",
 }
 
 export enum ProductCategory {

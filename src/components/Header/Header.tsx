@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { RouteName, UserStatus } from "../../constants/enums";
-import { routes } from "../../constants/routes";
+import { UserStatus } from "../../constants/enums";
 import { texts } from "../../constants/texts";
 import { store } from "../../store";
 import { HeaderDesktop } from "./components/HeaderDesktop/HeaderDesktop";
@@ -34,12 +33,8 @@ export const Header = observer(() => {
 });
 
 function getRoutes(userStatus: UserStatus): RouteConfig[] {
-  const routesNames = Object.keys(RouteName) as RouteName[];
-  const enabledRoutes = routesNames.filter(
-    (routeName) => routes[routeName].showInHeader[userStatus]
+  const availableRoutes: RouteConfig[] = texts.Header.navigation.filter(
+    ({ availableFor }) => availableFor[userStatus]
   );
-  return enabledRoutes.map((routeName) => ({
-    title: texts.Header.routesTitles[routeName],
-    path: routes[routeName].path,
-  }));
+  return availableRoutes;
 }
