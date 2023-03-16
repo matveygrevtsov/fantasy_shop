@@ -1,6 +1,6 @@
 import { useCreateProductsForm } from "./useCreateProductsForm";
 import { ImagesUploader } from "../../../../components/ImagesUploader/ImagesUploader";
-import { SubmitButton } from "../../../../components/Header/components/SubmitButton/SubmitButton";
+import { Button } from "../../../../components/Button/Button";
 import { texts } from "../../../../constants/texts";
 import { Controller } from "react-hook-form";
 import { CreateProductFormData } from "../../../../types";
@@ -46,9 +46,9 @@ export function CreateProductForm({
           <ImagesUploader onSelect={onChange} className={s.imagesUploader} />
         )}
       />
-      <SubmitButton disabled={!formState.isValid} className={s.submitButton}>
+      <Button disabled={!formState.isValid} className={s.submitButton}>
         {submitButtonText}
-      </SubmitButton>
+      </Button>
     </form>
   );
 }

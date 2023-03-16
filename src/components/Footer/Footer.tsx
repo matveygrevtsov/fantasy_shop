@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { texts } from "../../../../constants/texts";
+import { texts } from "../../constants/texts";
 
 import s from "./Footer.module.css";
 

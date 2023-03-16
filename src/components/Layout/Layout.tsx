@@ -1,4 +1,4 @@
-import { Header } from "../../Header";
+import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 
 import s from "./Layout.module.css";

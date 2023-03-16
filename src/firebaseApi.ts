@@ -20,7 +20,13 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
-import { getDatabase, ref as databaseRef, set } from "firebase/database";
+import {
+  getDatabase,
+  ref as databaseRef,
+  set,
+  child,
+  get,
+} from "firebase/database";
 import { v4 } from "uuid";
 
 class FirebaseApi {
@@ -88,8 +94,18 @@ class FirebaseApi {
   public async getProductsBySearchParams(
     searchProductsParams?: SearchProductsParams
   ): Promise<Product[]> {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return [];
+    const dbRef = databaseRef(getDatabase());
+    const snapshot = await get(child(dbRef, "products"));
+    if (!snapshot.exists()) {
+      return [];
+    }
+    const products = Object.entries(snapshot.val()).map(
+      ([id, productInfo]: any) => ({
+        id,
+        ...productInfo,
+      })
+    );
+    return products;
   }
 
   /**
