@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { UserStatus } from "../../constants/enums";
-import { routes } from "../../constants/routes";
+import { RoutePath, UserStatus } from "../../constants/enums";
 import { texts } from "../../constants/texts";
 import { store } from "../../store";
 import { CreateProductForm } from "./components/CreateProductForm/CreateProductForm";
@@ -27,7 +26,7 @@ export const CreateProductPage = observer(() => {
   }
 
   if (userStatus !== UserStatus.Admin) {
-    return <Navigate to={routes.MainPage.path} />;
+    return <Navigate to={RoutePath.MainPage} />;
   }
 
   return (

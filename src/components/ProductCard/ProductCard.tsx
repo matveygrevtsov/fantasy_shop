@@ -6,6 +6,7 @@ import { store } from "../../store";
 import { Link } from "react-router-dom";
 import { texts } from "../../constants/texts";
 import { Button } from "../Button/Button";
+import { RoutePath } from "../../constants/enums";
 
 import s from "./ProductCard.module.css";
 
@@ -19,7 +20,10 @@ export const ProductCard = observer(({ info, className }: Props) => {
   const { addToCartText, editText } = texts.ProductCard;
 
   return (
-    <div className={cn(s.root, className)}>
+    <Link
+      to={`${RoutePath.ProductPage}?id=${info.id}`}
+      className={cn(s.root, className)}
+    >
       <div className={s.head}>
         <img alt={info.name} src={info.images[0]} className={s.image} />
       </div>
@@ -27,11 +31,13 @@ export const ProductCard = observer(({ info, className }: Props) => {
         <h3 className={s.name}>{info.name}</h3>
         <div className={s.description}>{info.description}</div>
         {store.isUserAdmin() ? (
-          <Link to="">{editText}</Link>
+          <Link className={s.editProductLink} to="">
+            {editText}
+          </Link>
         ) : (
           <Button className={s.addToCartButton}>{addToCartText}</Button>
         )}
       </div>
-    </div>
+    </Link>
   );
 });

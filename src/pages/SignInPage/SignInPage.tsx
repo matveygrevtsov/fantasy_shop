@@ -5,9 +5,8 @@ import { Navigate } from "react-router-dom";
 import { SignInForm } from "./components/SignInForm/SignInForm";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { texts } from "../../constants/texts";
-import { routes } from "../../constants/routes";
 import { FirebaseErrorText } from "../../components/FirebaseErrorText/FirebaseErrorText";
-import { UserStatus } from "../../constants/enums";
+import { RoutePath, UserStatus } from "../../constants/enums";
 
 import s from "./SignInPage.module.css";
 
@@ -17,11 +16,11 @@ export const SignInPage = observer(() => {
   const { state, handleSubmit, handleStartTyping } = useSignInPage();
 
   if (userStatus === UserStatus.Client) {
-    return <Navigate to={routes.CartPage.path} />;
+    return <Navigate to={RoutePath.CartPage} />;
   }
 
   if (userStatus === UserStatus.Admin) {
-    return <Navigate to={routes.CreateProductPage.path} />;
+    return <Navigate to={RoutePath.CreateProductPage} />;
   }
 
   if (
