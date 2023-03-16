@@ -56,10 +56,13 @@ export const texts = {
       labels: {
         name: "Наименование",
         description: "Описание",
+        price: "Цена",
       },
       validationErrors: {
         emptyName: "Наименование не должно быть пустым",
         emptyDescription: "Описание не должно быть пустым",
+        invalidPrice: "Невалидное значение цены",
+        emptyPrice: "Цена не указана",
       },
       submitButtonText: "Создать",
     },

@@ -31,14 +31,28 @@ export function CreateProductForm({
       onSubmit={submit}
       className={cn(s.root, className)}
     >
-      <label className={s.label}>{labels.name}</label>
-      <input className={s.nameInput} {...register("name")} />
-      {errors.name && <span className={s.error}>{errors.name.message}</span>}
-      <label className={s.label}>{labels.description}</label>
-      <textarea className={s.descriptionInput} {...register("description")} />
-      {errors.description && (
-        <span className={s.error}>{errors.description.message}</span>
-      )}
+      <div className={s.formField}>
+        <label className={s.label}>{labels.name}</label>
+        <input className={s.nameInput} {...register("name")} />
+        {errors.name && <span className={s.error}>{errors.name.message}</span>}
+      </div>
+
+      <div className={s.formField}>
+        <label className={s.label}>{labels.description}</label>
+        <textarea className={s.descriptionInput} {...register("description")} />
+        {errors.description && (
+          <span className={s.error}>{errors.description.message}</span>
+        )}
+      </div>
+
+      <div className={s.formField}>
+        <label className={s.label}>{labels.price}</label>
+        <input className={s.priceInput} {...register("price")} />
+        {errors.price && (
+          <span className={s.error}>{errors.price.message}</span>
+        )}
+      </div>
+
       <Controller
         name="images"
         control={control}
