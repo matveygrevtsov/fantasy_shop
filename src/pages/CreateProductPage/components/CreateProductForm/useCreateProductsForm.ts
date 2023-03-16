@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { array, object, string } from "yup";
+import { array, object, string, number } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { texts } from "../../../../constants/texts";
 import { CreateProductFormData } from "../../../../types";
@@ -12,6 +12,10 @@ export function useCreateProductsForm(
   const formSchema = object().shape({
     name: string().required(validationErrors.emptyName),
     description: string().required(validationErrors.emptyDescription),
+    price: number()
+      .required(validationErrors.emptyPrice)
+      .positive(validationErrors.invalidPrice)
+      .typeError(validationErrors.invalidPrice),
     images: array(),
   });
 
