@@ -4,6 +4,7 @@ import { Button } from "../../../../components/Button/Button";
 import { texts } from "../../../../constants/texts";
 import { Controller } from "react-hook-form";
 import { CreateProductFormData } from "../../../../types";
+import Select from "react-select";
 import cn from "classnames";
 
 import s from "./CreateProductForm.module.css";
@@ -51,6 +52,25 @@ export function CreateProductForm({
         {errors.price && (
           <span className={s.error}>{errors.price.message}</span>
         )}
+      </div>
+
+      <div className={s.formField}>
+        <label className={s.label}>{texts.ProductCategorySelect.title}</label>
+        <Controller
+          name="productCategories"
+          control={control}
+          render={({ field: { onChange } }) => (
+            <Select
+              placeholder={texts.ProductCategorySelect.title}
+              onChange={(selectedOptions) =>
+                onChange(selectedOptions.map(({ value }) => value))
+              }
+              options={texts.ProductCategorySelect.options}
+              isMulti
+              className={s.productCategoriesSelect}
+            />
+          )}
+        />
       </div>
 
       <Controller
