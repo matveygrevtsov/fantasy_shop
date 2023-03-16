@@ -37,17 +37,17 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
         <ul className={s.searchParams}>
           <li className={s.searchParam}>
             <label className={s.label}>
-              {texts.ProductsSearchForm.ProductCategorySelect.title}
+              {texts.ProductCategorySelect.title}
             </label>
             <Controller
               name="productsCategories"
               control={control}
               render={({ field: { onChange } }) => (
                 <Select
-                  onChange={onChange}
-                  options={
-                    texts.ProductsSearchForm.ProductCategorySelect.options
+                  onChange={(selectedOptions) =>
+                    onChange(selectedOptions.map(({ value }) => value))
                   }
+                  options={texts.ProductCategorySelect.options}
                   isMulti
                 />
               )}

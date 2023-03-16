@@ -34,7 +34,7 @@
 }
 
 .imagesUploader {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .submitButton {
@@ -44,4 +44,8 @@
 
 .error {
   color: var(--color-red);
+}
+
+.productCategoriesSelect {
+  margin-top: 1rem;
 }

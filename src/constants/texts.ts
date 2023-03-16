@@ -57,6 +57,7 @@ export const texts = {
         name: "Наименование",
         description: "Описание",
         price: "Цена",
+        productCategories: "Категории",
       },
       validationErrors: {
         emptyName: "Наименование не должно быть пустым",
@@ -86,24 +87,6 @@ export const texts = {
   ProductsSearchForm: {
     searchInputPlaceholder: "Введите название продукта",
     searchProductsParamsTitle: "Фильтры",
-    ProductCategorySelect: {
-      title: "Категории",
-      placeholder: "Выбрать категории",
-      options: [
-        {
-          value: ProductCategory.Goblins,
-          label: "Гоблины",
-        },
-        {
-          value: ProductCategory.Orks,
-          label: "Орки",
-        },
-        {
-          value: ProductCategory.Dwarfs,
-          label: "Гномы",
-        },
-      ],
-    },
     ProductSortTypeSelect: {
       title: "Сортировка",
       options: [
@@ -125,5 +108,23 @@ export const texts = {
   ProductCard: {
     addToCartText: "Добавить в корзину",
     editText: "Редактировать",
+  },
+  ProductCategorySelect: {
+    title: "Категории",
+    placeholder: "Выбрать категории",
+    options: [
+      {
+        value: ProductCategory.Goblins,
+        label: "Гоблины",
+      },
+      {
+        value: ProductCategory.Orks,
+        label: "Орки",
+      },
+      {
+        value: ProductCategory.Dwarfs,
+        label: "Гномы",
+      },
+    ],
   },
 };

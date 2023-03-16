@@ -16,6 +16,7 @@ export function useCreateProductsForm(
       .required(validationErrors.emptyPrice)
       .positive(validationErrors.invalidPrice)
       .typeError(validationErrors.invalidPrice),
+    productCategories: array(),
     images: array(),
   });
 
