@@ -1,16 +1,16 @@
 import cn from "classnames";
+import { PropsWithChildren } from "react";
 
 import s from "./Button.module.css";
 
 interface Props {
   className?: string;
-  children?: JSX.Element | string;
   disabled?: boolean;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
 }
 
-export const Button: React.FC<Props> = ({
+export const Button: React.FC<PropsWithChildren<Props>> = ({
   className,
   children,
   disabled,
