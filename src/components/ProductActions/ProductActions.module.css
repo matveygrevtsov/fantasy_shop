@@ -24,14 +24,27 @@
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   outline: none;
-  background-color: transparent;
+  background-color: var(--color-white);
   cursor: pointer;
+  transition: background-color ease-in-out 0.2s, color ease-in-out 0.2s;
 }
 
 .button:disabled,
 .button[disabled] {
   opacity: 0.2;
   pointer-events: none;
+}
+
+@media (pointer: fine) {
+  .button:hover {
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+}
+
+.button:active {
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 .message {
