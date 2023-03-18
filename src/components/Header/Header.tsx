@@ -33,6 +33,7 @@ export const Header = observer(() => {
 });
 
 function getRoutes(userStatus: UserStatus): RouteConfig[] {
+  if (userStatus === UserStatus.Loading) return [];
   const availableRoutes: RouteConfig[] = texts.Header.navigation.filter(
     ({ availableFor }) => availableFor[userStatus]
   );
