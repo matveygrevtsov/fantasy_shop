@@ -48,3 +48,7 @@
   composes: message;
   color: var(--color-red);
 }
+
+.cartIcon {
+  margin-right: 0.5rem;
+}

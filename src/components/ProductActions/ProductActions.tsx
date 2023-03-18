@@ -2,6 +2,8 @@ import { AddToCartFormStatus, useProductActions } from "./useProductActions";
 import { observer } from "mobx-react-lite";
 import { Preloader } from "../Preloader/Preloader";
 import { texts } from "../../constants/texts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 import s from "./ProductActions.module.css";
 
@@ -50,6 +52,7 @@ export const ProductActions = observer(
             className={s.button}
             type="submit"
           >
+            <FontAwesomeIcon icon={faCartShopping} className={s.cartIcon} />
             {addToCartText}
           </button>
         </form>
