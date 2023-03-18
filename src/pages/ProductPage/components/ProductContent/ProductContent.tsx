@@ -11,9 +11,6 @@ export const ProductContent: React.FC<Product> = ({
   images,
   productCategories,
 }) => {
-  const handleAddProductToCart = (amount: number): Promise<void> =>
-    new Promise((resolve) => setTimeout(resolve, 1000));
-
   return (
     <div className={s.root}>
       <div className={s.slider}>
