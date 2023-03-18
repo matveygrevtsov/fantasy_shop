@@ -3,6 +3,7 @@ import { Product } from "../../types";
 import { Link } from "react-router-dom";
 import { RoutePath } from "../../constants/enums";
 import { ProductActions } from "../ProductActions/ProductActions";
+import TextTruncate from "react-text-truncate";
 
 import s from "./ProductCard.module.css";
 
@@ -20,7 +21,14 @@ export const ProductCard = ({ info, className }: Props) => {
         </div>
         <div className={s.body}>
           <h3 className={s.name}>{info.name}</h3>
-          <div className={s.description}>{info.description}</div>
+          <div className={s.description}>
+            <TextTruncate
+              line={3}
+              element="span"
+              truncateText="…"
+              text={info.description}
+            />
+          </div>
         </div>
       </Link>
       <ProductActions
