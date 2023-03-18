@@ -156,9 +156,13 @@ export const texts = {
     placeholder:
       "Перетяните несколько картинок, либо нажмите, чтобы выбрать их с вашего устройства.",
   },
-  ProductCard: {
+  ProductActions: {
     addToCartText: "Добавить в корзину",
+    addToCartSuccessText: "Товар успешно добавлен в корзину.",
+    addToCartErrorText:
+      "Не удалось добавить товар в корзину. Повторите попытку позже.",
     editText: "Редактировать",
+    currency: "₽",
   },
   ProductCategorySelect: {
     title: "Категории",

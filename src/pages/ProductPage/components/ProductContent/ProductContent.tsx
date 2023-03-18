@@ -1,5 +1,5 @@
+import { ProductActions } from "../../../../components/ProductActions/ProductActions";
 import { Product } from "../../../../types";
-import { AddToCartForm } from "../AddToCartForm/AddToCartForm";
 
 import s from "./ProductContent.module.css";
 
@@ -21,9 +21,8 @@ export const ProductContent: React.FC<Product> = ({
       </div>
       <div className={s.info}>
         <h1>{name}</h1>
-        <span className={s.price}>{price}₽</span>
         <div className={s.description}>{description}</div>
-        <AddToCartForm onSubmit={handleAddProductToCart} />
+        <ProductActions productId={id} price={price} />
       </div>
     </div>
   );
