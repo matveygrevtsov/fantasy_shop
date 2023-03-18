@@ -14,7 +14,7 @@ export enum AddToCartFormStatus {
   Success = "Success",
 }
 
-export function useAddToCartForm(onSubmit: (amount: number) => Promise<void>) {
+export function useProductActions(productId: string) {
   const [state, setState] = useState<AddToCartFormStatus>(
     AddToCartFormStatus.Init
   );
@@ -43,14 +43,10 @@ export function useAddToCartForm(onSubmit: (amount: number) => Promise<void>) {
 
   const submit = handleSubmit(({ amount }) => {
     setState(AddToCartFormStatus.Loading);
-    onSubmit(amount).then(
-      () => {
-        setState(AddToCartFormStatus.Success);
-      },
-      () => {
-        setState(AddToCartFormStatus.Error);
-      }
-    );
+    // TODO: Заменить моки на настоящую функцию.
+    new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+      setState(AddToCartFormStatus.Success);
+    });
   });
 
   return { state, register, formState, submit, handleClick };

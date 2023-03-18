@@ -1,5 +1,10 @@
-.root {
+.form {
   display: flex;
+  margin-top: 0.5rem;
+}
+
+.price {
+  font-size: 1.25rem;
 }
 
 .amountInput {
