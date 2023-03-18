@@ -31,11 +31,7 @@ export const ProductCard = ({ info, className }: Props) => {
           </div>
         </div>
       </Link>
-      <ProductActions
-        className={s.productActions}
-        productId={info.id}
-        price={info.price}
-      />
+      <ProductActions className={s.productActions} product={info} />
     </div>
   );
 };

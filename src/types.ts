@@ -4,6 +4,7 @@ export interface CreateProductFormData {
   name: string;
   description: string;
   price: number;
+  amount: number;
   productCategories: ProductCategory[];
   images: File[];
 }
@@ -13,6 +14,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  amount: number;
   productCategories: ProductCategory[];
   images: string[];
 }

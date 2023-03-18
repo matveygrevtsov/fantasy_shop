@@ -33,6 +33,10 @@
   composes: input;
 }
 
+.amountInput {
+  composes: input;
+}
+
 .imagesUploader {
   margin-top: 2rem;
 }
