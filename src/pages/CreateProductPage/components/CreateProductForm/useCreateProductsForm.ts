@@ -16,6 +16,10 @@ export function useCreateProductsForm(
       .required(validationErrors.emptyPrice)
       .positive(validationErrors.invalidPrice)
       .typeError(validationErrors.invalidPrice),
+    amount: number()
+      .required(validationErrors.emptyAmount)
+      .positive(validationErrors.invalidAmount)
+      .typeError(validationErrors.invalidAmount),
     productCategories: array(),
     images: array(),
   });
@@ -26,6 +30,9 @@ export function useCreateProductsForm(
       defaultValues: {
         name: "",
         description: "",
+        price: 0,
+        amount: 0,
+        productCategories: [],
         images: [],
       },
       // @ts-ignore

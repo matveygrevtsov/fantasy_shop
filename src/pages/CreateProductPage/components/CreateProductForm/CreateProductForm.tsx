@@ -55,6 +55,14 @@ export function CreateProductForm({
       </div>
 
       <div className={s.formField}>
+        <label className={s.label}>{labels.amount}</label>
+        <input className={s.amountInput} {...register("amount")} />
+        {errors.amount && (
+          <span className={s.error}>{errors.amount.message}</span>
+        )}
+      </div>
+
+      <div className={s.formField}>
         <label className={s.label}>{texts.ProductCategorySelect.title}</label>
         <Controller
           name="productCategories"

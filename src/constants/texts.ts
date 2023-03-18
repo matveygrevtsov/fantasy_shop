@@ -58,6 +58,7 @@ export const texts = {
         name: "Наименование",
         description: "Описание",
         price: "Цена",
+        amount: "Количество в наличии",
         productCategories: "Категории",
       },
       validationErrors: {
@@ -65,6 +66,8 @@ export const texts = {
         emptyDescription: "Описание не должно быть пустым",
         invalidPrice: "Невалидное значение цены",
         emptyPrice: "Цена не указана",
+        invalidAmount: "Невалидное количество товара в наличии",
+        emptyAmount: "Количество товара в наличии не указано",
       },
       submitButtonText: "Создать",
     },
@@ -163,6 +166,7 @@ export const texts = {
       "Не удалось добавить товар в корзину. Повторите попытку позже.",
     editText: "Редактировать",
     currency: "₽",
+    productIsOutOfStock: "К сожалению, товар закончился",
   },
   ProductCategorySelect: {
     title: "Категории",

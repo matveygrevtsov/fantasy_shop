@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { number, object } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Product } from "../../types";
 
 interface AddToCartFormData {
   amount: number;
@@ -14,7 +15,7 @@ export enum AddToCartFormStatus {
   Success = "Success",
 }
 
-export function useProductActions(productId: string) {
+export function useProductActions(product: Product) {
   const [state, setState] = useState<AddToCartFormStatus>(
     AddToCartFormStatus.Init
   );
