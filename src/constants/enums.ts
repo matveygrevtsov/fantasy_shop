@@ -5,6 +5,7 @@ export enum RoutePath {
   SignInPage = "/signin",
   CreateProductPage = "/create-product",
   ProductPage = "/product",
+  EditProductPage = "/edit-product",
 }
 
 export enum ProductCategory {

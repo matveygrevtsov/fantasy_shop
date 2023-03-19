@@ -91,7 +91,7 @@ class FirebaseApi {
    * Возвращает данные продукта из базы данных.
    * @param productId - айдишник продукта.
    */
-  public async getProduct(productId: string) {
+  public async getProduct(productId: string): Promise<Product | undefined> {
     const dbRef = databaseRef(getDatabase());
     const snapshot = await get(child(dbRef, `products/${productId}`));
     if (!snapshot.exists()) {

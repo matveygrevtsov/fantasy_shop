@@ -5,7 +5,7 @@ import { RoutePath, UserStatus } from "../../constants/enums";
 import { store } from "../../store";
 
 export const CartPage = observer(() => {
-  const userStatus = store.getUserState().status;
+  const userStatus = store.getUserStatus();
 
   if (userStatus === UserStatus.Loading) {
     return <Preloader />;

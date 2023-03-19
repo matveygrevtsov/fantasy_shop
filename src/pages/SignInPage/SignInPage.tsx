@@ -11,7 +11,7 @@ import { RoutePath, UserStatus } from "../../constants/enums";
 import s from "./SignInPage.module.css";
 
 export const SignInPage = observer(() => {
-  const userStatus = store.getUserState().status;
+  const userStatus = store.getUserStatus();
   const { title } = texts.SignInPage;
   const { state, handleSubmit, handleStartTyping } = useSignInPage();
 

@@ -13,19 +13,21 @@ export interface RouteConfig {
 }
 
 export const Header = observer(() => {
-  const userStatus = store.getUserState().status;
+  const userStatus = store.getUserStatus();
   const routes = getRoutes(userStatus);
+  const isUserLoggedIn =
+    userStatus === UserStatus.Admin || userStatus === UserStatus.Client;
 
   return (
     <>
       <HeaderMobile
         routes={routes}
-        isUserLoggedIn={store.isUserLoggedIn()}
+        isUserLoggedIn={isUserLoggedIn}
         className={s.headerMobile}
       />
       <HeaderDesktop
         routes={routes}
-        isUserLoggedIn={store.isUserLoggedIn()}
+        isUserLoggedIn={isUserLoggedIn}
         className={s.headerDesktop}
       />
     </>

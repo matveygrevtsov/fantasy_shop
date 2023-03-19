@@ -14,7 +14,7 @@ import s from "./CreateProductPage.module.css";
 
 export const CreateProductPage = observer(() => {
   const { handleSubmit, state, handleStartTyping } = useCreateProductPage();
-  const userStatus = store.getUserState().status;
+  const userStatus = store.getUserStatus();
   const { createProductFailText, createProductSuccessText } =
     texts.CreateProductPage;
 
