@@ -20,17 +20,8 @@ class Store {
     );
   }
 
-  public getUserState(): UserState {
-    return this.userState;
-  }
-
-  public isUserLoggedIn(): boolean {
-    const { status } = this.userState;
-    return status === UserStatus.Client || status === UserStatus.Admin;
-  }
-
-  public isUserAdmin(): boolean {
-    return this.userState.status === UserStatus.Admin;
+  public getUserStatus(): UserStatus {
+    return this.userState.status;
   }
 
   private handleUserAuthStatusChange(user: User | null) {

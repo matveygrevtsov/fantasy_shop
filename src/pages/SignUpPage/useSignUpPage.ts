@@ -24,7 +24,7 @@ export const useSignUpPage = () => {
   });
 
   useEffect(() => {
-    if (store.getUserState().status === UserStatus.Error) {
+    if (store.getUserStatus() === UserStatus.Error) {
       firebaseApi.signOut();
       setState({
         status: SignUpPageStatus.Error,

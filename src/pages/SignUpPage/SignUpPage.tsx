@@ -11,7 +11,7 @@ import { RoutePath, UserStatus } from "../../constants/enums";
 import s from "./SignUpPage.module.css";
 
 export const SignUpPage = observer(() => {
-  const userStatus = store.getUserState().status;
+  const userStatus = store.getUserStatus();
   const { title, alreadyHasAccountText } = texts.SignUpPage;
   const { state, handleSubmit, handleStartTyping } = useSignUpPage();
 

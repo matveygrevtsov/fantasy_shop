@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { Product } from "../../types";
 import { store } from "../../store";
-import { UserStatus } from "../../constants/enums";
+import { RoutePath, UserStatus } from "../../constants/enums";
 import { Link } from "react-router-dom";
 
 import s from "./ProductActions.module.css";
@@ -34,7 +34,7 @@ export const ProductActions = observer(({ product, className }: Props) => {
 
   if (
     state === AddToCartFormStatus.Loading ||
-    store.getUserState().status === UserStatus.Loading
+    store.getUserStatus() === UserStatus.Loading
   ) {
     return (
       <div className={className}>
@@ -43,9 +43,12 @@ export const ProductActions = observer(({ product, className }: Props) => {
     );
   }
 
-  if (store.getUserState().status === UserStatus.Admin) {
+  if (store.getUserStatus() === UserStatus.Admin) {
     return (
-      <Link to={"#"} className={s.editProductLink}>
+      <Link
+        to={`${RoutePath.EditProductPage}?id=${product.id}`}
+        className={s.editProductLink}
+      >
         {editText}
       </Link>
     );
