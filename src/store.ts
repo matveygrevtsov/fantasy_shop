@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
 import { makeAutoObservable } from "mobx";
 import { UserStatus } from "./constants/enums";
-import { firebaseApi } from "./firebaseApi";
+import { firebaseApi } from "./firebaseApi/firebaseApi";
 import { UserState } from "./types";
 
 class Store {
@@ -12,7 +12,7 @@ class Store {
     this.userState = {
       status: UserStatus.Loading,
     };
-    firebaseApi.observeUserAuthStatus((user) =>
+    firebaseApi.userAuthController.observeUserAuthStatus((user) =>
       this.handleUserAuthStatusChange(user)
     );
   }
@@ -42,7 +42,7 @@ class Store {
     this.userState = {
       status: UserStatus.Loading,
     };
-    firebaseApi.fetchUserData(user).then(
+    firebaseApi.userAuthController.fetchUserData(user).then(
       (data) => {
         this.userState = {
           status: UserStatus.Authorized,

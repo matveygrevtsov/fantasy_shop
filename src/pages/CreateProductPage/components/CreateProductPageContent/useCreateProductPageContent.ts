@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { firebaseApi } from "../../../../firebaseApi";
+import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
 import { CreateProductFormData } from "../../../../types";
 
 export enum Status {
@@ -27,7 +27,7 @@ export function useCreateProductPageContent() {
     setState({
       status: Status.Loading,
     });
-    firebaseApi.createProduct(product).then(
+    firebaseApi.productsController.createProduct(product).then(
       () =>
         setState({
           status: Status.Success,

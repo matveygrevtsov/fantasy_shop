@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { firebaseApi } from "../../../../firebaseApi";
+import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
 
 export enum Status {
   Init = "Init",
@@ -25,7 +25,7 @@ export const useSignUpPageContent = () => {
     setState({
       status: Status.Loading,
     });
-    firebaseApi.signUp(email, password).catch((error) =>
+    firebaseApi.userAuthController.signUp(email, password).catch((error) =>
       setState({
         status: Status.Error,
         errorCode: error.code,

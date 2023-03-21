@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { firebaseApi } from "../../../../firebaseApi";
+import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
 
 export enum Status {
   Init = "WaitingForUserCredentials",
@@ -25,7 +25,7 @@ export function useSignInPageContent() {
     setState({
       status: Status.Loading,
     });
-    firebaseApi.signIn(email, password).catch((error) =>
+    firebaseApi.userAuthController.signIn(email, password).catch((error) =>
       setState({
         status: Status.Error,
         errorCode: error.code,

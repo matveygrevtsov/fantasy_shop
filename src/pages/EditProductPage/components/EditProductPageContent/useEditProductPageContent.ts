@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { firebaseApi } from "../../../../firebaseApi";
+import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
 import { Product } from "../../../../types";
 
 export enum Status {
@@ -36,7 +36,7 @@ export const useEditProductPageContent = () => {
       });
       return;
     }
-    firebaseApi.getProduct(productId).then(
+    firebaseApi.productsController.fetchProductData(productId).then(
       (productDataToEdit) => {
         if (!productDataToEdit) {
           setState({

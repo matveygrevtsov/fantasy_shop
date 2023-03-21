@@ -30,10 +30,18 @@ export interface SearchProductsParams {
   productsSortType: ProductsSortType;
 }
 
-export interface UserData {
-  role: UserRole;
-}
+// В таком формате данные юзера скачиваются из базы данных.
+export type UserData =
+  | {
+      role: UserRole.Admin;
+    }
+  | {
+      role: UserRole.Client;
+      cart: string[];
+      orders: string[];
+    };
 
+// В таком формате данные юзера хранятся в сторе.
 export type UserState =
   | {
       status: UserStatus.Loading | UserStatus.Unauthorized;

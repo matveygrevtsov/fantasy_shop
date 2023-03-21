@@ -3,7 +3,7 @@ import { decodeBase64, encodeBase64 } from "../../utils/base64";
 import { ProductCategory, ProductsSortType } from "../../constants/enums";
 import { useEffect, useState } from "react";
 import { Product, SearchProductsParams } from "../../types";
-import { firebaseApi } from "../../firebaseApi";
+import { firebaseApi } from "../../firebaseApi/firebaseApi";
 
 export enum Status {
   Loading = "Loading",
@@ -57,8 +57,8 @@ async function mapSearchParamsEncodedToProducts(
 ): Promise<Product[]> {
   const searchParams = decodeBase64(searchParamsEncoded);
   return isSearchParams(searchParams)
-    ? firebaseApi.getProductsBySearchParams(searchParams)
-    : firebaseApi.getProductsBySearchParams();
+    ? firebaseApi.productsController.getProductsBySearchParams(searchParams)
+    : firebaseApi.productsController.getProductsBySearchParams();
 }
 
 function isSearchParams(obj: any): obj is SearchProductsParams {

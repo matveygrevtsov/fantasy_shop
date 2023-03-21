@@ -1,4 +1,4 @@
-import { firebaseApi } from "../../firebaseApi";
+import { firebaseApi } from "../../firebaseApi/firebaseApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import cn from "classnames";
@@ -14,7 +14,7 @@ export const LogOut: React.FC<Props> = ({ className, text }) => {
   return (
     <button
       className={cn(s.root, className)}
-      onClick={() => firebaseApi.signOut()}
+      onClick={() => firebaseApi.userAuthController.signOut()}
     >
       <span className={s.text}>{text}</span>
       <FontAwesomeIcon color="white" icon={faSignOut} />
