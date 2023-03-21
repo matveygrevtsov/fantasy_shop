@@ -36,10 +36,13 @@ export enum FirebaseErrors {
   AuthEmailAlreadyInUse = "auth/email-already-in-use", // Предоставленный адрес электронной почты уже используется существующим пользователем.
 }
 
-export enum UserStatus {
-  Loading = "Loading",
-  Error = "Error",
-  Guest = "Guest",
+export enum UserRole {
   Client = "Client",
   Admin = "Admin",
+}
+
+export enum UserStatus {
+  Loading = "Loading",
+  Unauthorized = "Unauthorized",
+  Authorized = "Authorized",
 }

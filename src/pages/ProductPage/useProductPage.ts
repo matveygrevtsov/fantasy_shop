@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { firebaseApi } from "../../firebaseApi";
 import { Product } from "../../types";
 
-export enum ProductPageStatus {
+export enum Status {
   Loading = "Loading",
   Error = "Error",
   NotFound = "NotFound",
@@ -12,27 +12,24 @@ export enum ProductPageStatus {
 
 type State =
   | {
-      status:
-        | ProductPageStatus.Loading
-        | ProductPageStatus.Error
-        | ProductPageStatus.NotFound;
+      status: Status.Loading | Status.Error | Status.NotFound;
     }
   | {
-      status: ProductPageStatus.Success;
+      status: Status.Success;
       data: Product;
     };
 
 export const useProductPage = () => {
   const [searchParams] = useSearchParams();
   const [state, setState] = useState<State>({
-    status: ProductPageStatus.Loading,
+    status: Status.Loading,
   });
 
   useEffect(() => {
     const productId = searchParams.get("id");
     if (!productId) {
       setState({
-        status: ProductPageStatus.NotFound,
+        status: Status.NotFound,
       });
       return;
     }
@@ -40,18 +37,18 @@ export const useProductPage = () => {
       (data) => {
         if (!data) {
           setState({
-            status: ProductPageStatus.NotFound,
+            status: Status.NotFound,
           });
         } else {
           setState({
-            status: ProductPageStatus.Success,
+            status: Status.Success,
             data,
           });
         }
       },
       (error) => {
         setState({
-          status: ProductPageStatus.Error,
+          status: Status.Error,
         });
       }
     );

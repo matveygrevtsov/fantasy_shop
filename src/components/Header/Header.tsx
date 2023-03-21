@@ -1,43 +1,50 @@
 import { observer } from "mobx-react-lite";
-import { UserStatus } from "../../constants/enums";
+import { UserRole, UserStatus } from "../../constants/enums";
 import { texts } from "../../constants/texts";
 import { store } from "../../store";
+import { RouteConfig, UserState } from "../../types";
 import { HeaderDesktop } from "./components/HeaderDesktop/HeaderDesktop";
 import { HeaderMobile } from "./components/HeaderMobile/HeaderMobile";
 
 import s from "./Header.module.css";
 
-export interface RouteConfig {
-  title: string;
-  path: string;
-}
-
 export const Header = observer(() => {
-  const userStatus = store.getUserStatus();
-  const routes = getRoutes(userStatus);
-  const isUserLoggedIn =
-    userStatus === UserStatus.Admin || userStatus === UserStatus.Client;
+  const userState = store.getUserState();
+  const routes = getRoutes(userState);
+  const isUserAuthorized = userState.status === UserStatus.Authorized;
 
   return (
     <>
       <HeaderMobile
         routes={routes}
-        isUserLoggedIn={isUserLoggedIn}
+        displayLogOutButton={isUserAuthorized}
         className={s.headerMobile}
       />
       <HeaderDesktop
         routes={routes}
-        isUserLoggedIn={isUserLoggedIn}
+        displayLogOutButton={isUserAuthorized}
         className={s.headerDesktop}
       />
     </>
   );
 });
 
-function getRoutes(userStatus: UserStatus): RouteConfig[] {
-  if (userStatus === UserStatus.Loading) return [];
-  const availableRoutes: RouteConfig[] = texts.Header.navigation.filter(
-    ({ availableFor }) => availableFor[userStatus]
-  );
-  return availableRoutes;
+function getRoutes(userState: UserState): RouteConfig[] {
+  const { adminRoutes, clientRoutes, guestRoutes } = texts.Header;
+
+  if (
+    userState.status === UserStatus.Authorized &&
+    userState.data.role === UserRole.Admin
+  ) {
+    return adminRoutes;
+  }
+
+  if (
+    userState.status === UserStatus.Authorized &&
+    userState.data.role === UserRole.Client
+  ) {
+    return clientRoutes;
+  }
+
+  return guestRoutes;
 }

@@ -2,10 +2,7 @@ import { User } from "firebase/auth";
 import { makeAutoObservable } from "mobx";
 import { UserStatus } from "./constants/enums";
 import { firebaseApi } from "./firebaseApi";
-
-type UserState = {
-  status: UserStatus;
-};
+import { UserState } from "./types";
 
 class Store {
   private userState: UserState;
@@ -20,29 +17,41 @@ class Store {
     );
   }
 
-  public getUserStatus(): UserStatus {
-    return this.userState.status;
+  /**
+   * Возвращает стейт юзера.
+   */
+  public getUserState(): UserState {
+    return this.userState;
   }
 
+  /**
+   * Данный метод вызывается в следующих кейсах:
+   * 1. Юзер нажал кнопку разлогина
+   * 2. Юзер ввёл свои данные на странице "sign-in" и отправил
+   * 3. Юзер ввёл свои данные на странице "sign-up" и отправил
+   * 4. Юзер перезагрузил страницу
+   * 5. Юзер открыл приложение в новой вкладке
+   */
   private handleUserAuthStatusChange(user: User | null) {
     if (!user) {
       this.userState = {
-        status: UserStatus.Guest,
+        status: UserStatus.Unauthorized,
       };
       return;
     }
     this.userState = {
       status: UserStatus.Loading,
     };
-    firebaseApi.getUserStatus(user).then(
-      (status) => {
+    firebaseApi.fetchUserData(user).then(
+      (data) => {
         this.userState = {
-          status,
+          status: UserStatus.Authorized,
+          data,
         };
       },
-      (error) => {
+      () => {
         this.userState = {
-          status: UserStatus.Error,
+          status: UserStatus.Unauthorized,
         };
       }
     );

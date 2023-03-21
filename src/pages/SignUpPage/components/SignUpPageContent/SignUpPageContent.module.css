@@ -1,0 +1,13 @@
+.root {
+  max-width: var(--container-s-max-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  margin: 2rem auto 0;
+}

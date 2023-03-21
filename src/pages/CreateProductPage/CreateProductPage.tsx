@@ -1,48 +1,26 @@
 import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { RoutePath, UserStatus } from "../../constants/enums";
-import { texts } from "../../constants/texts";
+import { RoutePath, UserRole, UserStatus } from "../../constants/enums";
 import { store } from "../../store";
-import { CreateProductForm } from "./components/CreateProductForm/CreateProductForm";
-import {
-  CreateProductPageStatus,
-  useCreateProductPage,
-} from "./useCreateProductPage";
-
-import s from "./CreateProductPage.module.css";
+import { CreateProductPageContent } from "./components/CreateProductPageContent/CreateProductPageContent";
 
 export const CreateProductPage = observer(() => {
-  const { handleSubmit, state, handleStartTyping } = useCreateProductPage();
-  const userStatus = store.getUserStatus();
-  const { createProductFailText, createProductSuccessText } =
-    texts.CreateProductPage;
+  const userState = store.getUserState();
 
+  // Если юзер авторизован и имеет роль админа - отображаем контент.
   if (
-    userStatus === UserStatus.Loading ||
-    state.status === CreateProductPageStatus.Loading
+    userState.status === UserStatus.Authorized &&
+    userState.data.role === UserRole.Admin
   ) {
+    return <CreateProductPageContent />;
+  }
+
+  // Если юзер ещё не загрузился - отображаем прелоадер.
+  if (userState.status === UserStatus.Loading) {
     return <Preloader />;
   }
 
-  if (userStatus !== UserStatus.Admin) {
-    return <Navigate to={RoutePath.MainPage} />;
-  }
-
-  return (
-    <div className={s.root}>
-      <h2 className={s.title}>{texts.CreateProductPage.title}</h2>
-      <CreateProductForm
-        onSubmit={handleSubmit}
-        className={s.createProductForm}
-        onStartTyping={handleStartTyping}
-      />
-      {state.status === CreateProductPageStatus.Error && (
-        <span className={s.error}>{createProductFailText}</span>
-      )}
-      {state.status === CreateProductPageStatus.Success && (
-        <span className={s.success}>{createProductSuccessText}</span>
-      )}
-    </div>
-  );
+  // По умолчанию редиректим на главную.
+  return <Navigate to={RoutePath.MainPage} />;
 });

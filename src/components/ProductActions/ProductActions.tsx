@@ -1,15 +1,9 @@
-import { AddToCartFormStatus, useProductActions } from "./useProductActions";
 import { observer } from "mobx-react-lite";
-import { Preloader } from "../Preloader/Preloader";
-import { texts } from "../../constants/texts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { Product } from "../../types";
 import { store } from "../../store";
-import { RoutePath, UserStatus } from "../../constants/enums";
-import { Link } from "react-router-dom";
-
-import s from "./ProductActions.module.css";
+import { UserRole, UserStatus } from "../../constants/enums";
+import { AddProductToCartForm } from "../AddProductToCartForm/AddProductToCartForm";
+import { EditProductLink } from "../EditProductLink/EditProductLink";
 
 interface Props {
   product: Product;
@@ -17,72 +11,24 @@ interface Props {
 }
 
 export const ProductActions = observer(({ product, className }: Props) => {
-  const { state, register, formState, submit, handleClick } =
-    useProductActions(product);
-  const {
-    addToCartText,
-    editText,
-    addToCartSuccessText,
-    addToCartErrorText,
-    currency,
-    productIsOutOfStock,
-  } = texts.ProductActions;
+  const userState = store.getUserState();
 
-  if (!product.amount) {
-    return <h2 className={s.productIsOutOfStock}>{productIsOutOfStock}</h2>;
-  }
-
+  // Если юзер авторизован и имеет права администратора - отображаем ссылку на редактирование продукта.
   if (
-    state === AddToCartFormStatus.Loading ||
-    store.getUserStatus() === UserStatus.Loading
+    userState.status === UserStatus.Authorized &&
+    userState.data.role === UserRole.Admin
   ) {
     return (
       <div className={className}>
-        <Preloader />
+        <EditProductLink product={product} />
       </div>
     );
   }
 
-  if (store.getUserStatus() === UserStatus.Admin) {
-    return (
-      <Link
-        to={`${RoutePath.EditProductPage}?id=${product.id}`}
-        className={s.editProductLink}
-      >
-        {editText}
-      </Link>
-    );
-  }
-
+  // По умолчанию отображаем форму добавления продукта в корзину.
   return (
-    <div className={className} onClick={handleClick}>
-      <h2 className={s.price}>
-        {product.price}
-        {currency}
-      </h2>
-      <form onSubmit={submit} className={s.form}>
-        <input
-          {...register("amount")}
-          type="number"
-          min="1"
-          max="100"
-          className={s.amountInput}
-        />
-        <button
-          disabled={!formState.isValid}
-          className={s.button}
-          type="submit"
-        >
-          <FontAwesomeIcon icon={faCartShopping} className={s.cartIcon} />
-          {addToCartText}
-        </button>
-      </form>
-      {state === AddToCartFormStatus.Error && (
-        <span className={s.error}>{addToCartErrorText}</span>
-      )}
-      {state === AddToCartFormStatus.Success && (
-        <span className={s.success}>{addToCartSuccessText}</span>
-      )}
+    <div className={className}>
+      <AddProductToCartForm product={product} />
     </div>
   );
 });
