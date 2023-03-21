@@ -5,9 +5,16 @@ import {
   signInWithEmailAndPassword,
   User,
 } from "firebase/auth";
-import { UserRole } from "../../constants/enums";
-import { getDatabase, ref as databaseRef, child, get } from "firebase/database";
-import { UserData } from "../../types";
+import { UserRole, UserStatus } from "../../constants/enums";
+import {
+  getDatabase,
+  ref as databaseRef,
+  child,
+  get,
+  set,
+} from "firebase/database";
+import { ClientData, UserData } from "../../types";
+import { store } from "../../store";
 
 interface Props {
   auth: Auth;
@@ -18,6 +25,9 @@ export class UserAuthController {
 
   constructor({ auth }: Props) {
     this.auth = auth;
+    onAuthStateChanged(this.auth, (user) =>
+      this.handleUserAuthStatusChange(user)
+    );
   }
 
   /**
@@ -81,11 +91,82 @@ export class UserAuthController {
 
     const dbRef = databaseRef(getDatabase());
     const snapshot = await get(child(dbRef, `users/${uid}`));
-    if (!snapshot.exists()) throw new Error("Не удалось скачать данные юзера");
+    if (snapshot.exists()) {
+      return {
+        role,
+        uid,
+        ...snapshot.val(),
+      };
+    }
+
+    const clientData: ClientData = {
+      cart: {},
+    };
 
     return {
       role,
-      ...snapshot.val(),
+      uid,
+      clientData,
     };
+  }
+
+  /**
+   * Добавляет продукт в корзину.
+   * @param productId - айдишник продукта.
+   * @param amount - количество такого продукта, которое будет добавлено в корзину.
+   */
+  public async addProductToCart(
+    productId: string,
+    amount: number
+  ): Promise<void> {
+    const userState = store.getUserState();
+    if (
+      !(
+        userState.status === UserStatus.Authorized &&
+        userState.data.role === UserRole.Client
+      )
+    )
+      return;
+
+    const database = getDatabase();
+    const { uid } = userState.data;
+    const prevAmount = userState.data.clientData.cart[productId] || 0;
+    await set(
+      databaseRef(database, `users/${uid}/cart/${productId}`),
+      prevAmount + amount
+    );
+  }
+
+  /**
+   * Данный метод вызывается в следующих кейсах:
+   * 1. Юзер нажал кнопку разлогина
+   * 2. Юзер ввёл свои данные на странице "sign-in" и отправил
+   * 3. Юзер ввёл свои данные на странице "sign-up" и отправил
+   * 4. Юзер перезагрузил страницу
+   * 5. Юзер открыл приложение в новой вкладке
+   */
+  private handleUserAuthStatusChange(user: User | null) {
+    if (!user) {
+      store.setUserState({
+        status: UserStatus.Unauthorized,
+      });
+      return;
+    }
+    store.setUserState({
+      status: UserStatus.Loading,
+    });
+    this.fetchUserData(user).then(
+      (data) => {
+        store.setUserState({
+          status: UserStatus.Authorized,
+          data,
+        });
+      },
+      () => {
+        store.setUserState({
+          status: UserStatus.Unauthorized,
+        });
+      }
+    );
   }
 }
