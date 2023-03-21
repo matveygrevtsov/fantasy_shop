@@ -11,12 +11,3 @@
 .form {
   margin: 2rem auto 0;
 }
-
-.linkToSignUpPage {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  margin: 15px auto 0;
-  text-align: center;
-  color: var(--color-blue);
-}
