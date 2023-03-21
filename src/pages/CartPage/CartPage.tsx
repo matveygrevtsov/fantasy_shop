@@ -8,19 +8,6 @@ import { CartPageContent } from "./components/CartPageContent/CartPageContent";
 export const CartPage = observer(() => {
   const userState = store.getUserState();
 
-  // Если юзер не авторизован - редиректим на главную.
-  if (userState.status === UserStatus.Unauthorized) {
-    return <Navigate to={RoutePath.MainPage} />;
-  }
-
-  // Если юзер авторизован, но не имеет роль клиента - редиректим на главную.
-  if (
-    userState.status === UserStatus.Authorized &&
-    userState.data.role !== UserRole.Client
-  ) {
-    return <Navigate to={RoutePath.MainPage} />;
-  }
-
   // Если юзер авторизован и имеет роль клиента - отображаем контент.
   if (
     userState.status === UserStatus.Authorized &&
@@ -29,6 +16,11 @@ export const CartPage = observer(() => {
     return <CartPageContent />;
   }
 
-  // По умолчанию отображаем прелоадер.
-  return <Preloader />;
+  // Если юзер ещё не загрузился - отображаем прелоадер
+  if (userState.status === UserStatus.Loading) {
+    return <Preloader />;
+  }
+
+  // По умолчанию редиректим на главную.
+  return <Navigate to={RoutePath.MainPage} />;
 });

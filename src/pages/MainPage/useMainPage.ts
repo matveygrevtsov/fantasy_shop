@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Product, SearchProductsParams } from "../../types";
 import { firebaseApi } from "../../firebaseApi";
 
-export enum StateStatus {
+export enum Status {
   Loading = "Loading",
   Error = "Error",
   Success = "Success",
@@ -13,16 +13,16 @@ export enum StateStatus {
 
 type State =
   | {
-      status: StateStatus.Loading | StateStatus.Error;
+      status: Status.Loading | Status.Error;
     }
   | {
-      status: StateStatus.Success;
+      status: Status.Success;
       products: Product[];
     };
 
 export function useMainPage() {
   const [state, setState] = useState<State>({
-    status: StateStatus.Loading,
+    status: Status.Loading,
   });
   const navigate = useNavigate();
   const [searchParamsEncoded, setSearchParamsEncoded] = useSearchParams();
@@ -34,18 +34,18 @@ export function useMainPage() {
 
   useEffect(() => {
     setState({
-      status: StateStatus.Loading,
+      status: Status.Loading,
     });
     mapSearchParamsEncodedToProducts(
       searchParamsEncoded.get("searchParamsEncoded") || ""
     ).then(
       (products) => {
         setState({
-          status: StateStatus.Success,
+          status: Status.Success,
           products,
         });
       },
-      () => setState({ status: StateStatus.Error })
+      () => setState({ status: Status.Error })
     );
   }, [searchParamsEncoded, setSearchParamsEncoded]);
 

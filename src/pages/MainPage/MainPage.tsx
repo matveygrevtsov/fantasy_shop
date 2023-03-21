@@ -1,5 +1,5 @@
 import { SearchProductsForm } from "./components/SearchProductsForm/SearchProductsForm";
-import { StateStatus, useMainPage } from "./useMainPage";
+import { Status, useMainPage } from "./useMainPage";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { ProductsList } from "../../components/ProductsList/ProductsList";
 
@@ -11,14 +11,14 @@ export const MainPage = () => {
   return (
     <div className={s.root}>
       <SearchProductsForm onSubmit={handleSubmit} />
-      {state.status === StateStatus.Loading && <Preloader />}
-      {state.status === StateStatus.Error && (
+      {state.status === Status.Loading && <Preloader />}
+      {state.status === Status.Error && (
         <h2>
           При скачивании списка продуктов произошла ошибка. Пожалуйста,
           повторите позже.
         </h2>
       )}
-      {state.status === StateStatus.Success && (
+      {state.status === Status.Success && (
         <ProductsList products={state.products} className={s.productsList} />
       )}
     </div>
