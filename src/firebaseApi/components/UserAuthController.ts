@@ -135,6 +135,7 @@ export class UserAuthController {
       databaseRef(database, `users/${uid}/cart/${productId}`),
       prevAmount + amount
     );
+    store.addProduct(productId, amount);
   }
 
   /**

@@ -11,9 +11,9 @@ export const CartPage = observer(() => {
   // Если юзер авторизован и имеет роль клиента - отображаем контент.
   if (
     userState.status === UserStatus.Authorized &&
-    userState.data.role !== UserRole.Client
+    userState.data.role === UserRole.Client
   ) {
-    return <CartPageContent />;
+    return <CartPageContent cart={userState.data.clientData.cart} />;
   }
 
   // Если юзер ещё не загрузился - отображаем прелоадер
