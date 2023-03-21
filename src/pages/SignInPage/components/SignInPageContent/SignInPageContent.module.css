@@ -1,4 +1,4 @@
-.container {
+.root {
   max-width: var(--container-s-max-width);
   margin: 0 auto;
   padding: var(--container-padding);
@@ -12,27 +12,11 @@
   margin: 2rem auto 0;
 }
 
-.linkToSignInPage {
+.linkToSignUpPage {
   display: block;
   width: 100%;
   max-width: 300px;
-  margin: 1rem auto 0;
+  margin: 15px auto 0;
   text-align: center;
   color: var(--color-blue);
-}
-
-.signUpAgainButton {
-  margin-top: 1rem;
-}
-
-.signUpAgainButton {
-  margin-top: 2rem;
-  width: 100%;
-}
-
-.error {
-  display: block;
-  margin-top: 1rem;
-  text-align: center;
-  color: var(--color-red);
 }

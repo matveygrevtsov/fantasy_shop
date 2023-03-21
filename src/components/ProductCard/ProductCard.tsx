@@ -31,7 +31,7 @@ export const ProductCard = ({ info, className }: Props) => {
           </div>
         </div>
       </Link>
-      <ProductActions className={s.productActions} product={info} />
+      <ProductActions product={info} className={s.productActions} />
     </div>
   );
 };

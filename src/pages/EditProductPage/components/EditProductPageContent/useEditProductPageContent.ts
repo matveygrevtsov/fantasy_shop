@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { firebaseApi } from "../../firebaseApi";
-import { Product } from "../../types";
+import { firebaseApi } from "../../../../firebaseApi";
+import { Product } from "../../../../types";
 
-export enum EditProductPageStatus {
+export enum Status {
   Loading = "Loading",
   Error = "Error",
   NotFound = "NotFound",
@@ -12,27 +12,27 @@ export enum EditProductPageStatus {
 
 type State =
   | {
-      status:
-        | EditProductPageStatus.Loading
-        | EditProductPageStatus.Error
-        | EditProductPageStatus.NotFound;
+      status: Status.Loading | Status.Error | Status.NotFound;
     }
   | {
-      status: EditProductPageStatus.Success;
+      status: Status.Success;
       productDataToEdit: Product;
     };
 
-export const useEditProductPage = () => {
+export const useEditProductPageContent = () => {
   const [state, setState] = useState<State>({
-    status: EditProductPageStatus.Loading,
+    status: Status.Loading,
   });
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
+    setState({
+      status: Status.Loading,
+    });
     const productId = searchParams.get("id");
     if (!productId) {
       setState({
-        status: EditProductPageStatus.NotFound,
+        status: Status.NotFound,
       });
       return;
     }
@@ -40,22 +40,22 @@ export const useEditProductPage = () => {
       (productDataToEdit) => {
         if (!productDataToEdit) {
           setState({
-            status: EditProductPageStatus.NotFound,
+            status: Status.NotFound,
           });
         } else {
           setState({
-            status: EditProductPageStatus.Success,
+            status: Status.Success,
             productDataToEdit,
           });
         }
       },
       (error) => {
         setState({
-          status: EditProductPageStatus.Error,
+          status: Status.Error,
         });
       }
     );
-  }, []);
+  }, [searchParams]);
 
   return { state };
 };

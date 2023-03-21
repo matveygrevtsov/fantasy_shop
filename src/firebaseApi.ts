@@ -12,8 +12,13 @@ import {
   User,
 } from "firebase/auth";
 import { firebaseConfig } from "./constants/firebase";
-import { CreateProductFormData, Product, SearchProductsParams } from "./types";
-import { UserStatus } from "./constants/enums";
+import {
+  CreateProductFormData,
+  Product,
+  SearchProductsParams,
+  UserData,
+} from "./types";
+import { UserRole } from "./constants/enums";
 import {
   getStorage,
   ref as storeRef,
@@ -75,16 +80,6 @@ class FirebaseApi {
     onUserAuthStateChanged: (user: User | null) => void
   ): void {
     onAuthStateChanged(this.auth, onUserAuthStateChanged);
-  }
-
-  /**
-   * Возвращает статус юзера.
-   * @param user - данные пользователя.
-   */
-  public async getUserStatus(user: User | null): Promise<UserStatus> {
-    if (!user) return UserStatus.Guest;
-    const idTokenResult = await user.getIdTokenResult();
-    return !!idTokenResult.claims.admin ? UserStatus.Admin : UserStatus.Client;
   }
 
   /**
@@ -156,6 +151,18 @@ class FirebaseApi {
       ...product,
       images,
     });
+  }
+
+  /**
+   * Скачивает дополнительные данные юзера из базы данных.
+   * @param user - данные юзера.
+   */
+  public async fetchUserData(user: User): Promise<UserData> {
+    const idTokenResult = await user.getIdTokenResult();
+    const role = !!idTokenResult.claims.admin
+      ? UserRole.Admin
+      : UserRole.Client;
+    return { role };
   }
 }
 

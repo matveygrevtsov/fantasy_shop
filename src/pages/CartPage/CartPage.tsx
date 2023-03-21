@@ -1,19 +1,34 @@
 import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { RoutePath, UserStatus } from "../../constants/enums";
+import { RoutePath, UserRole, UserStatus } from "../../constants/enums";
 import { store } from "../../store";
+import { CartPageContent } from "./components/CartPageContent/CartPageContent";
 
 export const CartPage = observer(() => {
-  const userStatus = store.getUserStatus();
+  const userState = store.getUserState();
 
-  if (userStatus === UserStatus.Loading) {
-    return <Preloader />;
-  }
-
-  if (userStatus !== UserStatus.Client) {
+  // Если юзер не авторизован - редиректим на главную.
+  if (userState.status === UserStatus.Unauthorized) {
     return <Navigate to={RoutePath.MainPage} />;
   }
 
-  return <h2>CartPage</h2>;
+  // Если юзер авторизован, но не имеет роль клиента - редиректим на главную.
+  if (
+    userState.status === UserStatus.Authorized &&
+    userState.data.role !== UserRole.Client
+  ) {
+    return <Navigate to={RoutePath.MainPage} />;
+  }
+
+  // Если юзер авторизован и имеет роль клиента - отображаем контент.
+  if (
+    userState.status === UserStatus.Authorized &&
+    userState.data.role !== UserRole.Client
+  ) {
+    return <CartPageContent />;
+  }
+
+  // По умолчанию отображаем прелоадер.
+  return <Preloader />;
 });

@@ -8,17 +8,15 @@ interface AddToCartFormData {
   amount: number;
 }
 
-export enum AddToCartFormStatus {
+export enum Status {
   Init = "Init",
   Loading = "Loading",
   Error = "Error",
   Success = "Success",
 }
 
-export function useProductActions(product: Product) {
-  const [state, setState] = useState<AddToCartFormStatus>(
-    AddToCartFormStatus.Init
-  );
+export function useAddProductToCartForm(product: Product) {
+  const [status, setStatus] = useState<Status>(Status.Init);
 
   const formSchema = object().shape({
     amount: number().required("").positive("").typeError(""),
@@ -34,21 +32,18 @@ export function useProductActions(product: Product) {
   });
 
   const handleClick = () => {
-    if (
-      state === AddToCartFormStatus.Error ||
-      state === AddToCartFormStatus.Success
-    ) {
-      setState(AddToCartFormStatus.Init);
+    if (status === Status.Error || status === Status.Success) {
+      setStatus(Status.Init);
     }
   };
 
   const submit = handleSubmit(({ amount }) => {
-    setState(AddToCartFormStatus.Loading);
+    setStatus(Status.Loading);
     // TODO: Заменить моки на настоящую функцию.
     new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-      setState(AddToCartFormStatus.Success);
+      setStatus(Status.Success);
     });
   });
 
-  return { state, register, formState, submit, handleClick };
+  return { status, register, formState, submit, handleClick };
 }

@@ -5,7 +5,6 @@ import {
   RoutePath,
   SignInFormInput,
   SignUpFormInput,
-  UserStatus,
 } from "./enums";
 
 export const texts = {
@@ -77,61 +76,38 @@ export const texts = {
   },
   Header: {
     logoutText: "Выйти",
-    navigation: [
+    guestRoutes: [
       {
         title: "Главная",
         path: RoutePath.MainPage,
-        availableFor: {
-          [UserStatus.Loading]: true,
-          [UserStatus.Error]: true,
-          [UserStatus.Guest]: true,
-          [UserStatus.Client]: true,
-          [UserStatus.Admin]: true,
-        },
-      },
-      {
-        title: "Корзина",
-        path: RoutePath.CartPage,
-        availableFor: {
-          [UserStatus.Loading]: false,
-          [UserStatus.Error]: false,
-          [UserStatus.Guest]: false,
-          [UserStatus.Client]: true,
-          [UserStatus.Admin]: false,
-        },
       },
       {
         title: "Регистрация",
         path: RoutePath.SignUpPage,
-        availableFor: {
-          [UserStatus.Loading]: true,
-          [UserStatus.Error]: true,
-          [UserStatus.Guest]: true,
-          [UserStatus.Client]: false,
-          [UserStatus.Admin]: false,
-        },
       },
       {
         title: "Вход",
         path: RoutePath.SignInPage,
-        availableFor: {
-          [UserStatus.Loading]: true,
-          [UserStatus.Error]: true,
-          [UserStatus.Guest]: true,
-          [UserStatus.Client]: false,
-          [UserStatus.Admin]: false,
-        },
+      },
+    ],
+    clientRoutes: [
+      {
+        title: "Главная",
+        path: RoutePath.MainPage,
+      },
+      {
+        title: "Корзина",
+        path: RoutePath.CartPage,
+      },
+    ],
+    adminRoutes: [
+      {
+        title: "Главная",
+        path: RoutePath.MainPage,
       },
       {
         title: "Создать продукт",
         path: RoutePath.CreateProductPage,
-        availableFor: {
-          [UserStatus.Loading]: false,
-          [UserStatus.Error]: false,
-          [UserStatus.Guest]: false,
-          [UserStatus.Client]: false,
-          [UserStatus.Admin]: true,
-        },
       },
     ],
   },

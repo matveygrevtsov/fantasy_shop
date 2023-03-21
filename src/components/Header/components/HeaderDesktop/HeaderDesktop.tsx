@@ -1,20 +1,20 @@
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
 import { Logo } from "../../../Logo/Logo";
-import { RouteConfig } from "../../Header";
+import { RouteConfig } from "../../../../types";
 import cn from "classnames";
 
 import s from "./HeaderDesktop.module.css";
 
 interface Props {
   className?: string;
-  isUserLoggedIn: boolean;
+  displayLogOutButton: boolean;
   routes: RouteConfig[];
 }
 
 export const HeaderDesktop: React.FC<Props> = ({
   className,
-  isUserLoggedIn,
+  displayLogOutButton,
   routes,
 }) => {
   return (
@@ -33,7 +33,7 @@ export const HeaderDesktop: React.FC<Props> = ({
             </NavLink>
           </li>
         ))}
-        {isUserLoggedIn && <LogOut className={s.logout} />}
+        {displayLogOutButton && <LogOut className={s.logout} />}
       </ul>
     </header>
   );

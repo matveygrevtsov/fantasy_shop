@@ -5,19 +5,19 @@ import { useHeaderMobile } from "./useHeaderMobile";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
-import { RouteConfig } from "../../Header";
 import { texts } from "../../../../constants/texts";
+import { RouteConfig } from "../../../../types";
 
 import s from "./HeaderMobile.module.css";
 
 interface Props {
   routes: RouteConfig[];
-  isUserLoggedIn: boolean;
+  displayLogOutButton: boolean;
   className?: string;
 }
 
 export const HeaderMobile: React.FC<Props> = observer(
-  ({ className, routes, isUserLoggedIn }) => {
+  ({ className, routes, displayLogOutButton }) => {
     const { ref, isOpened, handleClick, handleClose } = useHeaderMobile();
     const { logoutText } = texts.Header;
 
@@ -46,7 +46,7 @@ export const HeaderMobile: React.FC<Props> = observer(
                 </NavLink>
               </li>
             ))}
-            {isUserLoggedIn && (
+            {displayLogOutButton && (
               <li className={s.li}>
                 <LogOut className={s.logout} text={logoutText} />
               </li>
