@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { UserStatus } from "./constants/enums";
+import { UserRole, UserStatus } from "./constants/enums";
 import { UserState } from "./types";
 
 class Store {
@@ -24,6 +24,22 @@ class Store {
    */
   public setUserState(userState: UserState) {
     this.userState = userState;
+  }
+
+  /**
+   * Добавляет товар в корзину.
+   * @param productId Айдишник продукта.
+   * @param amount Количество такого продукта.
+   */
+  public addProduct(productId: string, amount: number) {
+    const { userState } = this;
+    if (
+      userState.status === UserStatus.Authorized &&
+      userState.data.role === UserRole.Client
+    ) {
+      const { cart } = userState.data.clientData;
+      cart[productId] = cart[productId] ? cart[productId] + amount : amount;
+    }
   }
 }
 
