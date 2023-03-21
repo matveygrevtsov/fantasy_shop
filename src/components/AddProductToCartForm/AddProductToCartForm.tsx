@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { texts } from "../../constants/texts";
 import { Product } from "../../types";
+import { Preloader } from "../Preloader/Preloader";
 import cn from "classnames";
 
 import s from "./AddProductToCartForm.module.css";
-import { Preloader } from "../Preloader/Preloader";
 
 interface Props {
   product: Product;
