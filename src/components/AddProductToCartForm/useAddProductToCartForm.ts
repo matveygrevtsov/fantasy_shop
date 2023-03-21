@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { number, object } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Product } from "../../types";
+import { firebaseApi } from "../../firebaseApi/firebaseApi";
 
 interface AddToCartFormData {
   amount: number;
@@ -39,10 +40,11 @@ export function useAddProductToCartForm(product: Product) {
 
   const submit = handleSubmit(({ amount }) => {
     setStatus(Status.Loading);
-    // TODO: Заменить моки на настоящую функцию.
-    new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-      setStatus(Status.Success);
-    });
+    firebaseApi.userAuthController
+      .addProductToCart(product.id, amount)
+      .then(() => {
+        setStatus(Status.Success);
+      });
   });
 
   return { status, register, formState, submit, handleClick };

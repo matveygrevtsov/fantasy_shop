@@ -30,6 +30,11 @@ export interface SearchProductsParams {
   productsSortType: ProductsSortType;
 }
 
+// Информация о клиенте
+export interface ClientData {
+  cart: Record<string, number>; // Объект, у которого ключи - айдишники продуктов, а соответствующие значения - количество таких продуктов, которые были добавлены в корзину.
+}
+
 // В таком формате данные юзера скачиваются из базы данных.
 export type UserData =
   | {
@@ -37,8 +42,8 @@ export type UserData =
     }
   | {
       role: UserRole.Client;
-      cart: string[];
-      orders: string[];
+      uid: string;
+      clientData: ClientData;
     };
 
 // В таком формате данные юзера хранятся в сторе.
