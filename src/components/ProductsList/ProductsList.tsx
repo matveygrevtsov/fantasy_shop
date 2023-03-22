@@ -13,7 +13,7 @@ export function ProductsList({ products, className }: Props) {
   return (
     <ul className={cn(s.root, className)}>
       {products.map((productInfo) => (
-        <ProductCard key={productInfo.id} info={productInfo} />
+        <ProductCard key={productInfo.id} product={productInfo} />
       ))}
     </ul>
   );
