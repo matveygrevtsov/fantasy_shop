@@ -14,15 +14,18 @@ import {
 } from "firebase/database";
 import { store } from "../../store";
 import { UserRole, UserData, ClientData, UserStatus } from "../../types/user";
+import { ProductsController } from "./ProductsController";
 
 interface Props {
   auth: Auth;
 }
 
 export class UserAuthController {
+  private readonly productsController: ProductsController;
   private readonly auth: Auth;
 
   constructor({ auth }: Props) {
+    this.productsController = new ProductsController();
     this.auth = auth;
     onAuthStateChanged(this.auth, (user) =>
       this.handleUserAuthStatusChange(user)
@@ -69,31 +72,32 @@ export class UserAuthController {
   }
 
   /**
-   * Скачивает дополнительные данные юзера из базы данных.
+   * Скачивает данные клиента из базы данных.
+   * @param uid - айдишник клиента.
+   */
+  public async fetchClientData(uid: string): Promise<ClientData> {
+    const dbRef = databaseRef(getDatabase());
+    const snapshot = await get(child(dbRef, `users/${uid}`));
+    return snapshot.exists()
+      ? {
+          uid,
+          ...snapshot.val(),
+        }
+      : {
+          uid,
+          cart: {},
+        };
+  }
+
+  /**
+   * Скачивает данные юзера из базы данных.
    * @param user - данные юзера.
    */
   public async fetchUserData(user: User): Promise<UserData> {
     const { uid } = user;
     const role = await this.getUserRole(user);
-
     if (role === UserRole.Admin) return { role };
-
-    const dbRef = databaseRef(getDatabase());
-    const snapshot = await get(child(dbRef, `users/${uid}`));
-    if (snapshot.exists()) {
-      return {
-        role,
-        clientData: {
-          uid,
-          ...snapshot.val(),
-        },
-      };
-    }
-
-    const clientData: ClientData = {
-      uid,
-      cart: {},
-    };
+    const clientData = await this.fetchClientData(uid);
 
     return {
       role,
@@ -114,11 +118,16 @@ export class UserAuthController {
   ): Promise<void> {
     const database = getDatabase();
     const prevAmount = clientData.cart[productId] || 0;
-    await set(
+    const newAmount = prevAmount + amount;
+    const increaseAmountInCartPromise = set(
       databaseRef(database, `users/${clientData.uid}/cart/${productId}`),
-      prevAmount + amount
+      newAmount
     );
-    store.addProduct(productId, amount);
+    await Promise.all([
+      increaseAmountInCartPromise,
+      this.productsController.decreaseAmount(productId, amount),
+    ]);
+    store.addProduct(productId, newAmount);
   }
 
   /**
