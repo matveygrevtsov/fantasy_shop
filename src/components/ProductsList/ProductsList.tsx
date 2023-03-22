@@ -1,4 +1,4 @@
-import { Product } from "../../types";
+import { Product } from "../../types/product";
 import { ProductCard } from "../ProductCard/ProductCard";
 import cn from "classnames";
 

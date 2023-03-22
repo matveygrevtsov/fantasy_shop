@@ -1,4 +1,4 @@
-import { Cart } from "../../../../types";
+import { Cart } from "../../../../types/user";
 
 import s from "./CartPageContent.module.css";
 

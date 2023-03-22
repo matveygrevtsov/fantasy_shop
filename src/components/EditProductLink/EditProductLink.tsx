@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { RoutePath } from "../../constants/enums";
-import { Product } from "../../types";
-import cn from "classnames";
 import { texts } from "../../constants/texts";
+import { Product } from "../../types/product";
+import { RoutePath } from "../../types/routing";
+import cn from "classnames";
 
 import s from "./EditProductLink.module.css";
 

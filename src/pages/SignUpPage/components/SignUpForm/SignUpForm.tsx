@@ -1,7 +1,7 @@
 import { useSignUpForm } from "./useSignUpForm";
 import { texts } from "../../../../constants/texts";
-import { SignUpFormInput } from "../../../../constants/enums";
 import { Button } from "../../../../components/Button/Button";
+import { SignUpFormInput } from "../../../../types/auth";
 import cn from "classnames";
 
 import s from "./SignUpForm.module.css";

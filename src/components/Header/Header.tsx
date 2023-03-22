@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
-import { UserRole, UserStatus } from "../../constants/enums";
 import { texts } from "../../constants/texts";
 import { store } from "../../store";
-import { RouteConfig, UserState } from "../../types";
+import { RouteConfig } from "../../types/routing";
+import { UserStatus, UserState, UserRole } from "../../types/user";
 import { HeaderDesktop } from "./components/HeaderDesktop/HeaderDesktop";
 import { HeaderMobile } from "./components/HeaderMobile/HeaderMobile";
 

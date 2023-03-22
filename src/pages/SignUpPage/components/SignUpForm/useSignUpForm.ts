@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { object, string, ref } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SignUpFormInput } from "../../../../constants/enums";
 import { texts } from "../../../../constants/texts";
 import { PASSWORD_MIN_LENGTH } from "../../../../constants/authFormValidation";
+import { SignUpFormInput } from "../../../../types/auth";
 
 export interface FormValues {
   [SignUpFormInput.Email]: string;

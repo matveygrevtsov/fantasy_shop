@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDragon } from "@fortawesome/free-solid-svg-icons";
-import { RoutePath } from "../../constants/enums";
+import { RoutePath } from "../../types/routing";
 import cn from "classnames";
 
 import s from "./Logo.module.css";

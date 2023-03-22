@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { RoutePath, UserRole, UserStatus } from "../../constants/enums";
 import { store } from "../../store";
+import { RoutePath } from "../../types/routing";
+import { UserStatus, UserRole } from "../../types/user";
 import { CartPageContent } from "./components/CartPageContent/CartPageContent";
 
 export const CartPage = observer(() => {

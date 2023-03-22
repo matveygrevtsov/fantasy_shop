@@ -1,5 +1,5 @@
 import { ProductActions } from "../../../../components/ProductActions/ProductActions";
-import { Product } from "../../../../types";
+import { Product } from "../../../../types/product";
 
 import s from "./ProductContent.module.css";
 

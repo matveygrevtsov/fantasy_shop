@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
 import { Logo } from "../../../Logo/Logo";
-import { RouteConfig } from "../../../../types";
+import { RouteConfig } from "../../../../types/routing";
 import cn from "classnames";
 
 import s from "./HeaderDesktop.module.css";

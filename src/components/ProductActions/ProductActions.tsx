@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
-import { Product } from "../../types";
 import { store } from "../../store";
-import { UserRole, UserStatus } from "../../constants/enums";
-import { AddProductToCartForm } from "../AddProductToCartForm/AddProductToCartForm";
 import { EditProductLink } from "../EditProductLink/EditProductLink";
+import { AddProductToCartAction } from "../AddProductToCartAction/AddProductToCartAction";
+import { Product } from "../../types/product";
+import { UserRole, UserStatus } from "../../types/user";
 
 interface Props {
   product: Product;
@@ -25,10 +25,18 @@ export const ProductActions = observer(({ product, className }: Props) => {
     );
   }
 
-  // По умолчанию отображаем форму добавления продукта в корзину.
+  // По умолчанию отображаем компоненту добавления продукта в корзину.
   return (
     <div className={className}>
-      <AddProductToCartForm product={product} />
+      <AddProductToCartAction
+        product={product}
+        clientData={
+          userState.status === UserStatus.Authorized &&
+          userState.data.role === UserRole.Client
+            ? userState.data.clientData
+            : undefined
+        }
+      />
     </div>
   );
 });

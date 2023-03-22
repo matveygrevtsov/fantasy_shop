@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
-import { CreateProductFormData } from "../../../../types";
+import { CreateProductFormData } from "../../../../types/product";
 
 export enum Status {
   WaitingForUserInput = "WaitingForUserInput",

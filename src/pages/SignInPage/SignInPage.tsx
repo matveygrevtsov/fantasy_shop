@@ -2,8 +2,9 @@ import { observer } from "mobx-react-lite";
 import { store } from "../../store";
 import { Navigate } from "react-router-dom";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { RoutePath, UserRole, UserStatus } from "../../constants/enums";
 import { SignInPageContent } from "./components/SignInPageContent/SignInPageContent";
+import { RoutePath } from "../../types/routing";
+import { UserRole, UserStatus } from "../../types/user";
 
 export const SignInPage = observer(() => {
   const userState = store.getUserState();

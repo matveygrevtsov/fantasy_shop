@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { UserRole, UserStatus } from "./constants/enums";
-import { UserState } from "./types";
+import { UserRole, UserState, UserStatus } from "./types/user";
 
 class Store {
   private userState: UserState;
@@ -24,6 +23,7 @@ class Store {
    */
   public setUserState(userState: UserState) {
     this.userState = userState;
+    console.log(userState);
   }
 
   /**

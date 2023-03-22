@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { array, object, string, number } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { texts } from "../../../../constants/texts";
-import { CreateProductFormData } from "../../../../types";
+import { CreateProductFormData } from "../../../../types/product";
 
 export function useCreateProductsForm(
   onSubmit: (product: CreateProductFormData) => void

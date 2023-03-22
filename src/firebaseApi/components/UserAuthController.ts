@@ -5,7 +5,6 @@ import {
   signInWithEmailAndPassword,
   User,
 } from "firebase/auth";
-import { UserRole, UserStatus } from "../../constants/enums";
 import {
   getDatabase,
   ref as databaseRef,
@@ -13,8 +12,8 @@ import {
   get,
   set,
 } from "firebase/database";
-import { ClientData, UserData } from "../../types";
 import { store } from "../../store";
+import { UserRole, UserData, ClientData, UserStatus } from "../../types/user";
 
 interface Props {
   auth: Auth;
@@ -58,16 +57,6 @@ export class UserAuthController {
   }
 
   /**
-   * Подписывает указанную функцию на изменение статуса авторизации юзера.
-   * @param onUserAuthStateChanged - функция, которая будет вызываться при изменении статуса авторизации юзера.
-   */
-  public observeUserAuthStatus(
-    onUserAuthStateChanged: (user: User | null) => void
-  ): void {
-    onAuthStateChanged(this.auth, onUserAuthStateChanged);
-  }
-
-  /**
    * Возвращает роль юзера.
    * @param user - данные юзера.
    */
@@ -94,45 +83,39 @@ export class UserAuthController {
     if (snapshot.exists()) {
       return {
         role,
-        uid,
-        ...snapshot.val(),
+        clientData: {
+          uid,
+          ...snapshot.val(),
+        },
       };
     }
 
     const clientData: ClientData = {
+      uid,
       cart: {},
     };
 
     return {
       role,
-      uid,
       clientData,
     };
   }
 
   /**
    * Добавляет продукт в корзину.
+   * @param clientData - данные покупателя.
    * @param productId - айдишник продукта.
    * @param amount - количество такого продукта, которое будет добавлено в корзину.
    */
   public async addProductToCart(
+    clientData: ClientData,
     productId: string,
     amount: number
   ): Promise<void> {
-    const userState = store.getUserState();
-    if (
-      !(
-        userState.status === UserStatus.Authorized &&
-        userState.data.role === UserRole.Client
-      )
-    )
-      return;
-
     const database = getDatabase();
-    const { uid } = userState.data;
-    const prevAmount = userState.data.clientData.cart[productId] || 0;
+    const prevAmount = clientData.cart[productId] || 0;
     await set(
-      databaseRef(database, `users/${uid}/cart/${productId}`),
+      databaseRef(database, `users/${clientData.uid}/cart/${productId}`),
       prevAmount + amount
     );
     store.addProduct(productId, amount);
