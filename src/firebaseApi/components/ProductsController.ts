@@ -68,26 +68,28 @@ export class ProductsController {
         ...productInfo,
       })
     );
-    return products;
+    return products.filter(({ amount }) => amount > 0);
   }
 
   /**
    * Уменьшает наличие продукта на заданное значение (в силу того, что он был добавлен в корзину какому-нибудь юзеру). Возвращает true, если amount не больше, чем количество товара в наличии и false в противном случае.
    * @param productId - айдишник продукта.
-   * @param amount - количество такого товара.
+   * @param expectedAmount - количество такого товара.
    */
-  public async decreaseAmount(productId: string, amount: number) {
+  public async decreaseAmount(
+    productId: string,
+    expectedAmount: number
+  ): Promise<number> {
     const productData = await this.fetchProductData(productId);
     if (!productData) {
       throw new Error(
         "Попытка уменьшить наличие товара, который не был найден в базе данных."
       );
     }
-    const delta = productData.amount - amount;
-    const result = delta >= 0;
-    const newAmount = Math.max(0, delta);
+    const realAmount = Math.min(productData.amount, expectedAmount);
+    const newAmount = productData.amount - realAmount;
     const database = getDatabase();
     await set(databaseRef(database, `products/${productId}/amount`), newAmount);
-    return result;
+    return realAmount;
   }
 }

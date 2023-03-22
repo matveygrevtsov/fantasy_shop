@@ -7,16 +7,22 @@ export enum Status {
   Init = "Init",
   Loading = "Loading",
   Error = "Error",
+  PartialSuccess = "PartialSuccess",
   Success = "Success",
+  SoldOut = "SoldOut",
 }
 
 type State =
   | {
-      status: Status.Init | Status.Loading | Status.Success;
+      status: Status.Init | Status.Loading | Status.Success | Status.SoldOut;
     }
   | {
       status: Status.Error;
       errorMessage: string;
+    }
+  | {
+      status: Status.PartialSuccess;
+      realAmount: number;
     };
 
 export function useAddProductToCart(product: Product, clientData?: ClientData) {
@@ -33,7 +39,7 @@ export function useAddProductToCart(product: Product, clientData?: ClientData) {
     }
   };
 
-  const handleSubmit = (amount: number) => {
+  const handleSubmit = async (expectedAmount: number) => {
     if (!clientData) {
       alert(
         "Пожалуйста, авторизуйтесь, чтобы иметь возможность добавлять товары в корзину."
@@ -43,13 +49,31 @@ export function useAddProductToCart(product: Product, clientData?: ClientData) {
     setState({
       status: Status.Loading,
     });
-    firebaseApi.userAuthController
-      .addProductToCart(clientData, product.id, amount)
-      .then(
-        () => setState({ status: Status.Success }),
-        (error) =>
-          setState({ status: Status.Error, errorMessage: error.message })
+    try {
+      const realAmount = await firebaseApi.userAuthController.addProductToCart(
+        clientData,
+        product.id,
+        expectedAmount
       );
+      if (realAmount === 0) {
+        setState({
+          status: Status.SoldOut,
+        });
+        return;
+      }
+      if (realAmount < expectedAmount) {
+        setState({
+          status: Status.PartialSuccess,
+          realAmount,
+        });
+        return;
+      }
+      setState({
+        status: Status.Success,
+      });
+    } catch (error: any) {
+      setState({ status: Status.Error, errorMessage: error.message });
+    }
   };
 
   return { state, handleSubmit, handleClick };
