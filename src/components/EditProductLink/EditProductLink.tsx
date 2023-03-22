@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { texts } from "../../constants/texts";
 import { Product } from "../../types/product";
@@ -17,7 +19,8 @@ export const EditProductLink: React.FC<Props> = ({ product, className }) => {
 
   return (
     <Link to={path} className={cn(s.root, className)}>
-      {editText}
+      <span>{editText}</span>
+      <FontAwesomeIcon icon={faEdit} className={s.editIcon} />
     </Link>
   );
 };
