@@ -109,25 +109,26 @@ export class UserAuthController {
    * Добавляет продукт в корзину.
    * @param clientData - данные покупателя.
    * @param productId - айдишник продукта.
-   * @param amount - количество такого продукта, которое будет добавлено в корзину.
+   * @param expectedAmount - ожидаемое количество такого продукта, которое будет добавлено в корзину.
    */
   public async addProductToCart(
     clientData: ClientData,
     productId: string,
-    amount: number
-  ): Promise<void> {
+    expectedAmount: number
+  ): Promise<number> {
     const database = getDatabase();
+    const realAmount = await this.productsController.decreaseAmount(
+      productId,
+      expectedAmount
+    );
     const prevAmount = clientData.cart[productId] || 0;
-    const newAmount = prevAmount + amount;
-    const increaseAmountInCartPromise = set(
+    const newAmount = prevAmount + realAmount;
+    await set(
       databaseRef(database, `users/${clientData.uid}/cart/${productId}`),
       newAmount
     );
-    await Promise.all([
-      increaseAmountInCartPromise,
-      this.productsController.decreaseAmount(productId, amount),
-    ]);
     store.addProduct(productId, newAmount);
+    return realAmount;
   }
 
   /**

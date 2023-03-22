@@ -23,8 +23,13 @@ export const AddProductToCart: React.FC<Props> = ({
     product,
     clientData
   );
-  const { addToCartSuccessText, addToCartErrorText, currency } =
-    texts.ProductActions;
+  const {
+    addToCartSuccessText,
+    addToCartErrorText,
+    currency,
+    addToCartPartialSuccessText,
+    addToCartSoldOutText,
+  } = texts.ProductActions;
   const rootClassName = cn(s.root, className);
 
   if (state.status === Status.Loading) {
@@ -52,6 +57,15 @@ export const AddProductToCart: React.FC<Props> = ({
       )}
       {state.status === Status.Success && (
         <div className={s.success}>{addToCartSuccessText}</div>
+      )}
+      {state.status === Status.PartialSuccess && (
+        <div className={s.success}>
+          {addToCartPartialSuccessText}
+          {state.realAmount}
+        </div>
+      )}
+      {state.status === Status.SoldOut && (
+        <div className={s.error}>{addToCartSoldOutText}</div>
       )}
     </div>
   );
