@@ -1,12 +1,12 @@
 import { Preloader } from "../../components/Preloader/Preloader";
-import { ProductContent } from "./components/ProductContent/ProductContent";
+import { ProductPageContent } from "./components/ProductPageContent/ProductPageContent";
 import { Status, useProductPage } from "./useProductPage";
 
 export const ProductPage = () => {
   const { state } = useProductPage();
 
   if (state.status === Status.Success) {
-    return <ProductContent {...state.data} />;
+    return <ProductPageContent product={state.product} />;
   }
 
   if (state.status === Status.Error) {

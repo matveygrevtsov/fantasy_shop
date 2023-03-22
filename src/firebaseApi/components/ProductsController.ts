@@ -47,7 +47,10 @@ export class ProductsController {
       return undefined;
     }
     const product = snapshot.val();
-    return product;
+    return {
+      ...product,
+      id: productId,
+    };
   }
 
   /**

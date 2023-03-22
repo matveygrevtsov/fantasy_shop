@@ -1,9 +1,13 @@
 import { ProductActions } from "../../../../components/ProductActions/ProductActions";
 import { Product } from "../../../../types/product";
 
-import s from "./ProductContent.module.css";
+import s from "./ProductPageContent.module.css";
 
-export const ProductContent: React.FC<Product> = (product) => {
+interface Props {
+  product: Product;
+}
+
+export const ProductPageContent: React.FC<Props> = ({ product }) => {
   return (
     <div className={s.root}>
       <div className={s.slider}>

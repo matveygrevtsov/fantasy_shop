@@ -16,7 +16,7 @@ type State =
     }
   | {
       status: Status.Success;
-      data: Product;
+      product: Product;
     };
 
 export const useProductPage = () => {
@@ -34,15 +34,15 @@ export const useProductPage = () => {
       return;
     }
     firebaseApi.productsController.fetchProductData(productId).then(
-      (data) => {
-        if (!data) {
+      (product) => {
+        if (!product) {
           setState({
             status: Status.NotFound,
           });
         } else {
           setState({
             status: Status.Success,
-            data,
+            product,
           });
         }
       },
