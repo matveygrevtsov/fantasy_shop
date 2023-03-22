@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { store } from "../../store";
 import { EditProductLink } from "../EditProductLink/EditProductLink";
-import { AddProductToCartAction } from "../AddProductToCartAction/AddProductToCartAction";
+import { AddProductToCart } from "../AddProductToCart/AddProductToCart";
 import { Product } from "../../types/product";
 import { UserRole, UserStatus } from "../../types/user";
 
@@ -28,7 +28,7 @@ export const ProductActions = observer(({ product, className }: Props) => {
   // По умолчанию отображаем компоненту добавления продукта в корзину.
   return (
     <div className={className}>
-      <AddProductToCartAction
+      <AddProductToCart
         product={product}
         clientData={
           userState.status === UserStatus.Authorized &&

@@ -1,7 +1,7 @@
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { texts } from "../../constants/texts";
 import { useAddProductToCartForm } from "./useAddProductToCartForm";
+import { texts } from "../../../../constants/texts";
 
 import s from "./AddProductToCartForm.module.css";
 

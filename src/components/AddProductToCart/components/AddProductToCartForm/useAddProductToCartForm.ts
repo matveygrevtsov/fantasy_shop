@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { number, object } from "yup";
-import { texts } from "../../constants/texts";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { texts } from "../../../../constants/texts";
 
 export const useAddProductToCartForm = (onSubmit: (amount: number) => void) => {
   const { productInvalidAmount, productAmountLimit } = texts.ProductActions;
