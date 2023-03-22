@@ -24,11 +24,11 @@ export const AddProductToCart: React.FC<Props> = ({
     clientData
   );
   const {
-    addToCartSuccessText,
     addToCartErrorText,
-    currency,
-    addToCartPartialSuccessText,
     addToCartSoldOutText,
+    addToCartPartialSuccessText,
+    addToCartSuccessText,
+    currency,
   } = texts.ProductActions;
   const rootClassName = cn(s.root, className);
 
