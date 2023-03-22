@@ -1,9 +1,9 @@
 import cn from "classnames";
-import { Product } from "../../types";
 import { Link } from "react-router-dom";
-import { RoutePath } from "../../constants/enums";
 import { ProductActions } from "../ProductActions/ProductActions";
 import TextTruncate from "react-text-truncate";
+import { Product } from "../../types/product";
+import { RoutePath } from "../../types/routing";
 
 import s from "./ProductCard.module.css";
 

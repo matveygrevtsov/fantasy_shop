@@ -1,6 +1,5 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
-import { RoutePath } from "./constants/enums";
 import { CartPage } from "./pages/CartPage/CartPage";
 import { CreateProductPage } from "./pages/CreateProductPage/CreateProductPage";
 import { EditProductPage } from "./pages/EditProductPage/EditProductPage";
@@ -8,6 +7,7 @@ import { MainPage } from "./pages/MainPage/MainPage";
 import { ProductPage } from "./pages/ProductPage/ProductPage";
 import { SignInPage } from "./pages/SignInPage/SignInPage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
+import { RoutePath } from "./types/routing";
 
 function App() {
   return (

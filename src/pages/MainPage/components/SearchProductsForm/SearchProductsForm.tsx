@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { DropDown } from "../../../../components/DropDown/DropDown";
 import { texts } from "../../../../constants/texts";
-import { SearchProductsParams } from "../../../../types";
 import { Controller } from "react-hook-form";
+import { SearchProductsParams } from "../../../../types/product";
 import Select from "react-select";
 
 import s from "./SearchProductsForm.module.css";

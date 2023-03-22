@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { array, number, object, string } from "yup";
 import { texts } from "../../../../constants/texts";
-import { CreateProductFormData, Product } from "../../../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Product, CreateProductFormData } from "../../../../types/product";
 
 export const useEditProductForm = (productDataToEdit: Product) => {
   const { validationErrors } = texts.CreateProductPage.CreateProductForm;

@@ -2,8 +2,9 @@ import { observer } from "mobx-react-lite";
 import { Navigate } from "react-router-dom";
 import { store } from "../../store";
 import { Preloader } from "../../components/Preloader/Preloader";
-import { RoutePath, UserRole, UserStatus } from "../../constants/enums";
 import { SignUpPageContent } from "./components/SignUpPageContent/SignUpPageContent";
+import { RoutePath } from "../../types/routing";
+import { UserRole, UserStatus } from "../../types/user";
 
 export const SignUpPage = observer(() => {
   const userState = store.getUserState();

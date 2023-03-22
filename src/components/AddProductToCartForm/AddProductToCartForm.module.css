@@ -1,13 +1,5 @@
-.root {
-}
-
 .form {
   display: flex;
-  margin-top: 0.5rem;
-}
-
-.price {
-  font-size: 1.25rem;
 }
 
 .amountInput {
@@ -50,21 +42,11 @@
   color: var(--color-white);
 }
 
-.message {
-  display: block;
-  margin-top: 0.5rem;
-}
-
-.success {
-  composes: message;
-  color: var(--color-green);
-}
-
-.error {
-  composes: message;
-  color: var(--color-red);
-}
-
 .cartIcon {
   margin-right: 0.5rem;
+}
+
+.validationErrorMessage {
+  color: var(--color-red);
+  margin-top: 0.5rem;
 }

@@ -1,0 +1,24 @@
+.root {
+}
+
+.price {
+  font-size: 1.25rem;
+}
+
+.message {
+  margin-top: 0.5rem;
+}
+
+.success {
+  composes: message;
+  color: var(--color-green);
+}
+
+.error {
+  composes: message;
+  color: var(--color-red);
+}
+
+.addProductToCartForm {
+  margin-top: 0.5rem;
+}

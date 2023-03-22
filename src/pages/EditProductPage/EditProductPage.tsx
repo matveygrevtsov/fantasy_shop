@@ -1,9 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { store } from "../../store";
-import { RoutePath, UserRole, UserStatus } from "../../constants/enums";
 import { Navigate } from "react-router-dom";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { EditProductPageContent } from "./components/EditProductPageContent/EditProductPageContent";
+import { UserRole, UserStatus } from "../../types/user";
+import { RoutePath } from "../../types/routing";
 
 export const EditProductPage = observer(() => {
   const userState = store.getUserState();

@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { LogOut } from "../../../LogOut/LogOut";
 import { texts } from "../../../../constants/texts";
-import { RouteConfig } from "../../../../types";
+import { RouteConfig } from "../../../../types/routing";
 
 import s from "./HeaderMobile.module.css";
 

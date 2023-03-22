@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
-import { Product } from "../../../../types";
+import { Product } from "../../../../types/product";
 
 export enum Status {
   Loading = "Loading",

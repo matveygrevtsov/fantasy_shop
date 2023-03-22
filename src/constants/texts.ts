@@ -1,11 +1,10 @@
 import {
   FirebaseErrors,
-  ProductCategory,
-  ProductsSortType,
-  RoutePath,
   SignInFormInput,
   SignUpFormInput,
-} from "./enums";
+} from "../types/auth";
+import { ProductCategory, ProductsSortType } from "../types/product";
+import { RoutePath } from "../types/routing";
 
 export const texts = {
   FirebaseErrors: {
@@ -143,6 +142,8 @@ export const texts = {
     editText: "Редактировать",
     currency: "₽",
     productIsOutOfStock: "К сожалению, товар закончился",
+    productInvalidAmount: "Введено невалидное количество товара",
+    productAmountLimit: "К сожалению, в наличии нет такого количества товара",
   },
   ProductCategorySelect: {
     title: "Категории",

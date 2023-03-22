@@ -1,8 +1,3 @@
-import {
-  CreateProductFormData,
-  Product,
-  SearchProductsParams,
-} from "../../types";
 import { v4 } from "uuid";
 import {
   getDatabase,
@@ -12,6 +7,11 @@ import {
   child,
 } from "firebase/database";
 import { FilesController } from "./FilesController";
+import {
+  CreateProductFormData,
+  Product,
+  SearchProductsParams,
+} from "../../types/product";
 
 export class ProductsController {
   private readonly filesController: FilesController;

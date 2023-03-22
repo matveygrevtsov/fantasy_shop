@@ -3,8 +3,8 @@ import { ImagesUploader } from "../../../../components/ImagesUploader/ImagesUplo
 import { Button } from "../../../../components/Button/Button";
 import { texts } from "../../../../constants/texts";
 import { Controller } from "react-hook-form";
-import { CreateProductFormData } from "../../../../types";
 import Select from "react-select";
+import { CreateProductFormData } from "../../../../types/product";
 import cn from "classnames";
 
 import s from "./CreateProductForm.module.css";

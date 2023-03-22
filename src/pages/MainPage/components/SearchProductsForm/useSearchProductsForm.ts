@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
-import { ProductsSortType } from "../../../../constants/enums";
-import { SearchProductsParams } from "../../../../types";
+import {
+  SearchProductsParams,
+  ProductsSortType,
+} from "../../../../types/product";
 
 export function useSearchProductsForm(
   onSubmit: (searchProductsFormState: SearchProductsParams) => void

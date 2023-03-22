@@ -1,4 +1,3 @@
-import { Product } from "../../../../types";
 import cn from "classnames";
 import { useEditProductForm } from "./useEditProductForm";
 import { Controller } from "react-hook-form";
@@ -6,6 +5,7 @@ import Select from "react-select";
 import { texts } from "../../../../constants/texts";
 import { ImagesUploader } from "../../../../components/ImagesUploader/ImagesUploader";
 import { Button } from "../../../../components/Button/Button";
+import { Product } from "../../../../types/product";
 
 import s from "./EditProductForm.module.css";
 

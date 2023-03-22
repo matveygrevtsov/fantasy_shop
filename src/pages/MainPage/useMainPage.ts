@@ -1,9 +1,13 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { decodeBase64, encodeBase64 } from "../../utils/base64";
-import { ProductCategory, ProductsSortType } from "../../constants/enums";
 import { useEffect, useState } from "react";
-import { Product, SearchProductsParams } from "../../types";
 import { firebaseApi } from "../../firebaseApi/firebaseApi";
+import {
+  Product,
+  SearchProductsParams,
+  ProductsSortType,
+  ProductCategory,
+} from "../../types/product";
 
 export enum Status {
   Loading = "Loading",
