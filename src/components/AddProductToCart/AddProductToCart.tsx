@@ -1,12 +1,12 @@
-import { Status, useAddProductToCartAction } from "./useAddProductToCartAction";
+import { Status, useAddProductToCart } from "./useAddProductToCart";
 import { texts } from "../../constants/texts";
 import { Preloader } from "../Preloader/Preloader";
-import { AddProductToCartForm } from "../AddProductToCartForm/AddProductToCartForm";
-import cn from "classnames";
 import { Product } from "../../types/product";
 import { ClientData } from "../../types/user";
+import { AddProductToCartForm } from "./components/AddProductToCartForm/AddProductToCartForm";
+import cn from "classnames";
 
-import s from "./AddProductToCartAction.module.css";
+import s from "./AddProductToCart.module.css";
 
 interface Props {
   product: Product;
@@ -14,12 +14,12 @@ interface Props {
   className?: string;
 }
 
-export const AddProductToCartAction: React.FC<Props> = ({
+export const AddProductToCart: React.FC<Props> = ({
   product,
   clientData,
   className,
 }) => {
-  const { state, handleSubmit, handleClick } = useAddProductToCartAction(
+  const { state, handleSubmit, handleClick } = useAddProductToCart(
     product,
     clientData
   );

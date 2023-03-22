@@ -19,10 +19,7 @@ type State =
       errorMessage: string;
     };
 
-export function useAddProductToCartAction(
-  product: Product,
-  clientData?: ClientData
-) {
+export function useAddProductToCart(product: Product, clientData?: ClientData) {
   const [state, setState] = useState<State>({
     status: Status.Init,
   });
