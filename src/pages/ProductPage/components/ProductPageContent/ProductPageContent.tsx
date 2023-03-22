@@ -8,8 +8,6 @@ interface Props {
 }
 
 export const ProductPageContent: React.FC<Props> = ({ product }) => {
-  console.log(product);
-
   return (
     <div className={s.root}>
       <div className={s.slider}>
