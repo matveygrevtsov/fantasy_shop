@@ -65,17 +65,25 @@ export const EditProductForm: React.FC<Props> = ({
         <Controller
           name="productCategories"
           control={control}
-          render={({ field: { onChange } }) => (
-            <Select
-              placeholder={texts.ProductCategorySelect.title}
-              onChange={(selectedOptions) =>
-                onChange(selectedOptions.map(({ value }) => value))
-              }
-              options={texts.ProductCategorySelect.options}
-              isMulti
-              className={s.productCategoriesSelect}
-            />
-          )}
+          render={({ field: { onChange } }) => {
+            const { options } = texts.ProductCategorySelect;
+            const defaultValue = options.filter(({ value }) =>
+              productDataToEdit.productCategories.includes(value)
+            );
+
+            return (
+              <Select
+                defaultValue={defaultValue}
+                placeholder={texts.ProductCategorySelect.title}
+                onChange={(selectedOptions) =>
+                  onChange(selectedOptions.map(({ value }) => value))
+                }
+                options={options}
+                isMulti
+                className={s.productCategoriesSelect}
+              />
+            );
+          }}
         />
       </div>
 
