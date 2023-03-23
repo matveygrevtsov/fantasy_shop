@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Product, CreateProductFormData } from "../../../../types/product";
 
 export const useEditProductForm = (productDataToEdit: Product) => {
-  const { validationErrors } = texts.CreateProductPage.CreateProductForm;
+  const { validationErrors } = texts.EditProductPage.editProductForm;
 
   const formSchema = object().shape({
     name: string().required(validationErrors.emptyName),

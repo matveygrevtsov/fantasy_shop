@@ -73,6 +73,30 @@ export const texts = {
       "К сожалению, не удалось создать продукт. Попробуйте позже.",
     createProductSuccessText: "Продукт успешно создан.",
   },
+  EditProductPage: {
+    title: "Редактировать продукт",
+    productNotFoundText: "Продукт с таким идентификатором не найден",
+    fetchProductDataError:
+      "К сожалению, не удалось скачать данные продукта. Повторите попытку позже.",
+    editProductForm: {
+      labels: {
+        name: "Наименование",
+        description: "Описание",
+        price: "Цена",
+        amount: "Количество в наличии",
+        productCategories: "Категории",
+      },
+      validationErrors: {
+        emptyName: "Наименование не должно быть пустым",
+        emptyDescription: "Описание не должно быть пустым",
+        invalidPrice: "Невалидное значение цены",
+        emptyPrice: "Цена не указана",
+        invalidAmount: "Невалидное количество товара в наличии",
+        emptyAmount: "Количество товара в наличии не указано",
+      },
+      submitText: "Сохранить изменения",
+    },
+  },
   Header: {
     logoutText: "Выйти",
     guestRoutes: [
