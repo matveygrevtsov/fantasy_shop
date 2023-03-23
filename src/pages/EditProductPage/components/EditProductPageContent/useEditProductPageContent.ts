@@ -14,16 +14,15 @@ export enum Status {
 
 type State =
   | {
-      status:
-        | Status.Loading
-        | Status.Error
-        | Status.NotFound
-        | Status.SavingChangesSuccess
-        | Status.SavingChangesError;
+      status: Status.Loading | Status.NotFound | Status.SavingChangesSuccess;
     }
   | {
       status: Status.ProductDataLoadedSuccessfully;
       productDataToEdit: Product;
+    }
+  | {
+      status: Status.Error | Status.SavingChangesError;
+      errorMessage: string;
     };
 
 export const useEditProductPageContent = () => {
@@ -59,6 +58,7 @@ export const useEditProductPageContent = () => {
       (error) => {
         setState({
           status: Status.Error,
+          errorMessage: error.message,
         });
       }
     );
@@ -74,9 +74,10 @@ export const useEditProductPageContent = () => {
           status: Status.SavingChangesSuccess,
         });
       },
-      () => {
+      (error) => {
         setState({
           status: Status.SavingChangesError,
+          errorMessage: error.message,
         });
       }
     );

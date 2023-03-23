@@ -14,6 +14,7 @@ import {
   SearchProductsParams,
 } from "../../types/product";
 import { ImageInStore } from "../../types/store";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 export class ProductsController {
   private readonly filesController: FilesController;
@@ -109,5 +110,28 @@ export class ProductsController {
    * Редактирует информацию о продукте.
    * @param editProductFormValues - данные формы редактирования продукта.
    */
-  public async editProduct(editProductFormValues: EditProductFormValues) {}
+  public async editProduct(editProductFormValues: EditProductFormValues) {
+    const productId = editProductFormValues.id;
+    const idsOfRemovedImages = await this.filesController.removeImages(
+      editProductFormValues.imagesToRemove
+    );
+    const newImages = await this.filesController.uploadImages(
+      editProductFormValues.imagesToUpload
+    );
+    const prevData = await this.fetchProductData(productId);
+    if (!prevData) {
+      throw Error(`Продукт с айдишином ${productId} не найден.`);
+    }
+    const images = [
+      ...prevData.images.filter(({ id }) => !idsOfRemovedImages.includes(id)),
+      ...newImages,
+    ];
+    const newData: Product = {
+      ...prevData,
+      ...editProductFormValues,
+      images,
+    };
+    const database = getDatabase();
+    await set(databaseRef(database, `products/${productId}`), newData);
+  }
 }
