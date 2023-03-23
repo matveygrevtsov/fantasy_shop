@@ -4,13 +4,13 @@ import { Button } from "../../../../components/Button/Button";
 import { texts } from "../../../../constants/texts";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
-import { CreateProductFormData } from "../../../../types/product";
+import { CreateProductFormValues } from "../../../../types/product";
 import cn from "classnames";
 
 import s from "./CreateProductForm.module.css";
 
 interface Props {
-  onSubmit: (product: CreateProductFormData) => void;
+  onSubmit: (product: CreateProductFormValues) => void;
   onStartTyping: () => void;
   className?: string;
 }

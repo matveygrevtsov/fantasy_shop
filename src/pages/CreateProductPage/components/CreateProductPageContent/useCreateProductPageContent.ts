@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
-import { CreateProductFormData } from "../../../../types/product";
+import { CreateProductFormValues } from "../../../../types/product";
 
 export enum Status {
   WaitingForUserInput = "WaitingForUserInput",
@@ -23,7 +23,7 @@ export function useCreateProductPageContent() {
     status: Status.WaitingForUserInput,
   });
 
-  const handleSubmit = (product: CreateProductFormData) => {
+  const handleSubmit = (product: CreateProductFormValues) => {
     setState({
       status: Status.Loading,
     });

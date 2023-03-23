@@ -1,9 +1,9 @@
-import cn from "classnames";
-import { Link } from "react-router-dom";
 import { ProductActions } from "../ProductActions/ProductActions";
-import TextTruncate from "react-text-truncate";
-import { Product } from "../../types/product";
 import { RoutePath } from "../../types/routing";
+import { Product } from "../../types/product";
+import { Link } from "react-router-dom";
+import TextTruncate from "react-text-truncate";
+import cn from "classnames";
 
 import s from "./ProductCard.module.css";
 
@@ -17,7 +17,11 @@ export const ProductCard = ({ product, className }: Props) => {
     <div className={cn(s.root, className)}>
       <Link to={`${RoutePath.ProductPage}?id=${product.id}`}>
         <div className={s.head}>
-          <img alt={product.name} src={product.images[0]} className={s.image} />
+          <img
+            alt={product.name}
+            src={product.images[0]?.src}
+            className={s.image}
+          />
         </div>
         <div className={s.body}>
           <h3 className={s.name}>{product.name}</h3>

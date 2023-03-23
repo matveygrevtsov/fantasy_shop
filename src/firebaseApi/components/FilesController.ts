@@ -5,28 +5,30 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
+import { ImageInStore } from "../../types/store";
 
 export class FilesController {
   constructor() {}
 
   /**
-   * Загружает картинку в хранилище firebase и возвращает соответствующий src.
+   * Загружает картинку в хранилище firebase.
    * @param image - объект, описывающий картинку.
    */
-  public async uploadImage(image: File): Promise<string> {
-    const imageId = v4();
+  public async uploadImage(image: File): Promise<ImageInStore> {
+    const id = v4();
     const storage = getStorage();
-    const storageRef = storeRef(storage, `images/${imageId}`);
+    const storageRef = storeRef(storage, `images/${id}`);
     await uploadBytes(storageRef, image);
     const src = await getDownloadURL(storageRef);
-    return src;
+    return { id, src };
   }
 
   /**
-   * Загружает картинки в хранилище firebase и возвращает соответствующие src.
+   * Загружает картинки в хранилище firebase.
    * @param images - объекты, описывающие картинки.
    */
-  public async uploadImages(images: File[]): Promise<string[]> {
+  public async uploadImages(images: File[]): Promise<ImageInStore[]> {
+    if (images.length === 0) return [];
     const promises = images.map((image) => this.uploadImage(image));
     return Promise.all(promises);
   }

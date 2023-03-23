@@ -78,6 +78,9 @@ export const texts = {
     productNotFoundText: "Продукт с таким идентификатором не найден",
     fetchProductDataError:
       "К сожалению, не удалось скачать данные продукта. Повторите попытку позже.",
+    savingChangesSuccess: "Сохранения успешно изменены",
+    savingChangesError:
+      "Не удалось сохранить изменения. Пожалуйста, повторите попытку позже.",
     editProductForm: {
       labels: {
         name: "Наименование",
@@ -85,6 +88,8 @@ export const texts = {
         price: "Цена",
         amount: "Количество в наличии",
         productCategories: "Категории",
+        deleteImages: "Удалить лишние картинки",
+        addNewImages: "Загрузить новые картинки",
       },
       validationErrors: {
         emptyName: "Наименование не должно быть пустым",

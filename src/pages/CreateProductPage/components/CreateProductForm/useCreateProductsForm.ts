@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { array, object, string, number } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { texts } from "../../../../constants/texts";
-import { CreateProductFormData } from "../../../../types/product";
+import { CreateProductFormValues } from "../../../../types/product";
 
 export function useCreateProductsForm(
-  onSubmit: (product: CreateProductFormData) => void
+  onSubmit: (product: CreateProductFormValues) => void
 ) {
   const { validationErrors } = texts.CreateProductPage.CreateProductForm;
 
@@ -25,7 +25,7 @@ export function useCreateProductsForm(
   });
 
   const { register, handleSubmit, control, formState } =
-    useForm<CreateProductFormData>({
+    useForm<CreateProductFormValues>({
       mode: "onTouched",
       defaultValues: {
         name: "",
@@ -39,7 +39,7 @@ export function useCreateProductsForm(
       resolver: yupResolver(formSchema),
     });
 
-  const submit = handleSubmit((product: CreateProductFormData) =>
+  const submit = handleSubmit((product: CreateProductFormValues) =>
     onSubmit(product)
   );
 

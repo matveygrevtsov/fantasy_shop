@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { firebaseApi } from "../../../../firebaseApi/firebaseApi";
-import { Product } from "../../../../types/product";
+import { EditProductFormValues, Product } from "../../../../types/product";
 
 export enum Status {
   Loading = "Loading",
   Error = "Error",
   NotFound = "NotFound",
-  Success = "Success",
+  ProductDataLoadedSuccessfully = "ProductDataLoadedSuccessfully",
+  SavingChangesSuccess = "SavingChangesSuccess",
+  SavingChangesError = "SavingChangesError",
 }
 
 type State =
   | {
-      status: Status.Loading | Status.Error | Status.NotFound;
+      status:
+        | Status.Loading
+        | Status.Error
+        | Status.NotFound
+        | Status.SavingChangesSuccess
+        | Status.SavingChangesError;
     }
   | {
-      status: Status.Success;
+      status: Status.ProductDataLoadedSuccessfully;
       productDataToEdit: Product;
     };
 
@@ -44,7 +51,7 @@ export const useEditProductPageContent = () => {
           });
         } else {
           setState({
-            status: Status.Success,
+            status: Status.ProductDataLoadedSuccessfully,
             productDataToEdit,
           });
         }
@@ -57,5 +64,23 @@ export const useEditProductPageContent = () => {
     );
   }, [searchParams]);
 
-  return { state };
+  const handleSubmit = (editProductFormValues: EditProductFormValues) => {
+    setState({
+      status: Status.Loading,
+    });
+    firebaseApi.productsController.editProduct(editProductFormValues).then(
+      () => {
+        setState({
+          status: Status.SavingChangesSuccess,
+        });
+      },
+      () => {
+        setState({
+          status: Status.SavingChangesError,
+        });
+      }
+    );
+  };
+
+  return { state, handleSubmit };
 };
