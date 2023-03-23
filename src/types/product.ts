@@ -21,6 +21,7 @@ export interface CreateProductFormValues {
 }
 
 export interface EditProductFormValues {
+  id: string;
   name: string;
   description: string;
   price: number;

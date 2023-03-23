@@ -23,7 +23,7 @@ export const EditProductPageContent = () => {
   if (state.status === Status.SavingChangesError) {
     return (
       <div className={s.root}>
-        <SavingChangesError />
+        <SavingChangesError errorMessage={state.errorMessage} />
       </div>
     );
   }

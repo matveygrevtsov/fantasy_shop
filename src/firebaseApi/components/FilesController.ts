@@ -4,6 +4,7 @@ import {
   ref as storeRef,
   uploadBytes,
   getDownloadURL,
+  deleteObject,
 } from "firebase/storage";
 import { ImageInStore } from "../../types/store";
 
@@ -31,5 +32,18 @@ export class FilesController {
     if (images.length === 0) return [];
     const promises = images.map((image) => this.uploadImage(image));
     return Promise.all(promises);
+  }
+
+  /**
+   * Удаляет картинки из хранилища firebase. Возвращает айдишники удалённых картинок.
+   * @param imagesToRemove - Картинки, которые нужно удалить.
+   */
+  public async removeImages(imagesToRemove: ImageInStore[]): Promise<string[]> {
+    const storage = getStorage();
+    const refs = imagesToRemove.map(({ id }) =>
+      storeRef(storage, `images/${id}`)
+    );
+    await Promise.all(refs.map(deleteObject)); // Удаляем картинки из стора
+    return imagesToRemove.map(({ id }) => id);
   }
 }
