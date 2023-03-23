@@ -21,8 +21,7 @@ export const EditProductForm: React.FC<Props> = ({
   const { register, submit, control, formState, handleStartTyping } =
     useEditProductForm(productDataToEdit);
   const { errors } = formState;
-  const { labels, submitButtonText } =
-    texts.CreateProductPage.CreateProductForm;
+  const { labels, submitText } = texts.EditProductPage.editProductForm;
 
   return (
     <form
@@ -95,7 +94,7 @@ export const EditProductForm: React.FC<Props> = ({
         )}
       />
       <Button disabled={!formState.isValid} className={s.submitButton}>
-        Сохранить изменения
+        {submitText}
       </Button>
     </form>
   );

@@ -1,17 +1,20 @@
 import { EditProductForm } from "../EditProductForm/EditProductForm";
 import { Status, useEditProductPageContent } from "./useEditProductPageContent";
 import { Preloader } from "../../../../components/Preloader/Preloader";
+import { texts } from "../../../../constants/texts";
 
 import s from "./EditProductPageContent.module.css";
 
 export const EditProductPageContent = () => {
   const { state } = useEditProductPageContent();
+  const { title, productNotFoundText, fetchProductDataError } =
+    texts.EditProductPage;
 
   // Если удалось скачать данные продукта по айдишнику, взятому из query-параметра.
   if (state.status === Status.Success) {
     return (
       <div className={s.root}>
-        <h2 className={s.title}>Редактирование продукта</h2>
+        <h2 className={s.title}>{title}</h2>
         <EditProductForm
           productDataToEdit={state.productDataToEdit}
           className={s.form}
@@ -24,7 +27,7 @@ export const EditProductPageContent = () => {
   if (state.status === Status.NotFound) {
     return (
       <div className={s.root}>
-        <span>Продукт с таким айдишником не найден.</span>
+        <span>{productNotFoundText}</span>
       </div>
     );
   }
@@ -33,10 +36,7 @@ export const EditProductPageContent = () => {
   if (state.status === Status.Error) {
     return (
       <div className={s.root}>
-        <span>
-          К сожалению, не удалось скачать данные продукта. Повторите попытку
-          позже.
-        </span>
+        <span>{fetchProductDataError}</span>
       </div>
     );
   }
