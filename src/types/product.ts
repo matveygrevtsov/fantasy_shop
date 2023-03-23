@@ -1,3 +1,5 @@
+import { ImageInStore } from "./store";
+
 export enum ProductCategory {
   Goblins = "Goblins",
   Orks = "Orks",
@@ -9,13 +11,23 @@ export enum ProductsSortType {
   DescendingOrderPrice = "DescendingOrderPrice", // По убыванию цены
 }
 
-export interface CreateProductFormData {
+export interface CreateProductFormValues {
   name: string;
   description: string;
   price: number;
   amount: number;
   productCategories: ProductCategory[];
   images: File[];
+}
+
+export interface EditProductFormValues {
+  name: string;
+  description: string;
+  price: number;
+  amount: number;
+  productCategories: ProductCategory[];
+  imagesToRemove: ImageInStore[];
+  imagesToUpload: File[];
 }
 
 export interface Product {
@@ -25,7 +37,7 @@ export interface Product {
   price: number;
   amount: number;
   productCategories: ProductCategory[];
-  images: string[];
+  images: ImageInStore[];
 }
 
 export interface SearchProductsParams {

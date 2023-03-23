@@ -11,7 +11,11 @@ export const ProductPageContent: React.FC<Props> = ({ product }) => {
   return (
     <div className={s.root}>
       <div className={s.slider}>
-        <img className={s.image} src={product.images[0]} alt={product.name} />
+        <img
+          className={s.image}
+          src={product.images[0]?.src}
+          alt={product.name}
+        />
       </div>
       <div className={s.info}>
         <h1>{product.name}</h1>

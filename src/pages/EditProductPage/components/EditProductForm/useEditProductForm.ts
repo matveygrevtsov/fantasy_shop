@@ -2,9 +2,12 @@ import { useForm } from "react-hook-form";
 import { array, number, object, string } from "yup";
 import { texts } from "../../../../constants/texts";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Product, CreateProductFormData } from "../../../../types/product";
+import { Product, EditProductFormValues } from "../../../../types/product";
 
-export const useEditProductForm = (productDataToEdit: Product) => {
+export const useEditProductForm = (
+  productDataToEdit: Product,
+  onSubmit: (editProductFormValues: EditProductFormValues) => void
+) => {
   const { validationErrors } = texts.EditProductPage.editProductForm;
 
   const formSchema = object().shape({
@@ -23,19 +26,26 @@ export const useEditProductForm = (productDataToEdit: Product) => {
   });
 
   const { register, handleSubmit, control, formState } =
-    useForm<CreateProductFormData>({
+    useForm<EditProductFormValues>({
       mode: "onTouched",
       defaultValues: {
         ...productDataToEdit,
-        images: [],
+        imagesToRemove: [],
+        imagesToUpload: [],
       },
       // @ts-ignore
       resolver: yupResolver(formSchema),
     });
 
-  const submit = handleSubmit((data) => console.log(data));
+  const submit = handleSubmit(onSubmit);
 
   const handleStartTyping = () => console.log();
 
-  return { register, submit, control, formState, handleStartTyping };
+  return {
+    register,
+    handleSubmit: submit,
+    control,
+    formState,
+    handleStartTyping,
+  };
 };

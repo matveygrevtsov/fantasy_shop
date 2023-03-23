@@ -8,10 +8,12 @@ import {
 } from "firebase/database";
 import { FilesController } from "./FilesController";
 import {
-  CreateProductFormData,
+  CreateProductFormValues,
+  EditProductFormValues,
   Product,
   SearchProductsParams,
 } from "../../types/product";
+import { ImageInStore } from "../../types/store";
 
 export class ProductsController {
   private readonly filesController: FilesController;
@@ -24,7 +26,7 @@ export class ProductsController {
    * Записывает данные о продукте в базу данных.
    * @param product - данные продукта из формы создания новых продуктов.
    */
-  public async createProduct(product: CreateProductFormData): Promise<void> {
+  public async createProduct(product: CreateProductFormValues): Promise<void> {
     const productId = v4();
     const database = getDatabase();
     const images = await this.filesController.uploadImages(product.images);
@@ -47,9 +49,11 @@ export class ProductsController {
       return undefined;
     }
     const product = snapshot.val();
+    const images = product.images || [];
     return {
       ...product,
       id: productId,
+      images,
     };
   }
 
@@ -66,10 +70,15 @@ export class ProductsController {
       return [];
     }
     const products = Object.entries(snapshot.val()).map(
-      ([id, productInfo]: any) => ({
-        id,
-        ...productInfo,
-      })
+      ([id, productInfo]: any) => {
+        const images = productInfo.images || [];
+
+        return {
+          ...productInfo,
+          id,
+          images,
+        };
+      }
     );
     return products.filter(({ amount }) => amount > 0);
   }
@@ -95,4 +104,10 @@ export class ProductsController {
     await set(databaseRef(database, `products/${productId}/amount`), newAmount);
     return realAmount;
   }
+
+  /**
+   * Редактирует информацию о продукте.
+   * @param editProductFormValues - данные формы редактирования продукта.
+   */
+  public async editProduct(editProductFormValues: EditProductFormValues) {}
 }
