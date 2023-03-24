@@ -3,6 +3,7 @@ import { texts } from "../../constants/texts";
 import { Preloader } from "../Preloader/Preloader";
 import { Product } from "../../types/product";
 import { ClientData } from "../../types/user";
+import { ProductPrice } from "../ProductPrice/ProductPrice";
 import { AddProductToCartForm } from "./components/AddProductToCartForm/AddProductToCartForm";
 import cn from "classnames";
 
@@ -28,7 +29,6 @@ export const AddProductToCart: React.FC<Props> = ({
     addToCartSoldOutText,
     addToCartPartialSuccessText,
     addToCartSuccessText,
-    currency,
   } = texts.ProductActions;
   const rootClassName = cn(s.root, className);
 
@@ -42,10 +42,7 @@ export const AddProductToCart: React.FC<Props> = ({
 
   return (
     <div onClick={handleClick} className={rootClassName}>
-      <h2 className={s.price}>
-        {product.price}
-        {currency}
-      </h2>
+      <ProductPrice price={product.price} />
       <AddProductToCartForm
         onSubmit={handleSubmit}
         className={s.addProductToCartForm}

@@ -90,7 +90,6 @@ export const EditProductForm: React.FC<Props> = ({
       </div>
 
       <div className={s.formField}>
-        <label className={s.label}>{labels.deleteImages}</label>
         <Controller
           name="imagesToRemove"
           control={control}

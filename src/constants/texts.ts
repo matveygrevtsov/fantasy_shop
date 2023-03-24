@@ -7,6 +7,9 @@ import { ProductCategory, ProductsSortType } from "../types/product";
 import { RoutePath } from "../types/routing";
 
 export const texts = {
+  ImagesRemover: {
+    title: "Удалить лишние картинки",
+  },
   FirebaseErrors: {
     [FirebaseErrors.AuthUserNotFound]: "Пользователь с таким email не найден.",
     [FirebaseErrors.AuthWrongPassword]: "Невалидный пароль.",
@@ -78,9 +81,10 @@ export const texts = {
     productNotFoundText: "Продукт с таким идентификатором не найден",
     fetchProductDataError:
       "К сожалению, не удалось скачать данные продукта. Повторите попытку позже.",
-    savingChangesSuccess: "Сохранения успешно изменены",
+    savingChangesSuccess: "Сохранения успешно изменены.",
     savingChangesError:
       "Не удалось сохранить изменения. Пожалуйста, повторите попытку позже.",
+    viewChangesLink: "Посмотреть изменения на странице продукта.",
     editProductForm: {
       labels: {
         name: "Наименование",
@@ -88,7 +92,6 @@ export const texts = {
         price: "Цена",
         amount: "Количество в наличии",
         productCategories: "Категории",
-        deleteImages: "Удалить лишние картинки",
         addNewImages: "Загрузить новые картинки",
       },
       validationErrors: {

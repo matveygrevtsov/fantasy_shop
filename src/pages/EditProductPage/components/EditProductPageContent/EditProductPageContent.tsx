@@ -15,7 +15,7 @@ export const EditProductPageContent = () => {
   if (state.status === Status.SavingChangesSuccess) {
     return (
       <div className={s.root}>
-        <SavingChangesSuccess />
+        <SavingChangesSuccess productData={state.newProductData} />
       </div>
     );
   }
