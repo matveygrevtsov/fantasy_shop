@@ -2,7 +2,7 @@ import { ImageInStore } from "../../types/store";
 import { useImagesRemover } from "./useImagesRemover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import cn from "classnames";
+import { texts } from "../../constants/texts";
 
 import s from "./ImagesRemover.module.css";
 
@@ -17,22 +17,28 @@ export const ImagesRemover: React.FC<Props> = ({
   onSelect,
   className,
 }) => {
-  const { selectedImages, handleClick, getNotSelectedImages } =
-    useImagesRemover(images, onSelect);
+  const { handleClick, notSelectedImages } = useImagesRemover(images, onSelect);
+
+  if (notSelectedImages.length === 0) {
+    return null;
+  }
 
   return (
-    <ul className={cn(s.root, className)}>
-      {getNotSelectedImages().map((image) => (
-        <li key={image.id} className={s.imageContainer}>
-          <button
-            onClick={() => handleClick(image)}
-            className={s.removeImageButton}
-          >
-            <FontAwesomeIcon icon={faTrashCan} />
-          </button>
-          <img alt="" src={image.src} className={s.image} />
-        </li>
-      ))}
-    </ul>
+    <div className={className}>
+      <label className={s.label}>{texts.ImagesRemover.title}</label>
+      <ul className={s.list}>
+        {notSelectedImages.map((image) => (
+          <li key={image.id} className={s.imageContainer}>
+            <button
+              onClick={() => handleClick(image)}
+              className={s.removeImageButton}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+            <img alt="" src={image.src} className={s.image} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };

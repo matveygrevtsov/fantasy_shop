@@ -18,5 +18,5 @@ export const useImagesRemover = (
     return images.filter(({ id }) => !idsOfSelectedImages.includes(id));
   };
 
-  return { selectedImages, handleClick, getNotSelectedImages };
+  return { handleClick, notSelectedImages: getNotSelectedImages() };
 };

@@ -25,6 +25,7 @@
 }
 
 .descriptionInput {
+  min-height: 10rem;
   composes: input;
   resize: vertical;
 }
@@ -38,7 +39,7 @@
 }
 
 .imagesUploader {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 
 .imagesRemover {
@@ -55,5 +56,5 @@
 }
 
 .productCategoriesSelect {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }

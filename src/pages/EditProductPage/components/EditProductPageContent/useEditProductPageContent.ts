@@ -14,7 +14,7 @@ export enum Status {
 
 type State =
   | {
-      status: Status.Loading | Status.NotFound | Status.SavingChangesSuccess;
+      status: Status.Loading | Status.NotFound;
     }
   | {
       status: Status.ProductDataLoadedSuccessfully;
@@ -23,6 +23,10 @@ type State =
   | {
       status: Status.Error | Status.SavingChangesError;
       errorMessage: string;
+    }
+  | {
+      status: Status.SavingChangesSuccess;
+      newProductData: EditProductFormValues;
     };
 
 export const useEditProductPageContent = () => {
@@ -72,6 +76,7 @@ export const useEditProductPageContent = () => {
       () => {
         setState({
           status: Status.SavingChangesSuccess,
+          newProductData: editProductFormValues,
         });
       },
       (error) => {
