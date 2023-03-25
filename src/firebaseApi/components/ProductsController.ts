@@ -59,6 +59,19 @@ export class ProductsController {
   }
 
   /**
+   * Скачивает данные продуктов по их айдишникам из базы данных и возвращает их.
+   * @param productsIds - айдишники продуктов.
+   */
+  public async fetchProductsData(
+    productsIds: string[]
+  ): Promise<Array<Product | undefined>> {
+    const promises = productsIds.map((productId) =>
+      this.fetchProductData(productId)
+    );
+    return Promise.all(promises);
+  }
+
+  /**
    * Возвращает массив продуктов, соответствующих параметрам поиска.
    * @param searchProductsParams - параметры поиска продуктов.
    */

@@ -38,7 +38,7 @@ class Store {
       userState.data.role === UserRole.Client
     ) {
       const { cart } = userState.data.clientData;
-      cart[productId] = cart[productId] ? cart[productId] + amount : amount;
+      cart[productId] = amount;
     }
   }
 }
