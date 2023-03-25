@@ -32,6 +32,7 @@ a {
   --color-green: #28a745;
   --color-red: #dc3545;
   --color-yellow: #ffc107;
+  --color-gray-light: #f7f7f9;
 
   --tablet-screen-width: 600px;
 }
