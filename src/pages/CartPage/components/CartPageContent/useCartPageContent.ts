@@ -27,7 +27,9 @@ export const useCartPageContent = (cart: Cart) => {
     status: Status.Loading,
   });
 
-  const F = (products: Array<Product | undefined>): Product[] => {
+  const getProductsListInCart = (
+    products: Array<Product | undefined>
+  ): Product[] => {
     return products.reduce<Product[]>((accumulator, product) => {
       if (!product) return accumulator;
       return [
@@ -45,7 +47,7 @@ export const useCartPageContent = (cart: Cart) => {
       (products) => {
         setState({
           status: Status.Success,
-          products: F(products),
+          products: getProductsListInCart(products),
         });
       },
       (error) => {
