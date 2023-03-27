@@ -2,6 +2,7 @@ import { SearchProductsForm } from "./components/SearchProductsForm/SearchProduc
 import { Status, useMainPage } from "./useMainPage";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { ProductsList } from "../../components/ProductsList/ProductsList";
+import { texts } from "../../constants/texts";
 
 import s from "./MainPage.module.css";
 
@@ -13,10 +14,7 @@ export const MainPage = () => {
       <SearchProductsForm onSubmit={handleSubmit} />
       {state.status === Status.Loading && <Preloader />}
       {state.status === Status.Error && (
-        <h2>
-          При скачивании списка продуктов произошла ошибка. Пожалуйста,
-          повторите позже.
-        </h2>
+        <h2>{texts.ProductSearchPage.searchErrorText}</h2>
       )}
       {state.status === Status.Success && (
         <ProductsList products={state.products} className={s.productsList} />

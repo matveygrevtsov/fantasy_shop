@@ -16,13 +16,18 @@ interface Props {
 
 export function SearchProductsForm({ className, onSubmit }: Props) {
   const { register, submit, control } = useSearchProductsForm(onSubmit);
+  const {
+    searchInputPlaceholder,
+    searchProductsParamsTitle,
+    ProductSortTypeSelect,
+  } = texts.ProductSearchPage.ProductsSearchForm;
 
   return (
     <form onSubmit={submit} className={className}>
       <div className={s.searchInputContainer}>
         <input
           {...register("searchString")}
-          placeholder={texts.ProductsSearchForm.searchInputPlaceholder}
+          placeholder={searchInputPlaceholder}
           className={s.searchInput}
           type="search"
         />
@@ -30,10 +35,7 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
-      <DropDown
-        className={s.searchParams}
-        title={texts.ProductsSearchForm.searchProductsParamsTitle}
-      >
+      <DropDown className={s.searchParams} title={searchProductsParamsTitle}>
         <ul className={s.searchParams}>
           <li className={s.searchParam}>
             <label className={s.label}>
@@ -54,17 +56,13 @@ export function SearchProductsForm({ className, onSubmit }: Props) {
             />
           </li>
           <li className={s.searchParam}>
-            <label className={s.label}>
-              {texts.ProductsSearchForm.ProductSortTypeSelect.title}
-            </label>
+            <label className={s.label}>{ProductSortTypeSelect.title}</label>
             <Controller
               name="productsSortType"
               control={control}
               render={({ field: { onChange } }) => (
                 <Select
-                  options={
-                    texts.ProductsSearchForm.ProductSortTypeSelect.options
-                  }
+                  options={ProductSortTypeSelect.options}
                   onChange={onChange}
                 />
               )}

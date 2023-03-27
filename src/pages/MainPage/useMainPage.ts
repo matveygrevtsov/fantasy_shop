@@ -68,9 +68,10 @@ async function mapSearchParamsEncodedToProducts(
 function isSearchParams(obj: any): obj is SearchProductsParams {
   if (!obj || typeof obj !== "object") return false;
   if (typeof obj.searchString !== "string") return false;
+
   if (
-    typeof obj.productCategories !== "object" ||
-    !Array.isArray(obj.productCategories)
+    typeof obj.productsCategories !== "object" ||
+    !Array.isArray(obj.productsCategories)
   ) {
     return false;
   }
@@ -80,7 +81,7 @@ function isSearchParams(obj: any): obj is SearchProductsParams {
   }
 
   if (
-    obj.productCategories.some(
+    obj.productsCategories.some(
       (category: any) => !Object.values(ProductCategory).includes(category)
     )
   ) {
