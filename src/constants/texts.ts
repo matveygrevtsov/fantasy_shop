@@ -145,21 +145,27 @@ export const texts = {
   Footer: {
     copyright: "© 2023 Copyright: Fantasy Shop",
   },
-  ProductsSearchForm: {
-    searchInputPlaceholder: "Введите название продукта",
-    searchProductsParamsTitle: "Фильтры",
-    ProductSortTypeSelect: {
-      title: "Сортировка",
-      options: [
-        {
-          value: ProductsSortType.DescendingOrderPrice,
-          label: "По убыванию цены",
-        },
-        {
-          value: ProductsSortType.AscendingOrderPrice,
-          label: "По возрастанию цены",
-        },
-      ],
+  ProductSearchPage: {
+    searchErrorText:
+      "При скачивании продуктов произошла ошибка. Пожалуйста, повторите попытку позже.",
+    noResultsText:
+      "К сожалению, продуктов, соответствующих параметрам поиска, не найдено.",
+    ProductsSearchForm: {
+      searchInputPlaceholder: "Введите название продукта",
+      searchProductsParamsTitle: "Фильтры",
+      ProductSortTypeSelect: {
+        title: "Сортировка",
+        options: [
+          {
+            value: ProductsSortType.DescendingOrderPrice,
+            label: "По убыванию цены",
+          },
+          {
+            value: ProductsSortType.AscendingOrderPrice,
+            label: "По возрастанию цены",
+          },
+        ],
+      },
     },
   },
   ImagesUploader: {

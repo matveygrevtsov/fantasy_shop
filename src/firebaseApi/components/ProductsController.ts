@@ -11,10 +11,10 @@ import {
   CreateProductFormValues,
   EditProductFormValues,
   Product,
+  ProductsSortType,
   SearchProductsParams,
 } from "../../types/product";
-import { ImageInStore } from "../../types/store";
-import { getStorage, ref, deleteObject } from "firebase/storage";
+import { areTextsOverlap } from "../../utils/strings";
 
 export class ProductsController {
   private readonly filesController: FilesController;
@@ -83,7 +83,7 @@ export class ProductsController {
     if (!snapshot.exists()) {
       return [];
     }
-    const products = Object.entries(snapshot.val()).map(
+    const allProducts: Product[] = Object.entries(snapshot.val()).map(
       ([id, productInfo]: any) => {
         const images = productInfo.images || [];
 
@@ -94,7 +94,34 @@ export class ProductsController {
         };
       }
     );
-    return products.filter(({ amount }) => amount > 0);
+    if (!searchProductsParams) return allProducts;
+    const result = allProducts.filter(({ amount, productCategories, name }) => {
+      if (amount < 1) return false;
+      // Если юзер указал категории в форме поиска, и при этом у продукта нет такой категории, которая содержится в категориях из формы поиска.
+      if (
+        searchProductsParams.productsCategories.length > 0 &&
+        !productCategories.some((category) =>
+          searchProductsParams.productsCategories.includes(category)
+        )
+      ) {
+        return false;
+      }
+      return this.isProductNameMatchSearchString(
+        name,
+        searchProductsParams.searchString
+      );
+    });
+
+    if (
+      searchProductsParams.productsSortType ===
+      ProductsSortType.AscendingOrderPrice
+    ) {
+      result.sort((product1, product2) => product1.price - product2.price);
+    } else {
+      result.sort((product1, product2) => product2.price - product1.price);
+    }
+
+    return result;
   }
 
   /**
@@ -146,5 +173,19 @@ export class ProductsController {
     };
     const database = getDatabase();
     await set(databaseRef(database, `products/${productId}`), newData);
+  }
+
+  /**
+   * Возвращает true, если наименование продукта соответствует поисковой строке и false в противном случае.
+   * @param productName - наименование продукта.
+   * @param searchString - поисковая строка.
+   */
+  private isProductNameMatchSearchString(
+    productName: string,
+    searchString: string
+  ): boolean {
+    if (!searchString) return true;
+    if (!productName) return false;
+    return areTextsOverlap(searchString, productName);
   }
 }

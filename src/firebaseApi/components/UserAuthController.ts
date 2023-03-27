@@ -52,8 +52,6 @@ export class UserAuthController {
 
   /**
    * Разлогинивает юзера.
-   * @param email - Электронная почта.
-   * @param password - Пароль.
    */
   public async signOut(): Promise<void> {
     await this.auth.signOut();
@@ -138,6 +136,7 @@ export class UserAuthController {
    * 3. Юзер ввёл свои данные на странице "sign-up" и отправил
    * 4. Юзер перезагрузил страницу
    * 5. Юзер открыл приложение в новой вкладке
+   * @param user - обновлённые данные пользователя.
    */
   private handleUserAuthStatusChange(user: User | null) {
     if (!user) {
