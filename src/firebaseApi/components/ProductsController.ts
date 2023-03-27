@@ -177,7 +177,8 @@ export class ProductsController {
 
   /**
    * Возвращает true, если наименование продукта соответствует поисковой строке и false в противном случае.
-   * @param editProductFormValues - данные формы редактирования продукта.
+   * @param productName - наименование продукта.
+   * @param searchString - поисковая строка.
    */
   private isProductNameMatchSearchString(
     productName: string,
