@@ -95,22 +95,9 @@ export class ProductsController {
       }
     );
     if (!searchProductsParams) return allProducts;
-    const result = allProducts.filter(({ amount, productCategories, name }) => {
-      if (amount < 1) return false;
-      // Если юзер указал категории в форме поиска, и при этом у продукта нет такой категории, которая содержится в категориях из формы поиска.
-      if (
-        searchProductsParams.productsCategories.length > 0 &&
-        !productCategories.some((category) =>
-          searchProductsParams.productsCategories.includes(category)
-        )
-      ) {
-        return false;
-      }
-      return this.isProductNameMatchSearchString(
-        name,
-        searchProductsParams.searchString
-      );
-    });
+    const result = allProducts.filter((product) =>
+      this.isProductMatchSearchParams(product, searchProductsParams)
+    );
 
     if (
       searchProductsParams.productsSortType ===
@@ -173,6 +160,33 @@ export class ProductsController {
     };
     const database = getDatabase();
     await set(databaseRef(database, `products/${productId}`), newData);
+  }
+
+  /**
+   * Возвращает true, если продукт соответствует параметрам поиска и false в противном случае.
+   * @param product - данные продукта.
+   * @param searchProductsParams - параметры поиска продуктов.
+   */
+  private isProductMatchSearchParams(
+    product: Product,
+    searchProductsParams: SearchProductsParams
+  ): boolean {
+    const { amount, productCategories, name } = product;
+
+    if (amount < 1) return false;
+    // Если юзер указал категории в форме поиска, и при этом у продукта нет такой категории, которая содержится в категориях из формы поиска.
+    if (
+      searchProductsParams.productsCategories.length > 0 &&
+      !productCategories.some((category) =>
+        searchProductsParams.productsCategories.includes(category)
+      )
+    ) {
+      return false;
+    }
+    return this.isProductNameMatchSearchString(
+      name,
+      searchProductsParams.searchString
+    );
   }
 
   /**
